@@ -11,6 +11,7 @@ module.exports = {
       ? path.join(__dirname, './public/index.js')
       : path.join(__dirname, './src/index.js'),
   output: {
+    path: path.resolve(__dirname, 'dist'),
     path: path.join(__dirname, '/lib'),
     filename: 'index.js',
     libraryTarget: 'umd', // 采用通用模块定义
