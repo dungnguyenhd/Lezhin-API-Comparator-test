@@ -2,13 +2,13 @@ const path = require('path');
 const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
-  template: path.join(__dirname, './main-comparator/index.html'),
+  template: path.join(__dirname, './public/index.html'),
   filename: './index.html',
 });
 module.exports = {
   entry:
     process.env.NODE_ENV === 'development'
-      ? path.join(__dirname, './main-comparator/index.js')
+      ? path.join(__dirname, './public/index.js')
       : path.join(__dirname, './src/index.js'),
   output: {
     path: path.join(__dirname, '/lib'),
