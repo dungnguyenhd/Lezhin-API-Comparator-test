@@ -4,7 +4,7 @@
   "description": "React json compare view.",
   "main": "./index.js",
   "scripts": {
-    "clean": "rm -rf dist",
+    "clean": "mkdir dist rm -rf dist",
     "build": "npm run clean && webpack --config webpack.config.js",
     "start": "webpack-dev-server --config webpack.config.js"
   },
