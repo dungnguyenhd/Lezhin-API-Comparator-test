@@ -1,3 +1,5 @@
-# Lezhin-API-Comparator-test
+Lezhin API Response Compare Tool
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/react-ts-nauct7)
+npm install
+
+npm start
