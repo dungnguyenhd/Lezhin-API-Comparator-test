@@ -4,6 +4,7 @@
   "description": "React json compare view.",
   "main": "./index.js",
   "scripts": {
+    "prebuild": "rimraf dist",
     "start": "NODE_ENV=development webpack-dev-server --open",
     "build": "NODE_ENV=production webpack --mode production"
   },
