@@ -4,9 +4,8 @@
   "description": "React json compare view.",
   "main": "./index.js",
   "scripts": {
-    "build": "npm run clean && npm run create-dist && webpack --config webpack.config.js && cp -r /* dist/",
-    "clean": "rm -rf dist/*",
-    "create-dist": "mkdir -p dist",
+    "prebuild": "rimraf dist",
+    "build": "webpack --config webpack.config.js",
     "start": "webpack-dev-server --config webpack.config.js"
   },
   "repository": {
@@ -52,7 +51,8 @@
     "react-json-viewer-cool": "^2.0.0",
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.4"
+    "webpack-dev-server": "^4.7.4",
+    "rimraf": "^3.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.0",
