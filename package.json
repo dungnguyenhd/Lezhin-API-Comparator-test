@@ -6,7 +6,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "start": "NODE_ENV=development webpack-dev-server --open",
-    "build": "NODE_ENV=production webpack --mode production"
+    "build": "npm run clean && webpack --config webpack.prod.js --mode production --output-path dist",
   },
   "repository": {
     "type": "git",
