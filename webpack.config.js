@@ -2,12 +2,12 @@ const path = require('path');
 const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
-  template: path.join(__dirname, './public/index.html'),
+  template: path.join(__dirname, './components/index.html'),
   filename: './index.html',
 });
 module.exports = {
   entry:
-    path.join(__dirname, './public/index.js'),
+    path.join(__dirname, './components/index.js'),
   output: {
     path: path.join(__dirname, '/dist'),
     filename: 'index.js',
