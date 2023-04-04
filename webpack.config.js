@@ -33,22 +33,7 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   externals:
-    [
-      {
-        react: {
-          root: 'React',
-          commonjs2: 'react',
-          commonjs: 'react',
-          umd: 'react',
-        },
-        'react-dom': {
-          root: 'ReactDOM',
-          commonjs2: 'react-dom',
-          commonjs: 'react-dom',
-          umd: 'react-dom',
-        },
-      },
-    ],
+    [],
   devServer: {
     port: 8000,
   },
