@@ -624,8 +624,6 @@ function App() {
           <div className='col-7 text-center text-danger h1 pt-5 mt-5' style={{ backgroundImage: `url(https://image.slidesdocs.com/responsive-images/background/white-clean-abstract-portfolio-simple-powerpoint-background_a97a4601d6__960_540.jpg)`, backgroundRepeat: "no-repeat", backgroundSize: "auto" }}> <span>Lezhin API Comparator</span> </div>
         </div>
 
-        <hr />
-
       </div>
       <div className='container-fluid'>
         <div className='row'>
@@ -633,7 +631,7 @@ function App() {
 
           <div className='col-2 d-none d-lg-block'>
             <div className='sticky-addition' style={{ paddingTop: 2 }}>
-              <div className='bg-light ms-4' style={{ width: "fit-content", paddingLeft: 20, marginTop: 38, paddingBottom: 20, paddingTop: 10, paddingRight: 20, fontSize: ".74rem" }}>
+              <div className='bg-light ms-4' style={{ width: "fit-content", paddingLeft: 30, marginTop: 38, paddingBottom: 20, paddingTop: 10, paddingRight: 30, fontSize: ".74rem", borderRadius: 10 }}>
                 <div className='text-center text-danger'> OPTION </div>
                 <br />
                 {/* socialType */}
@@ -752,11 +750,12 @@ function App() {
           </div>
 
           <div className='col-8'>
+                <hr></hr>
 
             {/* API get user me */}
             <span id='wrapper_get_1' />
 
-            <div className='p-2 highlight'> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'} </div>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'} </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -770,13 +769,13 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={userMeBeta} newData={userMeAlpha} />
 
             {/* API get user me meta */}
             <hr id='wrapper_get_2' />
 
-            <div className='p-2 highlight'> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/meta </div>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/meta </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -790,13 +789,13 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={userMeMetaBeta} newData={userMeMetaAlpha} />
 
             {/* API get user me cohort */}
             <hr id='wrapper_get_3' />
 
-            <div className='p-2 highlight'> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/cohort </div>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/cohort </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -810,13 +809,13 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={userMeCohortBeta} newData={userMeCohortAlpha} />
 
             {/* API get user me devices */}
             <hr id='wrapper_get_4' />
 
-            <div className='p-2 highlight'> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /users/{'{me}'}/devices </div>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /users/{'{me}'}/devices </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -830,13 +829,13 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={userMeDevicesBeta} newData={userMeDevicesAlpha} />
 
             {/* API get user me certifications */}
             <hr id='wrapper_get_5' />
 
-            <div className='p-2 highlight'> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/certifications </div>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/certifications </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -850,13 +849,13 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={userMeCertificationsBeta} newData={userMeCertificationsAlpha} />
 
             {/* API get user me identity */}
             <hr id='wrapper_get_6' />
 
-            <div className='p-2 highlight'> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/identity/{'{access_token}'} </div>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/identity/{'{access_token}'} </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -870,13 +869,13 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={userIdentityBeta} newData={userIdentityAlpha} />
 
             {/* API get user me connections social */}
             <hr id='wrapper_get_7' />
 
-            <div className='p-2 highlight'> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/connections/<span className='text-danger'>{socialType}</span> </div>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/connections/<span className='text-danger'>{socialType}</span> </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -890,13 +889,13 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={userMeConnectionsSocialBeta} newData={userMeConnectionsSocialAlpha} />
 
             {/* API get user me genres */}
             <hr id='wrapper_get_8' />
 
-            <div className='p-2 highlight'> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/genres </div>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/genres </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -910,13 +909,13 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={userMeGenresBeta} newData={userMeGenresAlpha} />
 
             {/* API get user me balance */}
             <hr id='wrapper_get_9' />
 
-            <div className='p-2 highlight'> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/balance </div>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/balance </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -930,13 +929,13 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={userMeBalanceBeta} newData={userMeBalanceAlpha} />
 
             {/* API get user me ga */}
             <hr id='wrapper_get_10' />
 
-            <div className='p-2 highlight'> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/ga </div>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/ga </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -950,13 +949,13 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={userMeGaBeta} newData={userMeGaAlpha} />
 
             {/* API get user me badge-counts */}
             <hr id='wrapper_get_11' />
 
-            <div className='p-2 highlight'> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/badge-counts </div>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/badge-counts </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -970,13 +969,13 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={userMeBadgeCountBeta} newData={userMeBadgeCountAlpha} />
 
             {/* API get user me presents */}
             <hr id='wrapper_get_12' />
 
-            <div className='p-2 highlight'> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/presents </div>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/presents </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -990,13 +989,13 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={userMePresentsBeta} newData={userMePresentsAlpha} />
 
             {/* API get user me presents */}
             <hr id='wrapper_get_13' />
 
-            <div className='p-2 highlight'> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/subscription </div>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/subscription </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -1010,7 +1009,7 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={userMeSubscriptionBeta} newData={userMeSubscriptionAlpha} />
 
             {/* ==================================== ==================== PUT ==================== ==================================== */}
@@ -1019,7 +1018,7 @@ function App() {
             {/* API put user me */}
             <hr id='wrapper_put_1' />
 
-            <div className='p-2 highlight'>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}>
               {'>'} <span className='text-primary'> &#160;<strong>PUT</strong></span> v2/users/{'{me}'} &#160;
               <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#putUserMeModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
 
@@ -1116,14 +1115,14 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={putUserMeBeta} newData={putUserMeAlpha} />
 
             {/* ====================== ====================== API put user me password ======================  ====================== */}
 
             <hr id='wrapper_put_2' />
 
-            <div className='p-2 highlight'>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}>
               {'>'} <span className='text-primary'> &#160;<strong>PUT</strong></span> /users/{'{me}'}/password &#160;
               <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#putUserPasswordModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
 
@@ -1171,14 +1170,14 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={putUserMePasswordBeta} newData={putUserMePassowrdAlpha} />
 
             {/* ====================== ====================== API put user me username ======================  ====================== */}
 
             <hr id='wrapper_put_3' />
 
-            <div className='p-2 highlight'>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}>
               {'>'} <span className='text-primary'> &#160;<strong>PUT</strong></span> /users/{'{me}'}/username &#160;
               <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#putUserUsernameModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
 
@@ -1226,14 +1225,14 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={putUserMeUsernameBeta} newData={putUserMeUsernameAlpha} />
 
             {/* ====================== ====================== API put user me social ======================  ====================== */}
 
             <hr id='wrapper_put_4' />
 
-            <div className='p-2 highlight'>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}>
               {'>'} <span className='text-primary'> &#160;<strong>PUT</strong></span> /users/{'{me}'}/connect/{socialTypePut} &#160;
               <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#putUsersocialModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
 
@@ -1276,7 +1275,7 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={putUserMeUsernameBeta} newData={putUserMeUsernameAlpha} />
 
 
@@ -1289,7 +1288,7 @@ function App() {
             {/* API post user signin */}
             <hr id='wrapper_post_1' />
 
-            <div className='p-2 highlight'> {'>'} <span className='text-warning'> &#160;<strong>POST</strong></span> users/signin </div>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-warning'> &#160;<strong>POST</strong></span> users/signin </div>
 
             <div className="origin-data pt-3">
               <div className="old-data">
@@ -1304,12 +1303,12 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={userBeta} newData={userAlpha} />
 
             <hr id='wrapper_post_2' />
 
-            <div className='p-2 highlight'>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}>
               {'>'} <span className='text-warning'> &#160;<strong>POST</strong></span> v2/users/{'{me}'}/unregister &#160;
               <button type="button" className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#putUserUnregisterModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
 
@@ -1373,7 +1372,7 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={putUserMeUnregisterBeta} newData={putUserMeUnregisterAlpha} />
 
             {/* ====================================DEL==================================== */}
@@ -1382,7 +1381,7 @@ function App() {
 
             <hr id='wrapper_del_1' />
 
-            <div className='p-2 highlight'>
+            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}>
               {'>'} <span className='text-danger'> &#160;<strong>DEL</strong></span> /users/{'{me}'}/connections/{socialTypeDel} &#160;
             </div>
 
@@ -1399,14 +1398,14 @@ function App() {
               </div>
             </div>
 
-            <p className="title">👌The merged different:</p>
+            <p className="title">- The merged different:</p>
             <JsonCompare oldData={delUserMeSocialBeta} newData={delUserMeSocialAlpha} />
 
           </div>
 
           <div className='col-2 d-none d-lg-block'>
             <div className='sticky'>
-              <div className='btn-group-vertical wrapper_sidebar btn-light' style={{ width: 240, backgroundColor: '#f8f9fa' }}>
+              <div className='btn-group-vertical wrapper_sidebar btn-light' style={{ width: 240, backgroundColor: '#f8f9fa', borderRadius: 10 }}>
                 <button type="button" className="btn text-danger" onClick={clickView} style={{ fontSize: '.74rem' }} data-bs-toggle="tooltip" title="Up">API</button>
                 <div style={{ height: "535px", overflowY: "scroll" }}>
                   <a href={`#wrapper_get_1`}><button type="button" className="btn btn-md " style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeAlpha, userMeBeta)) ? "black" : "red" }}> v2/users/{"{me}"}</span></button></a>

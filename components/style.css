@@ -20,13 +20,13 @@
 }
 
 .highlight {
-  background-color: rgba(253, 225, 15, 0.192);
+  background-color: rgba(253, 225, 15, 0.168);
 }
 
 div.sticky {
   position: -webkit-sticky;
   position: sticky;
-  top: 0;
+  top: 140;
   padding-left: 32px;
   padding-top: 40px;
 }
@@ -34,7 +34,7 @@ div.sticky {
 div.sticky-addition {
   position: -webkit-sticky;
   position: sticky;
-  top: 0;
+  top: 140;
 }
 
 body {
