@@ -2,18 +2,17 @@ const path = require('path');
 const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
-  template: path.join(__dirname, './dist/index.html'),
+  template: path.join(__dirname, './public/index.html'),
   filename: './index.html',
 });
 module.exports = {
   entry:
-    process.env.NODE_ENV === 'development'
-      ? path.join(__dirname, './public/index.js')
-      : path.join(__dirname, './src/index.js'),
+    path.join(__dirname, './public/index.js'),
   output: {
     path: path.join(__dirname, '/dist'),
-    libraryTarget: 'umd', // 采用通用模块定义
-    libraryExport: 'default', // 兼容 ES6 的模块系统、CommonJS 和 AMD 模块规范
+    filename: 'index.js',
+    libraryTarget: 'umd',
+    libraryExport: 'default',
   },
   module: {
     rules: [
@@ -29,7 +28,7 @@ module.exports = {
       },
     ],
   },
-  plugins: process.env.NODE_ENV === 'development' ? [htmlWebpackPlugin, new Dotenv()] : [],
+  plugins: [htmlWebpackPlugin, new Dotenv()],
   resolve: {
     extensions: ['.js', '.jsx'],
   },
