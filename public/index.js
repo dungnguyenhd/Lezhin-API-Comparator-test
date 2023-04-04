@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import { render } from 'react-dom';
 import JsonCompare from '../lib/index.js';
 import compareService from './services/compareService.js';
@@ -1447,4 +1448,10 @@ function App() {
     </div>
   );
 }
-render(<App />, document.getElementById('root'));
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
