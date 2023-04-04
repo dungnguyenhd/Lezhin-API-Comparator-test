@@ -1,8 +1,7 @@
 import axios from "axios";
 
-const proxyUrl = 'https://main--lezhin-api-comparator.netlify.app/'
-const API_BASE_URL_ALPHA = proxyUrl + process.env.REACT_APP_ALPHA_DOMAIN;
-const API_BASE_URL_BETA = proxyUrl + process.env.REACT_APP_BETA_DOMAIN;
+const API_BASE_URL_ALPHA = process.env.REACT_APP_ALPHA_DOMAIN;
+const API_BASE_URL_BETA = process.env.REACT_APP_BETA_DOMAIN;
 const token = process.env.REACT_APP_BETA_TOKEN;
 
 class compareService {
