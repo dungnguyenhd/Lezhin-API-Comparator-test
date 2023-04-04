@@ -1406,7 +1406,7 @@ function App() {
 
           <div className='col-2 d-none d-lg-block'>
             <div className='sticky'>
-              <div className='btn-group-vertical wrapper_sidebar btn-outline-light' style={{ width: 240 }}>
+              <div className='btn-group-vertical wrapper_sidebar btn-light' style={{ width: 240, backgroundColor: '#f8f9fa' }}>
                 <button type="button" className="btn text-danger" onClick={clickView} style={{ fontSize: '.74rem' }} data-bs-toggle="tooltip" title="Up">API</button>
                 <div style={{ height: "535px", overflowY: "scroll" }}>
                   <a href={`#wrapper_get_1`}><button type="button" className="btn btn-md " style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeAlpha, userMeBeta)) ? "black" : "red" }}> v2/users/{"{me}"}</span></button></a>
