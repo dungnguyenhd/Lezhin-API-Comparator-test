@@ -23,6 +23,7 @@ function App() {
   const [putUserUsername, setPutUserUsername] = useState({ username: null, password: 'lezhin123!' });
   const [putUserSocial, setPutUserSocial] = useState({ accessToken: null });
   const [putUnregister, setPutUnregister] = useState(null);
+  const [usernameSearch, setUsernameSearch] = useState(null);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -99,6 +100,20 @@ function App() {
         localStorage.setItem('userMeAlpha', JSON.stringify(res.data));
       }).catch((err) => {
         localStorage.setItem('userMeAlpha', JSON.stringify(err.response.data));
+      })
+
+      // call get users/me/meta alpha
+      compareService.getUserMeMetaV1Alpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
+        localStorage.setItem('userMeMetaV1Alpha', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('userMeMetaV1Alpha', JSON.stringify(err.response.data));
+      })
+
+      // call get users/me alpha
+      compareService.getUserMeV1Alpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
+        localStorage.setItem('userMeV1Alpha', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('userMeV1Alpha', JSON.stringify(err.response.data));
       })
 
       // call get users/me/cohort alpha
@@ -220,11 +235,11 @@ function App() {
         localStorage.setItem('userMeChargesAlpha', JSON.stringify(err.response.data));
       })
 
-      // call get /v2/users/{{me}/RedeemAttempt Alpha
-      compareService.getUserMeRedeemAttemptAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeRedeemAttemptAlpha', JSON.stringify(res.data));
+      // call get search user Alpha
+      compareService.getUserCmsSearchUserAlpha(adminAlpha.access_token, usernameSearch).then((res) => {
+        localStorage.setItem('getUserCmsSearchAlpha', JSON.stringify(res.data));
       }).catch((err) => {
-        localStorage.setItem('userMeRedeemAttemptAlpha', JSON.stringify(err.response.data));
+        localStorage.setItem('getUserCmsSearchAlpha', JSON.stringify(err.response.data));
       })
 
       // ============================== ============================== put API ============================== ==============================
@@ -412,11 +427,26 @@ function App() {
         localStorage.setItem('userMeChargesBeta', JSON.stringify(err.response.data));
       })
 
-      // call get /v2/users/{{me}/RedeemAttempt Beta
-      compareService.getUserMeRedeemAttemptBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeRedeemAttemptBeta', JSON.stringify(res.data));
+      // call get users/me/meta Beta
+      compareService.getUserMeMetaV1Beta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
+        localStorage.setItem('userMeMetaV1Beta', JSON.stringify(res.data));
       }).catch((err) => {
-        localStorage.setItem('userMeRedeemAttemptBeta', JSON.stringify(err.response.data));
+        localStorage.setItem('userMeMetaV1Beta', JSON.stringify(err.response.data));
+      })
+
+      // call get users/me Beta
+      compareService.getUserMeV1Beta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
+        localStorage.setItem('userMeV1Beta', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('userMeV1Beta', JSON.stringify(err.response.data));
+      })
+
+      // call post v2/get/{me}/Search cms Beta
+
+      compareService.getUserCmsSearchUserBeta(adminBeta.access_token, usernameSearch).then((res) => {
+        localStorage.setItem('getUserCmsSearchBeta', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('getUserCmsSearchBeta', JSON.stringify(err.response.data));
       })
 
       // ============================== ============================== put API ============================== ==============================
@@ -480,6 +510,8 @@ function App() {
   const userBeta = JSON.parse(localStorage.getItem('userBeta'));
   const userMeMetaBeta = JSON.parse(localStorage.getItem('userMeMetaBeta'));
   const userMeBeta = JSON.parse(localStorage.getItem('userMeBeta'));
+  const userMeMetaV1Beta = JSON.parse(localStorage.getItem('userMeMetaV1Beta'));
+  const userMeV1Beta = JSON.parse(localStorage.getItem('userMeV1Beta'));
   const userMeCohortBeta = JSON.parse(localStorage.getItem('userMeCohortBeta'));
   const userMeDevicesBeta = JSON.parse(localStorage.getItem('userMeDevicesBeta'));
   const userMeCertificationsBeta = JSON.parse(localStorage.getItem('userMeCertificationsBeta'));
@@ -496,7 +528,7 @@ function App() {
   const userMeDailyFreeBeta = JSON.parse(localStorage.getItem('userMeDailyFreeBeta'));
   const userMeRecentsBeta = JSON.parse(localStorage.getItem('userMeRecentsBeta'));
   const userMeChargesBeta = JSON.parse(localStorage.getItem('userMeChargesBeta'));
-  const userMeRedeemAttemptBeta = JSON.parse(localStorage.getItem('userMeRedeemAttemptBeta'));
+  const getUserCmsSearchBeta = JSON.parse(localStorage.getItem('getUserCmsSearchBeta'));
   const putUserMeBeta = JSON.parse(localStorage.getItem('putUserMeBeta'));
   const putUserMePasswordBeta = JSON.parse(localStorage.getItem('putUserMePasswordBeta'));
   const putUserMeUsernameBeta = JSON.parse(localStorage.getItem('putUserMeUsernameBeta'));
@@ -512,6 +544,8 @@ function App() {
   const userAlpha = JSON.parse(localStorage.getItem('userAlpha'));
   const userMeMetaAlpha = JSON.parse(localStorage.getItem('userMeMetaAlpha'));
   const userMeAlpha = JSON.parse(localStorage.getItem('userMeAlpha'));
+  const userMeMetaV1Alpha = JSON.parse(localStorage.getItem('userMeMetaV1Alpha'));
+  const userMeV1Alpha = JSON.parse(localStorage.getItem('userMeV1Alpha'));
   const userMeCohortAlpha = JSON.parse(localStorage.getItem('userMeCohortAlpha'));
   const userMeDevicesAlpha = JSON.parse(localStorage.getItem('userMeDevicesAlpha'));
   const userMeCertificationsAlpha = JSON.parse(localStorage.getItem('userMeCertificationsAlpha'));
@@ -528,7 +562,7 @@ function App() {
   const userMeDailyFreeAlpha = JSON.parse(localStorage.getItem('userMeDailyFreeAlpha'));
   const userMeRecentsAlpha = JSON.parse(localStorage.getItem('userMeRecentsAlpha'));
   const userMeChargesAlpha = JSON.parse(localStorage.getItem('userMeChargesAlpha'));
-  const userMeRedeemAttemptAlpha = JSON.parse(localStorage.getItem('userMeRedeemAttemptAlpha'));
+  const getUserCmsSearchAlpha = JSON.parse(localStorage.getItem('getUserCmsSearchAlpha'));
   const putUserMeAlpha = JSON.parse(localStorage.getItem('putUserMeAlpha'));
   const putUserMePassowrdAlpha = JSON.parse(localStorage.getItem('putUserMePasswordAlpha'));
   const putUserMeUsernameAlpha = JSON.parse(localStorage.getItem('putUserMeUsernameAlpha'));
@@ -588,6 +622,8 @@ function App() {
     } else if (t == 5) {
       data = { ...putUnregister };
       data[name] = value;
+    } else if (t == 6) {
+      setUsernameSearch(value);
     }
   }
 
@@ -640,9 +676,11 @@ function App() {
       if (e.target.value == 'false') {
         setIsAutoPost(false);
         setPutUnregister(null);
+        setUsernameSearch(null);
       } else {
         setIsAutoPost(true);
         setPutUnregister({ password: 'lezhin123!', reason: 'test', kind: '123', selected: '123', cause: '23' });
+        setUsernameSearch('dungnguyent9902@gmail.com')
       }
     } else if (t == 3) {
       if (e.target.value == 'false') {
@@ -654,7 +692,7 @@ function App() {
   }
 
   const handClickRequest = (e, t) => {
-    if (userAlpha || userBeta && t == 1) {
+    if (userAlpha && userBeta && t == 1) {
 
       // call post users/{me}/unregister alpha
 
@@ -672,8 +710,7 @@ function App() {
         localStorage.setItem('putUserMeUnregisterBeta', JSON.stringify(err.response.data));
       })
 
-    } else if (adminAlpha.data != null && adminBeta.data != null && t == 2) {
-
+    } else if (adminAlpha && adminBeta && t == 2) {
       // call post v2/users/{me}/unregister cms alpha
 
       compareService.putUserCmsUnregisterAlpha(adminAlpha.access_token, userAlpha.data.user.userId, null).then((res) => {
@@ -690,7 +727,7 @@ function App() {
         localStorage.setItem('putUserCmsUnregisterBeta', JSON.stringify(err.response.data));
       })
 
-    } else if (adminAlpha.data != null && adminBeta.data != null && t == 3) {
+    } else if (adminAlpha && adminBeta && t == 3) {
 
       // call post v2/users/{me}/Reregister cms alpha
 
@@ -706,6 +743,23 @@ function App() {
         localStorage.setItem('putUserCmsReregisterBeta', JSON.stringify(res.data));
       }).catch((err) => {
         localStorage.setItem('putUserCmsReregisterBeta', JSON.stringify(err.response.data));
+      })
+    } else if (adminAlpha && adminBeta && t == 4) {
+
+      // call post v2/get/{me}/Search cms alpha
+
+      compareService.getUserCmsSearchUserAlpha(adminAlpha.access_token, usernameSearch).then((res) => {
+        localStorage.setItem('getUserCmsSearchAlpha', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('getUserCmsSearchAlpha', JSON.stringify(err.response.data));
+      })
+
+      // call post v2/get/{me}/Search cms Beta
+
+      compareService.getUserCmsSearchUserBeta(adminBeta.access_token, usernameSearch).then((res) => {
+        localStorage.setItem('getUserCmsSearchBeta', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('getUserCmsSearchBeta', JSON.stringify(err.response.data));
       })
     }
   }
@@ -1176,26 +1230,6 @@ function App() {
             <p className="title">- The merged different:</p>
             <JsonCompare oldData={userMeLibraryBeta} newData={userMeLibraryAlpha} />
 
-            {/* API get user me redeem-attempt */}
-            <hr id='wrapper_get_14' />
-
-            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/redeem-attempt </div>
-            <div className="origin-data pt-3">
-              <div className="old-data">
-                <p className="title">- Beta data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeRedeemAttemptBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  <span className='ps-2'>Calling API</span></>)}</pre>
-              </div>
-              <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeRedeemAttemptAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  <span className='ps-2'>Calling API</span></>)}</pre>
-              </div>
-            </div>
-
-            <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeRedeemAttemptBeta} newData={userMeRedeemAttemptAlpha} />
-
             {/* API get user me dailyfree/recent */}
             <hr id='wrapper_get_15' />
 
@@ -1256,25 +1290,55 @@ function App() {
             <p className="title">- The merged different:</p>
             <JsonCompare oldData={userMeChargesBeta} newData={userMeChargesAlpha} />
 
-            {/* API get user me devices */}
+            {/* ====================== ====================== API get search user cms ======================  ====================== */}
+
             <hr id='wrapper_get_18' />
 
-            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /users/{'{me}'}/devices </div>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/username?limit=10 &#160;
+              <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#searchUsersCmsModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="searchUsersCmsModal" tabIndex="-1" aria-labelledby="searchUsersCmsModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="searchUsersCmsModalLabel">GET v2/users/username?limit=10</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                      <form>
+                        <div className="row align-items-center">
+                          <span>
+                            <label htmlFor="" className="col-form-label">username or userId&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='username' onChange={(e) => handlePutChangeValue1(e, 6)} defaultValue={usernameSearch ? usernameSearch : null} />
+                          </span>
+                        </div>
+                      </form>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 4)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeDevicesBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingBeta ? (JSON.stringify(getUserCmsSearchBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
                 <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeDevicesAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(getUserCmsSearchAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeDevicesBeta} newData={userMeDevicesAlpha} />
+            <JsonCompare oldData={getUserCmsSearchBeta} newData={getUserCmsSearchAlpha} />
 
             {/* API get user me invitations */}
             <hr id='wrapper_get_19' />
@@ -1295,6 +1359,67 @@ function App() {
 
             <p className="title">- The merged different:</p>
             <JsonCompare oldData={userMeInvitationsBeta} newData={userMeInvitationsAlpha} />
+
+            {/* API get user me v1 */}
+            <hr id='wrapper_get_20' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /users/{'{me}'} </div>
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeV1Beta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeV1Alpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={userMeV1Beta} newData={userMeV1Alpha} />
+
+            {/* API get user me meta v1 */}
+            <hr id='wrapper_get_21' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /users/{'{me}'}/meta </div>
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeMetaV1Beta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeMetaV1Alpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={userMeMetaV1Beta} newData={userMeMetaV1Alpha} />
+
+            {/* API get user me devices */}
+            <hr id='wrapper_get_22' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /users/{'{me}'}/devices </div>
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeDevicesBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeDevicesAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={userMeDevicesBeta} newData={userMeDevicesAlpha} />
+
 
             {/* ==================================== ==================== PUT ==================== ==================================== */}
             {/* ==================================== ==================== PUT ==================== ==================================== */}
@@ -1789,13 +1914,15 @@ function App() {
                   <a href={`#wrapper_get_11`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeBadgeCountAlpha, userMeBadgeCountBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/badge-counts </span> </button></a>
                   <a href={`#wrapper_get_12`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMePresentsAlpha, userMePresentsBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/presents </span> </button></a>
                   <a href={`#wrapper_get_13`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeLibraryAlpha, userMeLibraryBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/library/filters </span> </button></a>
-                  <a href={`#wrapper_get_14`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeRedeemAttemptAlpha, userMeRedeemAttemptBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/redeem_attempt </span> </button></a>
                   <a href={`#wrapper_get_15`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeDailyFreeAlpha, userMeDailyFreeBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/daily/recent </span> </button></a>
                   <a href={`#wrapper_get_16`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeRecentsAlpha, userMeRecentsBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/recents </span> </button></a>
                   <a href={`#wrapper_get_17`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeChargesAlpha, userMeChargesBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/charges </span> </button></a>
+                  <a href={`#wrapper_get_18`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(getUserCmsSearchAlpha, getUserCmsSearchBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/username?limit=10 </span> </button></a>
 
-                  <a href={`#wrapper_get_18`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeDevicesAlpha, userMeDevicesBeta)) ? "black" : "red" }}> /users/{"{me}"}/devices </span> </button></a>
                   <a href={`#wrapper_get_19`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeInvitationsAlpha, userMeInvitationsBeta)) ? "black" : "red" }}> /users/{"{me}"}/invitations </span> </button></a>
+                  <a href={`#wrapper_get_20`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeV1Alpha, userMeV1Beta)) ? "black" : "red" }}> /users/{"{me}"} </span> </button></a>
+                  <a href={`#wrapper_get_21`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeMetaV1Alpha, userMeMetaV1Beta)) ? "black" : "red" }}> /users/{"{me}"}/meta </span> </button></a>
+                  <a href={`#wrapper_get_22`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeDevicesAlpha, userMeDevicesBeta)) ? "black" : "red" }}> /users/{"{me}"}/devices </span> </button></a>
 
                   {/* ==================================================================================== PUT ====================================================================================*/}
 
@@ -1808,8 +1935,8 @@ function App() {
 
                   <a href={`#wrapper_post_1`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(userAlpha, userBeta)) ? "black" : "red" }}> /users/signin</span> </button></a>
                   <a href={`#wrapper_post_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(putUserMeUnregisterAlpha, putUserMeUnregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/unregister</span> </button></a>
-                  <a href={`#wrapper_post_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(putUserMeUnregisterAlpha, putUserMeUnregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/unregister {"(cms)"}</span> </button></a>
-                  <a href={`#wrapper_post_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(putUserMeUnregisterAlpha, putUserMeUnregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/reregister {"(cms)"}</span> </button></a>
+                  <a href={`#wrapper_post_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(putUserCmsUnregisterAlpha, putUserCmsUnregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/unregister {"(cms)"}</span> </button></a>
+                  <a href={`#wrapper_post_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(putUserCmsReregisterAlpha, putUserCmsReregisterAlpha)) ? "black" : "red" }}> v2/users/{"{me}"}/reregister {"(cms)"}</span> </button></a>
 
                   {/* ==================================================================================== DEL ====================================================================================*/}
 

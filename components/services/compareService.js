@@ -57,6 +57,25 @@ class compareService {
     return axios.get(API_BASE_URL_BETA + `/v2/users/${userId}`, { headers })
   }
 
+  // {{base_url}}/users/{{me}}
+  getUserMeV1Alpha(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_BASE_URL_ALPHA + `/users/${userId}`, { headers })
+  }
+
+  getUserMeV1Beta(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_BASE_URL_BETA + `/users/${userId}`, { headers })
+  }
+
   // {{base_url}}/v2/users/{{me}/meta}
   getUserMeMetaAlpha(access_token, userId, locale) {
     const headers = {
@@ -74,6 +93,25 @@ class compareService {
       Authorization: `Bearer ${access_token}`,
     };
     return axios.get(API_BASE_URL_BETA + `/v2/users/${userId}/meta`, { headers })
+  }
+
+  // {{base_url}}/users/{{me}/metaV1}
+  getUserMeMetaV1Alpha(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_BASE_URL_ALPHA + `/users/${userId}/meta`, { headers })
+  }
+
+  getUserMeMetaV1Beta(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_BASE_URL_BETA + `/users/${userId}/meta`, { headers })
   }
 
   // {{base_url}}/v2/users/{{me}/cohort}
@@ -593,43 +631,43 @@ class compareService {
     return axios.post(API_CMS_URL_BETA + `/v2/users/${userId}/unregister`, putData, { headers })
   }
 
-    // ====== ======= ====== PUT Reregister ====== ======= ======
+  // ====== ======= ====== PUT Reregister ====== ======= ======
 
-    putUserCmsReregisterAlpha(access_token, userId, putData) {
-      const headers = {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${access_token}`,
-      };
-      return axios.post(API_CMS_URL_ALPHA + `/v2/users/${userId}/reregister`, putData, { headers })
-    }
+  putUserCmsReregisterAlpha(access_token, userId, putData) {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.post(API_CMS_URL_ALPHA + `/v2/users/${userId}/reregister`, putData, { headers })
+  }
 
-    putUserCmsReregisterBeta(access_token, userId, putData) {
-      const headers = {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${access_token}`,
-      };
-      return axios.post(API_CMS_URL_BETA + `/v2/users/${userId}/reregister`, putData, { headers })
-    }
+  putUserCmsReregisterBeta(access_token, userId, putData) {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.post(API_CMS_URL_BETA + `/v2/users/${userId}/reregister`, putData, { headers })
+  }
 
-    // ====== ======= ====== Post Reregister ====== ======= ======
+  // ====== ======= ====== Get Search User By Name or Id ====== ======= ======
 
-    putUserCmsSearchUserAlpha(access_token, search, putData) {
-      const headers = {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${access_token}`,
-      };
-      return axios.post(API_CMS_URL_ALPHA + `/v2/users/${search}?limit=10`, putData, { headers })
-    }
+  getUserCmsSearchUserAlpha(access_token, search) {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_CMS_URL_ALPHA + `/v2/users/${search}?limit=10`, { headers })
+  }
 
-    putUserCmsSearchUserBeta(access_token, search, putData) {
-      const headers = {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${access_token}`,
-      };
-      return axios.post(API_CMS_URL_BETA + `/v2/users/${search}?limit=10`, putData, { headers })
-    }
+  getUserCmsSearchUserBeta(access_token, search) {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_CMS_URL_BETA + `/v2/users/${search}?limit=10`, { headers })
+  }
 
-    // ===============================================================
+  // ===============================================================
 }
 
 export default new compareService();
