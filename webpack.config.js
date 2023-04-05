@@ -6,11 +6,14 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
   filename: './index.html',
 });
 module.exports = {
-  entry:
-    path.join(__dirname, './components/index.js'),
+  entry: {
+    index: path.join(__dirname, './components/index.js'),
+    v2: path.join(__dirname, './components/v2.js'),
+    v1: path.join(__dirname, './components/v1.js'),
+  },
   output: {
     path: path.join(__dirname, '/dist'),
-    filename: 'index.js',
+    filename: '[name].js',
     libraryTarget: 'umd',
     libraryExport: 'default',
   },
@@ -35,6 +38,7 @@ module.exports = {
   externals:
     [],
   devServer: {
+    historyApiFallback: true,
     port: 8000,
   },
 };

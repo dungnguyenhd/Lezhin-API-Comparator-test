@@ -2,23 +2,11 @@ import axios from "axios";
 
 const API_BASE_URL_ALPHA = process.env.REACT_APP_ALPHA_DOMAIN;
 const API_BASE_URL_BETA = process.env.REACT_APP_BETA_DOMAIN;
+const API_CMS_URL_ALPHA = process.env.REACT_APP_ALPHA_CMS_DOMAIN;
+const API_CMS_URL_BETA = process.env.REACT_APP_BETA_CMS_DOMAIN;
 const token = process.env.REACT_APP_BETA_TOKEN;
 
 class compareService {
-  // add API service
-  addNewAPI(header, endpoint, data, type) {
-    const headers = header;
-
-    if (type == 'get') {
-      return axios.get(API_BASE_URL_ALPHA + endpoint, { data }, { headers });
-    } else if (type == 'post') {
-      return axios.post(API_BASE_URL_ALPHA + endpoint, { data }, { headers });
-    } else if (type == 'put') {
-      return axios.post(API_BASE_URL_ALPHA + endpoint, { data }, { headers });
-    } else if (type == 'del') {
-      return axios.post(API_BASE_URL_ALPHA + endpoint, { data }, { headers });
-    }
-  }
 
   // {{base_url}}/users/signin
   postLoginAlpha(username, password, locale) {
@@ -259,14 +247,14 @@ class compareService {
     return axios.get(API_BASE_URL_BETA + `/v2/users/${userId}/badge_counts`, { headers })
   }
 
-  // {{base_url}}/v2/users/{{me}/presents?offset=0&limit=50}
+  // {{base_url}}/v2/users/{{me}/presents?offset=0&limit=10}
   getUserMePresentsAlpha(access_token, userId, locale) {
     const headers = {
       'Content-Type': 'application/json',
       'x-lz-locale': locale,
       Authorization: `Bearer ${access_token}`,
     };
-    return axios.get(API_BASE_URL_ALPHA + `/v2/users/${userId}/presents?offset=0&limit=50`, { headers })
+    return axios.get(API_BASE_URL_ALPHA + `/v2/users/${userId}/presents?offset=0&limit=10`, { headers })
   }
 
   getUserMePresentsBeta(access_token, userId, locale) {
@@ -275,7 +263,7 @@ class compareService {
       'x-lz-locale': locale,
       Authorization: `Bearer ${access_token}`,
     };
-    return axios.get(API_BASE_URL_BETA + `/v2/users/${userId}/presents?offset=0&limit=50`, { headers })
+    return axios.get(API_BASE_URL_BETA + `/v2/users/${userId}/presents?offset=0&limit=10`, { headers })
   }
 
   // {{base_url}}/v2/users/{{me}/subscription?limit=30&offset=0&sort=createdAt&filter=all}
@@ -337,26 +325,6 @@ class compareService {
     return axios.get(API_BASE_URL_BETA + `/v2/users/${userId}/library/filters`, { headers })
   }
 
-  // {{base_url}}/v2/users/{{me}/vouchers}
-
-  getUserMeVouchersAlpha(access_token, userId, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.get(API_BASE_URL_ALPHA + `/v2/users/${userId}/vouchers`, { headers })
-  }
-
-  getUserMeVouchersBeta(access_token, userId, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.get(API_BASE_URL_BETA + `/v2/users/${userId}/vouchers`, { headers })
-  }
-
   // {{base_url}}/v2/users/{{me}/dailyfree/recent}
 
   getUserMeDailyFreeAlpha(access_token, userId, locale) {
@@ -416,6 +384,27 @@ class compareService {
     };
     return axios.get(API_BASE_URL_BETA + `/v2/users/${userId}/charges`, { headers })
   }
+
+  // {{base_url}}/v2/users/{{me}/redeem_attempt}
+
+  getUserMeRedeemAttemptAlpha(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_BASE_URL_ALPHA + `/v2/users/${userId}/redeem_attempt`, { headers })
+  }
+
+  getUserMeRedeemAttemptBeta(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_BASE_URL_BETA + `/v2/users/${userId}/redeem_attempt`, { headers })
+  }
+
   // ====================================================== PUT =======================================================================================
   // ====================================================== PUT =======================================================================================
 
@@ -543,6 +532,104 @@ class compareService {
     return axios.delete(API_BASE_URL_BETA + `/v2/users/${userId}/connections/${socialType}`, putData, { headers })
   }
 
+
+  // ====================================================== CMS API =======================================================================================
+  // ====================================================== CMS API =======================================================================================
+
+
+  // ================== Login to CMS  ==================
+
+  postLoginCmsAlpha() {
+    const qs = require('qs');
+    const headers = {
+      'authority': 'cms-dot-lezhincomix-alpha.appspot.com',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    };
+    const data = {
+      'client_id': 'lezhincomics-backoffice-user',
+      'grant_type': 'password',
+      'response_type': 'token',
+      'username': 'tpvn.common',
+      'password': 'Lezhin1!@'
+    };
+    const postData = qs.stringify(data);
+    return axios.post(API_CMS_URL_ALPHA + '/_admin/tokens', postData, { headers });
+  }
+
+  postLoginCmsBeta() {
+    const qs = require('qs');
+    const headers = {
+      'authority': 'cms-dot-lezhincomix-beta.appspot.com',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    };
+    const data = {
+      'client_id': 'lezhincomics-backoffice-user',
+      'grant_type': 'password',
+      'response_type': 'token',
+      'username': 'tpvn.common',
+      'password': 'Lezhin1!@'
+    };
+    const postData = qs.stringify(data);
+    return axios.post(API_CMS_URL_BETA + '/_admin/tokens', postData, { headers });
+  }
+
+  // ====== ======= ====== PUT unregister ====== ======= ======
+
+  putUserCmsUnregisterAlpha(access_token, userId, putData, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.post(API_CMS_URL_ALPHA + `/v2/users/${userId}/unregister`, putData, { headers })
+  }
+
+  putUserCmsUnregisterBeta(access_token, userId, putData, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.post(API_CMS_URL_BETA + `/v2/users/${userId}/unregister`, putData, { headers })
+  }
+
+    // ====== ======= ====== PUT Reregister ====== ======= ======
+
+    putUserCmsReregisterAlpha(access_token, userId, putData) {
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${access_token}`,
+      };
+      return axios.post(API_CMS_URL_ALPHA + `/v2/users/${userId}/reregister`, putData, { headers })
+    }
+
+    putUserCmsReregisterBeta(access_token, userId, putData) {
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${access_token}`,
+      };
+      return axios.post(API_CMS_URL_BETA + `/v2/users/${userId}/reregister`, putData, { headers })
+    }
+
+    // ====== ======= ====== Post Reregister ====== ======= ======
+
+    putUserCmsSearchUserAlpha(access_token, search, putData) {
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${access_token}`,
+      };
+      return axios.post(API_CMS_URL_ALPHA + `/v2/users/${search}?limit=10`, putData, { headers })
+    }
+
+    putUserCmsSearchUserBeta(access_token, search, putData) {
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${access_token}`,
+      };
+      return axios.post(API_CMS_URL_BETA + `/v2/users/${search}?limit=10`, putData, { headers })
+    }
+
+    // ===============================================================
 }
 
 export default new compareService();
