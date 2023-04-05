@@ -297,6 +297,125 @@ class compareService {
     return axios.get(API_BASE_URL_BETA + `/v2/users/${userId}/subscriptions?limit=30&offset=0&sort=createdAt&filter=all`, { headers })
   }
 
+  // {{base_url}}/users/{{me}/invitations?page=0&limit=10}
+
+  getUserMeInvitationsAlpha(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_BASE_URL_ALPHA + `/users/${userId}/invitations?page=0&limit=10`, { headers })
+  }
+
+  getUserMeInvitationsBeta(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_BASE_URL_BETA + `/users/${userId}/invitations?page=0&limit=10`, { headers })
+  }
+
+  // {{base_url}}/v2/users/{{me}/library/filters}
+
+  getUserMeLibraryAlpha(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_BASE_URL_ALPHA + `/v2/users/${userId}/library/filters`, { headers })
+  }
+
+  getUserMeLibraryBeta(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_BASE_URL_BETA + `/v2/users/${userId}/library/filters`, { headers })
+  }
+
+  // {{base_url}}/v2/users/{{me}/vouchers}
+
+  getUserMeVouchersAlpha(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_BASE_URL_ALPHA + `/v2/users/${userId}/vouchers`, { headers })
+  }
+
+  getUserMeVouchersBeta(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_BASE_URL_BETA + `/v2/users/${userId}/vouchers`, { headers })
+  }
+
+  // {{base_url}}/v2/users/{{me}/dailyfree/recent}
+
+  getUserMeDailyFreeAlpha(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_BASE_URL_ALPHA + `/v2/users/${userId}/dailyfree/recent`, { headers })
+  }
+
+  getUserMeDailyFreeBeta(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_BASE_URL_BETA + `/v2/users/${userId}/dailyfree/recent`, { headers })
+  }
+
+  // {{base_url}}/v2/users/{{me}/recents}
+
+  getUserMeRecentsAlpha(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_BASE_URL_ALPHA + `/v2/users/${userId}/recents`, { headers })
+  }
+
+  getUserMeRecentsBeta(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_BASE_URL_BETA + `/v2/users/${userId}/recents`, { headers })
+  }
+
+  // {{base_url}}/v2/users/{{me}/charges}
+
+  getUserMeChargesAlpha(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_BASE_URL_ALPHA + `/v2/users/${userId}/charges`, { headers })
+  }
+
+  getUserMeChargesBeta(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.get(API_BASE_URL_BETA + `/v2/users/${userId}/charges`, { headers })
+  }
   // ====================================================== PUT =======================================================================================
   // ====================================================== PUT =======================================================================================
 
@@ -401,8 +520,8 @@ class compareService {
     return axios.post(API_BASE_URL_BETA + `/v2/users/${userId}/unregister`, putData, { headers })
   }
 
-    // ====================================================== POST =======================================================================================
-  // ====================================================== POST =======================================================================================
+  // ====================================================== DEL =======================================================================================
+  // ====================================================== DEL =======================================================================================
 
   // ================== del user Me Connect Social ==================
 

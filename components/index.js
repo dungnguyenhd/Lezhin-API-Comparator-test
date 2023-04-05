@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
 import { render } from 'react-dom';
 import JsonCompare from '../lib/index.js';
 import compareService from './services/compareService.js';
@@ -166,6 +165,48 @@ function App() {
         localStorage.setItem('userMeSubscriptionAlpha', JSON.stringify(err.response.data));
       })
 
+      // call get /users/{{me}/invitations?page=0&limit=10 alpha
+      compareService.getUserMeInvitationsAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
+        localStorage.setItem('userMeInvitationsAlpha', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('userMeInvitationsAlpha', JSON.stringify(err.response.data));
+      })
+
+      // call get /v2/users/{{me}/library/filters alpha
+      compareService.getUserMeLibraryAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
+        localStorage.setItem('userMeLibraryAlpha', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('userMeLibraryAlpha', JSON.stringify(err.response.data));
+      })
+
+      // call get /v2/users/{{me}/vouchers Alpha
+      compareService.getUserMeVouchersAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
+        localStorage.setItem('userMeVouchersAlpha', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('userMeVouchersAlpha', JSON.stringify(err.response.data));
+      })
+
+      // call get /v2/users/{{me}/dailyfree/recent Alpha
+      compareService.getUserMeDailyFreeAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
+        localStorage.setItem('userMeDailyFreeAlpha', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('userMeDailyFreeAlpha', JSON.stringify(err.response.data));
+      })
+
+      // call get /v2/users/{{me}/recents Alpha
+      compareService.getUserMeRecentsAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
+        localStorage.setItem('userMeRecentsAlpha', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('userMeRecentsAlpha', JSON.stringify(err.response.data));
+      })
+
+      // call get /v2/users/{{me}/Charges Alpha
+      compareService.getUserMeChargesAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
+        localStorage.setItem('userMeChargesAlpha', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('userMeChargesAlpha', JSON.stringify(err.response.data));
+      })
+
       // ============================== ============================== put API ============================== ==============================
       // ============================== ============================== put API ============================== ==============================
 
@@ -324,6 +365,48 @@ function App() {
         localStorage.setItem('userMeSubscriptionBeta', JSON.stringify(err.response.data));
       })
 
+      // call get /users/{{me}/invitations?page=0&limit=10 Beta
+      compareService.getUserMeInvitationsBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
+        localStorage.setItem('userMeInvitationsBeta', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('userMeInvitationsBeta', JSON.stringify(err.response.data));
+      })
+
+      // call get /v2/users/{{me}/library/filters Beta
+      compareService.getUserMeLibraryBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
+        localStorage.setItem('userMeLibraryBeta', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('userMeLibraryBeta', JSON.stringify(err.response.data));
+      })
+
+      // call get /v2/users/{{me}/vouchers Beta
+      compareService.getUserMeVouchersBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
+        localStorage.setItem('userMeVouchersBeta', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('userMeVouchersBeta', JSON.stringify(err.response.data));
+      })
+
+      // call get /v2/users/{{me}/dailyfree/recent Beta
+      compareService.getUserMeDailyFreeBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
+        localStorage.setItem('userMeDailyFreeBeta', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('userMeDailyFreeBeta', JSON.stringify(err.response.data));
+      })
+
+      // call get /v2/users/{{me}/recents Beta
+      compareService.getUserMeRecentsBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
+        localStorage.setItem('userMeRecentsBeta', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('userMeRecentsBeta', JSON.stringify(err.response.data));
+      })
+
+      // call get /v2/users/{{me}/Charges Beta
+      compareService.getUserMeChargesBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
+        localStorage.setItem('userMeChargesBeta', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('userMeChargesBeta', JSON.stringify(err.response.data));
+      })
+
       // ============================== ============================== put API ============================== ==============================
       // ============================== ============================== put API ============================== ==============================
 
@@ -401,6 +484,12 @@ function App() {
   const userMeBadgeCountBeta = JSON.parse(localStorage.getItem('userMeBadgeCountBeta'));
   const userMePresentsBeta = JSON.parse(localStorage.getItem('userMePresentsBeta'));
   const userMeSubscriptionBeta = JSON.parse(localStorage.getItem('userMeSubscriptionBeta'));
+  const userMeInvitationsBeta = JSON.parse(localStorage.getItem('userMeInvitationsBeta'));
+  const userMeLibraryBeta = JSON.parse(localStorage.getItem('userMeLibraryBeta'));
+  const userMeVouchersBeta = JSON.parse(localStorage.getItem('userMeVouchersBeta'));
+  const userMeDailyFreeBeta = JSON.parse(localStorage.getItem('userMeDailyFreeBeta'));
+  const userMeRecentsBeta = JSON.parse(localStorage.getItem('userMeRecentsBeta'));
+  const userMeChargesBeta = JSON.parse(localStorage.getItem('userMeChargesBeta'));
   const putUserMeBeta = JSON.parse(localStorage.getItem('putUserMeBeta'));
   const putUserMePasswordBeta = JSON.parse(localStorage.getItem('putUserMePasswordBeta'));
   const putUserMeUsernameBeta = JSON.parse(localStorage.getItem('putUserMeUsernameBeta'));
@@ -424,6 +513,12 @@ function App() {
   const userMeBadgeCountAlpha = JSON.parse(localStorage.getItem('userMeBadgeCountAlpha'));
   const userMePresentsAlpha = JSON.parse(localStorage.getItem('userMePresentsAlpha'));
   const userMeSubscriptionAlpha = JSON.parse(localStorage.getItem('userMeSubscriptionAlpha'));
+  const userMeInvitationsAlpha = JSON.parse(localStorage.getItem('userMeInvitationsAlpha'));
+  const userMeLibraryAlpha = JSON.parse(localStorage.getItem('userMeLibraryAlpha'));
+  const userMeVouchersAlpha = JSON.parse(localStorage.getItem('userMeVouchersAlpha'));
+  const userMeDailyFreeAlpha = JSON.parse(localStorage.getItem('userMeDailyFreeAlpha'));
+  const userMeRecentsAlpha = JSON.parse(localStorage.getItem('userMeRecentsAlpha'));
+  const userMeChargesAlpha = JSON.parse(localStorage.getItem('userMeChargesAlpha'));
   const putUserMeAlpha = JSON.parse(localStorage.getItem('putUserMeAlpha'));
   const putUserMePassowrdAlpha = JSON.parse(localStorage.getItem('putUserMePasswordAlpha'));
   const putUserMeUsernameAlpha = JSON.parse(localStorage.getItem('putUserMeUsernameAlpha'));
@@ -750,12 +845,12 @@ function App() {
           </div>
 
           <div className='col-8'>
-                <hr></hr>
+            <hr></hr>
 
             {/* API get user me */}
             <span id='wrapper_get_1' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'} </div>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'} </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -775,7 +870,7 @@ function App() {
             {/* API get user me meta */}
             <hr id='wrapper_get_2' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/meta </div>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/meta </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -795,7 +890,7 @@ function App() {
             {/* API get user me cohort */}
             <hr id='wrapper_get_3' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/cohort </div>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/cohort </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -812,30 +907,31 @@ function App() {
             <p className="title">- The merged different:</p>
             <JsonCompare oldData={userMeCohortBeta} newData={userMeCohortAlpha} />
 
-            {/* API get user me devices */}
+            {/* API get user me presents */}
             <hr id='wrapper_get_4' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /users/{'{me}'}/devices </div>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/subscription </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeDevicesBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeSubscriptionBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
                 <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeDevicesAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeSubscriptionAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeDevicesBeta} newData={userMeDevicesAlpha} />
+            <JsonCompare oldData={userMeSubscriptionBeta} newData={userMeSubscriptionAlpha} />
+
 
             {/* API get user me certifications */}
             <hr id='wrapper_get_5' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/certifications </div>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/certifications </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -855,7 +951,7 @@ function App() {
             {/* API get user me identity */}
             <hr id='wrapper_get_6' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/identity/{'{access_token}'} </div>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/identity/{'{access_token}'} </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -875,7 +971,7 @@ function App() {
             {/* API get user me connections social */}
             <hr id='wrapper_get_7' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/connections/<span className='text-danger'>{socialType}</span> </div>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/connections/<span className='text-danger'>{socialType}</span> </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -895,7 +991,7 @@ function App() {
             {/* API get user me genres */}
             <hr id='wrapper_get_8' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/genres </div>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/genres </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -915,7 +1011,7 @@ function App() {
             {/* API get user me balance */}
             <hr id='wrapper_get_9' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/balance </div>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/balance </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -935,7 +1031,7 @@ function App() {
             {/* API get user me ga */}
             <hr id='wrapper_get_10' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/ga </div>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/ga </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -955,7 +1051,7 @@ function App() {
             {/* API get user me badge-counts */}
             <hr id='wrapper_get_11' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/badge-counts </div>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/badge-counts </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -975,7 +1071,7 @@ function App() {
             {/* API get user me presents */}
             <hr id='wrapper_get_12' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/presents </div>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/presents </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
@@ -995,22 +1091,142 @@ function App() {
             {/* API get user me presents */}
             <hr id='wrapper_get_13' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/subscription </div>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/library/filters </div>
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeSubscriptionBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeLibraryBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
                 <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeSubscriptionAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeLibraryAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeSubscriptionBeta} newData={userMeSubscriptionAlpha} />
+            <JsonCompare oldData={userMeVouchersBeta} newData={userMeVouchersAlpha} />
+
+            {/* API get user me vouchers */}
+            <hr id='wrapper_get_14' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/vouchers </div>
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeVouchersBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeVouchersAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={userMeVouchersBeta} newData={userMeVouchersAlpha} />
+
+            {/* API get user me dailyfree/recent */}
+            <hr id='wrapper_get_15' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/dailyfree/recent </div>
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeDailyFreeBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeDailyFreeAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={userMeDailyFreeBeta} newData={userMeDailyFreeAlpha} />
+
+            {/* API get user me dailyfree/recent */}
+            <hr id='wrapper_get_16' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/recents </div>
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeRecentsBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeRecentsAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={userMeRecentsBeta} newData={userMeRecentsAlpha} />
+
+            {/* API get user me dailyfree/recent */}
+            <hr id='wrapper_get_17' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/charges </div>
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeChargesBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeChargesAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={userMeChargesBeta} newData={userMeChargesAlpha} />
+
+            {/* API get user me devices */}
+            <hr id='wrapper_get_18' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /users/{'{me}'}/devices </div>
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeDevicesBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeDevicesAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={userMeDevicesBeta} newData={userMeDevicesAlpha} />
+
+            {/* API get user me invitations */}
+            <hr id='wrapper_get_19' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /users/{'{me}'}/invitations </div>
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeInvitationsBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeInvitationsAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={userMeInvitationsBeta} newData={userMeInvitationsAlpha} />
 
             {/* ==================================== ==================== PUT ==================== ==================================== */}
             {/* ==================================== ==================== PUT ==================== ==================================== */}
@@ -1018,7 +1234,7 @@ function App() {
             {/* API put user me */}
             <hr id='wrapper_put_1' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
               {'>'} <span className='text-primary'> &#160;<strong>PUT</strong></span> v2/users/{'{me}'} &#160;
               <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#putUserMeModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
 
@@ -1122,7 +1338,7 @@ function App() {
 
             <hr id='wrapper_put_2' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
               {'>'} <span className='text-primary'> &#160;<strong>PUT</strong></span> /users/{'{me}'}/password &#160;
               <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#putUserPasswordModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
 
@@ -1177,7 +1393,7 @@ function App() {
 
             <hr id='wrapper_put_3' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
               {'>'} <span className='text-primary'> &#160;<strong>PUT</strong></span> /users/{'{me}'}/username &#160;
               <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#putUserUsernameModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
 
@@ -1232,7 +1448,7 @@ function App() {
 
             <hr id='wrapper_put_4' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
               {'>'} <span className='text-primary'> &#160;<strong>PUT</strong></span> /users/{'{me}'}/connect/{socialTypePut} &#160;
               <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#putUsersocialModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
 
@@ -1288,7 +1504,7 @@ function App() {
             {/* API post user signin */}
             <hr id='wrapper_post_1' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}> {'>'} <span className='text-warning'> &#160;<strong>POST</strong></span> users/signin </div>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-warning'> &#160;<strong>POST</strong></span> users/signin </div>
 
             <div className="origin-data pt-3">
               <div className="old-data">
@@ -1308,7 +1524,7 @@ function App() {
 
             <hr id='wrapper_post_2' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
               {'>'} <span className='text-warning'> &#160;<strong>POST</strong></span> v2/users/{'{me}'}/unregister &#160;
               <button type="button" className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#putUserUnregisterModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
 
@@ -1381,7 +1597,7 @@ function App() {
 
             <hr id='wrapper_del_1' />
 
-            <div className='p-2 highlight' style={{border: '1px solid lightgrey', borderRadius: 5}}>
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
               {'>'} <span className='text-danger'> &#160;<strong>DEL</strong></span> /users/{'{me}'}/connections/{socialTypeDel} &#160;
             </div>
 
@@ -1411,7 +1627,7 @@ function App() {
                   <a href={`#wrapper_get_1`}><button type="button" className="btn btn-md " style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeAlpha, userMeBeta)) ? "black" : "red" }}> v2/users/{"{me}"}</span></button></a>
                   <a href={`#wrapper_get_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeMetaAlpha, userMeMetaBeta)) ? "black" : "red" }}>  v2/users/{"{me}"}/meta </span> </button></a>
                   <a href={`#wrapper_get_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeCohortAlpha, userMeCohortBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/cohort </span> </button></a>
-                  <a href={`#wrapper_get_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeDevicesAlpha, userMeDevicesBeta)) ? "black" : "red" }}> /users/{"{me}"}/devices </span> </button></a>
+                  <a href={`#wrapper_get_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeSubscriptionAlpha, userMeSubscriptionBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/subscription </span> </button></a>
                   <a href={`#wrapper_get_5`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeCertificationsAlpha, userMeCertificationsBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/certifications </span> </button></a>
                   <a href={`#wrapper_get_6`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userIdentityAlpha, userIdentityBeta)) ? "black" : "red" }}> v2/users/identity/{"{access_token}"} </span> </button></a>
                   <a href={`#wrapper_get_7`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeConnectionsSocialAlpha, userMeConnectionsSocialBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/connections/{socialType} </span> </button></a>
@@ -1420,7 +1636,14 @@ function App() {
                   <a href={`#wrapper_get_10`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeGaAlpha, userMeGaBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/ga </span> </button></a>
                   <a href={`#wrapper_get_11`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeBadgeCountAlpha, userMeBadgeCountBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/badge-counts </span> </button></a>
                   <a href={`#wrapper_get_12`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMePresentsAlpha, userMePresentsBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/presents </span> </button></a>
-                  <a href={`#wrapper_get_13`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeSubscriptionAlpha, userMeSubscriptionBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/subscription </span> </button></a>
+                  <a href={`#wrapper_get_13`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeLibraryAlpha, userMeLibraryBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/library/filters </span> </button></a>
+                  <a href={`#wrapper_get_14`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeVouchersAlpha, userMeVouchersBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/vouchers </span> </button></a>
+                  <a href={`#wrapper_get_15`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeDailyFreeAlpha, userMeDailyFreeBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/daily/recent </span> </button></a>
+                  <a href={`#wrapper_get_16`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeRecentsAlpha, userMeRecentsBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/recents </span> </button></a>
+                  <a href={`#wrapper_get_17`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeChargesAlpha, userMeChargesBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/charges </span> </button></a>
+
+                  <a href={`#wrapper_get_18`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeDevicesAlpha, userMeDevicesBeta)) ? "black" : "red" }}> /users/{"{me}"}/devices </span> </button></a>
+                  <a href={`#wrapper_get_19`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeInvitationsAlpha, userMeInvitationsBeta)) ? "black" : "red" }}> /users/{"{me}"}/invitations </span> </button></a>
 
                   {/* ==================================================================================== PUT ====================================================================================*/}
 
