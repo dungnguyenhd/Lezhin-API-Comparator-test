@@ -947,7 +947,7 @@ function App() {
                     <br /> <span className="title">- Beta :</span> {userBeta.data && !userBeta.error ? userBeta.data.user.username : (<>not found</>)} - {userBeta.data && !userBeta.error ? userBeta.data.user.userId : <>not found</>}
                     <br />
                     <button
-                      className="btn btn-primary btn-block mb mt-3"
+                      className="btn btn-primary btn-block mb-4 mt-3"
                       style={{ padding: "5px 30px" }}
                       onClick={handleReload}
                     >
