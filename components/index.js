@@ -24,6 +24,11 @@ function App() {
   const [putUserSocial, setPutUserSocial] = useState({ accessToken: null });
   const [putUnregister, setPutUnregister] = useState(null);
   const [usernameSearch, setUsernameSearch] = useState(null);
+  const [putVerificationsDataAlpha, setPutVerificationsDataAlpha] = useState({ email: verificationEmail, token: null });
+  const [putVerificationsDataBeta, setPutVerificationsDataBeta] = useState({ email: verificationEmail, token: null });
+  const [postSignupAlpha, setPostSignupApha] = useState({ agreements: { marketingEmail: false, collectingBirth: false }, birthDate: null, gender: null, account: { username: verificationEmail, password: null }, verificationToken: putVerificationsDataAlpha.token });
+  const [postSignupBeta, setPostSignupBeta] = useState({ agreements: { marketingEmail: false, collectingBirth: false }, birthDate: null, gender: null, account: { username: verificationEmail, password: null }, verificationToken: putVerificationsDataBeta.token });
+  const [verifyEmail, setVerifyEmail] = useState(null);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -505,8 +510,8 @@ function App() {
   // get Local Storage Data ===========================================================================================================================
 
   const adminBeta = JSON.parse(localStorage.getItem('adminBeta'));
-  const putUserCmsUnregisterBeta = JSON.parse(localStorage.getItem('putUserCmsUnregisterBeta'));
-  const putUserCmsReregisterBeta = JSON.parse(localStorage.getItem('putUserCmsReregisterBeta'));
+  const postUserCmsUnregisterBeta = JSON.parse(localStorage.getItem('postUserCmsUnregisterBeta'));
+  const postUserCmsReregisterBeta = JSON.parse(localStorage.getItem('postUserCmsReregisterBeta'));
   const userBeta = JSON.parse(localStorage.getItem('userBeta'));
   const userMeMetaBeta = JSON.parse(localStorage.getItem('userMeMetaBeta'));
   const userMeBeta = JSON.parse(localStorage.getItem('userMeBeta'));
@@ -535,12 +540,15 @@ function App() {
   const putUserMeSocialBeta = JSON.parse(localStorage.getItem('putUserMeSocialBeta'));
   const putUserMeUnregisterBeta = JSON.parse(localStorage.getItem('putUserMeUnregisterBeta'));
   const delUserMeSocialBeta = JSON.parse(localStorage.getItem('delUserMeSocialBeta'));
+  const postVerificationSendEmailBeta = JSON.parse(localStorage.getItem('postVerificationSendEmailBeta'));
+  const putVerificationsBeta = JSON.parse(localStorage.getItem('putVerificationsBeta'));
+  const postUserSignupBeta = JSON.parse(localStorage.getItem('postUserSignupBeta'));
 
   // ----
 
   const adminAlpha = JSON.parse(localStorage.getItem('adminAlpha'));
-  const putUserCmsUnregisterAlpha = JSON.parse(localStorage.getItem('putUserCmsUnregisterAlpha'));
-  const putUserCmsReregisterAlpha = JSON.parse(localStorage.getItem('putUserCmsReregisterAlpha'));
+  const postUserCmsUnregisterAlpha = JSON.parse(localStorage.getItem('postUserCmsUnregisterAlpha'));
+  const postUserCmsReregisterAlpha = JSON.parse(localStorage.getItem('postUserCmsReregisterAlpha'));
   const userAlpha = JSON.parse(localStorage.getItem('userAlpha'));
   const userMeMetaAlpha = JSON.parse(localStorage.getItem('userMeMetaAlpha'));
   const userMeAlpha = JSON.parse(localStorage.getItem('userMeAlpha'));
@@ -569,7 +577,11 @@ function App() {
   const putUserMeSocialAlpha = JSON.parse(localStorage.getItem('putUserMeSocialAlpha'));
   const putUserMeUnregisterAlpha = JSON.parse(localStorage.getItem('putUserMeUnregisterAlpha'));
   const delUserMeSocialAlpha = JSON.parse(localStorage.getItem('delUserMeSocialAlpha'));
+  const postVerificationSendEmailAlpha = JSON.parse(localStorage.getItem('postVerificationSendEmailAlpha'));
+  const putVerificationsAlpha = JSON.parse(localStorage.getItem('putVerificationsAlpha'));
+  const postUserSignupAlpha = JSON.parse(localStorage.getItem('postUserSignupAlpha'));
 
+  const verificationEmail = localStorage.getItem('verificationEmail');
   // handle request ===================================================================================================================================
   // handle request ===================================================================================================================================
 
@@ -604,26 +616,62 @@ function App() {
     const value = target.value;
     const name = target.name;
     let data;
-    if (t == 1) {
-      data = { ...putUserMe };
-      data[name] = value;
-      setPutUserMe(data);
-    } else if (t == 2) {
-      data = { ...putUserPassword };
-      data[name] = value;
-      setPutUserPassword(data);
-    } else if (t == 3) {
-      data = { ...putUserUsername };
-      data[name] = value;
-      setPutUserUsername(data);
-    } else if (t == 4) {
-      data = { ...putUserSocial };
-      data[name] = value;
-    } else if (t == 5) {
-      data = { ...putUnregister };
-      data[name] = value;
-    } else if (t == 6) {
-      setUsernameSearch(value);
+
+    switch (t) {
+      case 1:
+        data = { ...putUserMe };
+        data[name] = value;
+        setPutUserMe(data);
+        break;
+      case 2:
+        data = { ...putUserPassword };
+        data[name] = value;
+        setPutUserPassword(data);
+        break;
+      case 3:
+        data = { ...putUserUsername };
+        data[name] = value;
+        setPutUserUsername(data);
+        break;
+      case 4:
+        data = { ...putUserSocial };
+        data[name] = value;
+        break;
+      case 5:
+        data = { ...putUnregister };
+        data[name] = value;
+        break;
+      case 6:
+        setUsernameSearch(value);
+        break;
+      case 7:
+        localStorage.setItem('verificationEmail', value);
+        setVerifyEmail(value);
+        break;
+      case 8:
+        data = { ...putVerificationsDataAlpha };
+        data.email = verificationEmail;
+        postSignupAlpha.account.username = verificationEmail;
+        postSignupBeta.account.username = verificationEmail;
+        postSignupAlpha.verificationToken = value;
+        data[name] = value;
+        setPutVerificationsDataAlpha(data);
+        break;
+      case 9:
+        data = { ...postSignupAlpha };
+        data[name] = value;
+        setPostSignupApha(data);
+        setPostSignupBeta(data);
+        break;
+      case 10:
+        data = { ...putVerificationsDataBeta };
+        data.email = verificationEmail;
+        postSignupBeta.verificationToken = value;
+        data[name] = value;
+        setPutVerificationsDataBeta(data);
+        break;
+      default:
+        break;
     }
   }
 
@@ -632,22 +680,47 @@ function App() {
     const value = target.value;
     const name = target.name;
     let data;
+    let data1;
     let value1;
-    if (t == 1) {
-      data = { ...putUserMe };
-      if (value == 'false') { value1 = false } else if (value1 == 'true') { value = true } else { value1 = true }
-      data.agreements[name] = value1;
-      setPutUserMe(data);
+
+    switch (t) {
+      case 1:
+        data = { ...putUserMe };
+        if (value == 'false') { value1 = false } else if (value1 == 'true') { value = true } else { value1 = true }
+        data.agreements[name] = value1;
+        setPutUserMe(data);
+        break;
+      case 2:
+        data = { ...postSignupAlpha };
+        if (value == 'false') { value1 = false } else if (value1 == 'true') { value = true } else { value1 = true }
+        data.agreements[name] = value1;
+        setPostSignupApha(data);
+        setPostSignupBeta(data);
+        break;
+      case 3:
+        data = { ...postSignupAlpha };
+        data1 = { ...postSignupBeta };
+        data.account[name] = value;
+        data1.account[name] = value;
+        setPostSignupApha(data);
+        setPostSignupBeta(data1);
+        break;
+      default:
+        break;
     }
   }
 
   const handleSelectSocialType = (e, t) => {
-    if (t == 1) {
-      setSocialType(e.target.value);
-    } else if (t == 2) {
-      setSocialTypePut(e.target.value);
-    } else {
-      setSocialTypeDel(e.target.value);
+    switch (t) {
+      case 1:
+        setSocialType(e.target.value);
+        break;
+      case 2:
+        setSocialTypePut(e.target.value);
+        break;
+      default:
+        setSocialTypeDel(e.target.value);
+        break;
     }
   }
 
@@ -713,36 +786,36 @@ function App() {
     } else if (adminAlpha && adminBeta && t == 2) {
       // call post v2/users/{me}/unregister cms alpha
 
-      compareService.putUserCmsUnregisterAlpha(adminAlpha.access_token, userAlpha.data.user.userId, null).then((res) => {
-        localStorage.setItem('putUserCmsUnregisterAlpha', JSON.stringify(res.data));
+      compareService.postUserCmsUnregisterAlpha(adminAlpha.access_token, userAlpha.data.user.userId, null).then((res) => {
+        localStorage.setItem('postUserCmsUnregisterAlpha', JSON.stringify(res.data));
       }).catch((err) => {
-        localStorage.setItem('putUserCmsUnregisterAlpha', JSON.stringify(err.response.data));
+        localStorage.setItem('postUserCmsUnregisterAlpha', JSON.stringify(err.response.data));
       })
 
       // call post v2/users/{me}/unregister cms Beta
 
-      compareService.putUserCmsUnregisterBeta(adminBeta.access_token, userBeta.data.user.userId, null).then((res) => {
-        localStorage.setItem('putUserCmsUnregisterBeta', JSON.stringify(res.data));
+      compareService.postUserCmsUnregisterBeta(adminBeta.access_token, userBeta.data.user.userId, null).then((res) => {
+        localStorage.setItem('postUserCmsUnregisterBeta', JSON.stringify(res.data));
       }).catch((err) => {
-        localStorage.setItem('putUserCmsUnregisterBeta', JSON.stringify(err.response.data));
+        localStorage.setItem('postUserCmsUnregisterBeta', JSON.stringify(err.response.data));
       })
 
     } else if (adminAlpha && adminBeta && t == 3) {
 
       // call post v2/users/{me}/Reregister cms alpha
 
-      compareService.putUserCmsReregisterAlpha(adminAlpha.access_token, userAlpha.data.user.userId, null).then((res) => {
-        localStorage.setItem('putUserCmsReregisterAlpha', JSON.stringify(res.data));
+      compareService.postUserCmsReregisterAlpha(adminAlpha.access_token, userAlpha.data.user.userId, null).then((res) => {
+        localStorage.setItem('postUserCmsReregisterAlpha', JSON.stringify(res.data));
       }).catch((err) => {
-        localStorage.setItem('putUserCmsReregisterAlpha', JSON.stringify(err.response.data));
+        localStorage.setItem('postUserCmsReregisterAlpha', JSON.stringify(err.response.data));
       })
 
       // call post v2/users/{me}/Reregister cms Beta
 
-      compareService.putUserCmsReregisterBeta(adminBeta.access_token, userBeta.data.user.userId, null).then((res) => {
-        localStorage.setItem('putUserCmsReregisterBeta', JSON.stringify(res.data));
+      compareService.postUserCmsReregisterBeta(adminBeta.access_token, userBeta.data.user.userId, null).then((res) => {
+        localStorage.setItem('postUserCmsReregisterBeta', JSON.stringify(res.data));
       }).catch((err) => {
-        localStorage.setItem('putUserCmsReregisterBeta', JSON.stringify(err.response.data));
+        localStorage.setItem('postUserCmsReregisterBeta', JSON.stringify(err.response.data));
       })
     } else if (adminAlpha && adminBeta && t == 4) {
 
@@ -761,6 +834,51 @@ function App() {
       }).catch((err) => {
         localStorage.setItem('getUserCmsSearchBeta', JSON.stringify(err.response.data));
       })
+    } else if (t == 5) {
+      // send verification email
+
+      compareService.postVerificationSendEmailAlpha(verifyEmail).then((res) => {
+        localStorage.setItem('postVerificationSendEmailAlpha', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('postVerificationSendEmailAlpha', JSON.stringify(err.response.data));
+      })
+
+      compareService.postVerificationSendEmailBeta(verifyEmail).then((res) => {
+        localStorage.setItem('postVerificationSendEmailBeta', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('postVerificationSendEmailBeta', JSON.stringify(err.response.data));
+      })
+
+    } else if (t == 6) {
+      // entry verification code
+
+      compareService.putVerificationsAlpha(putVerificationsDataAlpha).then((res) => {
+        localStorage.setItem('putVerificationsAlpha', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('putVerificationsAlpha', JSON.stringify(err.response.data));
+      })
+
+      compareService.putVerificationsBeta(putVerificationsDataBeta).then((res) => {
+        localStorage.setItem('putVerificationsBeta', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('putVerificationsBeta', JSON.stringify(err.response.data));
+      })
+
+    } else if (t == 7) {
+      // send post sign up user
+
+      compareService.postUserSignupAlpha(postSignupAlpha, locale).then((res) => {
+        localStorage.setItem('postUserSignupAlpha', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('postUserSignupAlpha', JSON.stringify(err.response.data));
+      })
+
+      compareService.postUserSignupBeta(postSignupBeta, locale).then((res) => {
+        localStorage.setItem('postUserSignupBeta', JSON.stringify(res.data));
+      }).catch((err) => {
+        localStorage.setItem('postUserSignupBeta', JSON.stringify(err.response.data));
+      })
+
     }
   }
 
@@ -1814,18 +1932,18 @@ function App() {
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(putUserCmsUnregisterBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingBeta ? (JSON.stringify(postUserCmsUnregisterBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
                 <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(putUserCmsUnregisterAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(postUserCmsUnregisterAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={putUserCmsUnregisterBeta} newData={putUserCmsUnregisterAlpha} />
+            <JsonCompare oldData={postUserCmsUnregisterBeta} newData={postUserCmsUnregisterAlpha} />
 
             {/* ====================== ====================== API post user me unregister cms ======================  ====================== */}
 
@@ -1855,18 +1973,226 @@ function App() {
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(putUserCmsReregisterBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingBeta ? (JSON.stringify(postUserCmsReregisterBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
                 <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(putUserCmsReregisterAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(postUserCmsReregisterAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={putUserCmsReregisterBeta} newData={putUserCmsReregisterAlpha} />
+            <JsonCompare oldData={postUserCmsReregisterBeta} newData={postUserCmsReregisterAlpha} />
+
+            {/* ====================== ====================== API post send verification email ======================  ====================== */}
+
+            <hr id='wrapper_post_5' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-warning'> &#160;<strong>POST</strong></span> v2/verifications/send-mail &#160;
+              <button type="button" className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#postSendverificationEmailModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="postSendverificationEmailModal" tabIndex="-1" aria-labelledby="postSendverificationEmailModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="postSendverificationEmailModalLabel">POST v2/verifications/send-mail</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div className="modal-body">
+                      <form>
+                        <div className="row align-items-center">
+                          <span>
+                            <label htmlFor="" className="col-form-label">email&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='email' onChange={(e) => handlePutChangeValue1(e, 7)} defaultValue={verificationEmail ? verificationEmail : null} />
+                          </span>
+                        </div>
+                      </form>
+                    </div>
+
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 5)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(postVerificationSendEmailBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(postVerificationSendEmailAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={postVerificationSendEmailBeta} newData={postVerificationSendEmailAlpha} />
+
+
+            {/* ====================== ====================== API put verifications ======================  ====================== */}
+
+            <hr id='wrapper_put_5' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-primary'> &#160;<strong>PUT</strong></span> v2/verifications &#160;
+              <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#PutVerificationModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="PutVerificationModal" tabIndex="-1" aria-labelledby="PutVerificationModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="PutVerificationModalLabel">PUT v2/verifications</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div className="modal-body">
+                      <form>
+                        <div className="row align-items-center">
+                          <span>
+                            <label htmlFor="tokenAlpha" className="col-form-label">tokenAlpha&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="tokenAlpha" name='token' onChange={(e) => handlePutChangeValue1(e, 8)} defaultValue={putVerificationsAlpha ? putVerificationsAlpha.token : null} />
+                          </span>
+
+                          <span>
+                            <label htmlFor="tokenBeta" className="col-form-label">tokenBeta&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="tokenBeta" name='token' onChange={(e) => handlePutChangeValue1(e, 10)} defaultValue={putVerificationsBeta ? putVerificationsBeta.token : null} />
+                          </span>
+                        </div>
+                      </form>
+                    </div>
+
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 6)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(putVerificationsBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(putVerificationsAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={putVerificationsBeta} newData={putVerificationsAlpha} />
+
+            {/* ====================================== API post sign up ====================================== */}
+            <hr id='wrapper_post_6' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-warning'> &#160;<strong>POST</strong></span> /users/signup &#160;
+              <button type="button" className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#postSignupModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="postSignupModal" tabIndex="-1" aria-labelledby="postSignupModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="postSignupModalLabel">POST /users/signup</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                      <form>
+                        <div className="row align-items-center">
+
+                          <label htmlFor="" className="col-form-label">account :&#160;</label>
+                          <span>
+                            <label htmlFor="" className="col-form-label">username&#160;</label>
+                            <span>
+                              <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='username' onChange={(e) => handlePutChangeValue2(e, 3)} defaultValue={postSignupAlpha ? postSignupAlpha.account.username : null} />
+                            </span>
+                            <br />
+                            <span>
+                              <label htmlFor="" className="col-form-label">password&#160;</label>
+                              <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='password' onChange={(e) => handlePutChangeValue2(e, 3)} defaultValue={postSignupAlpha ? postSignupAlpha.account.password : null} />
+                            </span>
+                          </span>
+
+                          <span>
+                            <label htmlFor="" className="col-form-label">birthDate&#160;</label>
+                            {postSignupAlpha.agreements.collectingBirth ? <><input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='birthDate' onChange={(e) => handlePutChangeValue1(e, 9)} defaultValue={postSignupAlpha ? postSignupAlpha.birthDate : null} /></> : <span className='text-muted'>- you must agree collecting birth to set birth -</span>}
+                          </span>
+
+                          <span>
+                            <label htmlFor="" className="col-form-label">gender&#160;</label>
+                            {postSignupAlpha.agreements.collectingBirth ? <><input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='gender' onChange={(e) => handlePutChangeValue1(e, 9)} defaultValue={postSignupAlpha ? postSignupAlpha.gender : null} /></> : <span className='text-muted'>- you must agree collecting birth to set gender -</span>}
+                          </span>
+
+                          <label htmlFor="" className="col-form-label">agreements :&#160;</label>
+                          <span>
+                            <label htmlFor="" className="col-form-label">marketingEmail&#160;</label>
+                            <select className="form-select-sm mt-1" style={{ fontSize: '.8rem' }} aria-label="Default select example"
+                              id='marketingEmail' name='marketingEmail' value={postSignupAlpha.agreements.marketingEmail} onChange={(e) => handlePutChangeValue2(e, 2)}>
+                              <option value="true">true</option>
+                              <option value="false">false</option>
+                            </select>
+                          </span>
+
+                          <span>
+                            <label htmlFor="" className="col-form-label">collectingBirth&#160;</label>
+                            <select className="form-select-sm mt-1" style={{ fontSize: '.8rem' }} aria-label="Default select example"
+                              id='socialTcollectingBirthype' name='collectingBirth' value={postSignupAlpha.agreements.collectingBirth} onChange={(e) => handlePutChangeValue2(e, 2)}>
+                              <option value="true">true</option>
+                              <option value="false">false</option>
+                            </select>
+                          </span>
+
+                          <span>
+                            <label htmlFor="" className="col-form-label">verificationTokenAlpha&#160;:</label>
+                            <p>{postSignupAlpha ? postSignupAlpha.verificationToken : null}</p>
+                          </span>
+
+                          <span>
+                            <label htmlFor="" className="col-form-label">verificationTokenBeta&#160;:</label>
+                            <p>{postSignupBeta ? postSignupBeta.verificationToken : null}</p>
+                          </span>
+
+                        </div>
+                      </form>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 7)}>Send request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(postUserSignupBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(postUserSignupAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={postUserSignupBeta} newData={postUserSignupAlpha} />
 
             {/* ====================================DEL==================================== */}
 
@@ -1927,6 +2253,8 @@ function App() {
                   {/* ==================================================================================== PUT ====================================================================================*/}
 
                   <a href={`#wrapper_put_1`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeAlpha, putUserMeBeta)) ? "black" : "red" }}> v2/users/{"{me}"} </span></button></a>
+                  <a href={`#wrapper_put_5`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putVerificationsAlpha, putVerificationsBeta)) ? "black" : "red" }}> v2/verifications</span> </button></a>
+
                   <a href={`#wrapper_put_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeAlpha, putUserMeBeta)) ? "black" : "red" }}> /users/{"{me}"}/password</span> </button></a>
                   <a href={`#wrapper_put_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeAlpha, putUserMeBeta)) ? "black" : "red" }}> /users/{"{me}"}/username</span> </button></a>
                   <a href={`#wrapper_put_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeSocialAlpha, putUserMeSocialBeta)) ? "black" : "red" }}> /users/{"{me}"}/connect/{socialTypePut}</span> </button></a>
@@ -1934,9 +2262,12 @@ function App() {
                   {/* ==================================================================================== POST ====================================================================================*/}
 
                   <a href={`#wrapper_post_1`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(userAlpha, userBeta)) ? "black" : "red" }}> /users/signin</span> </button></a>
+                  <a href={`#wrapper_post_6`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postUserSignupAlpha, postUserSignupBeta)) ? "black" : "red" }}> /users/signup</span> </button></a>
+
                   <a href={`#wrapper_post_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(putUserMeUnregisterAlpha, putUserMeUnregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/unregister</span> </button></a>
-                  <a href={`#wrapper_post_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(putUserCmsUnregisterAlpha, putUserCmsUnregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/unregister {"(cms)"}</span> </button></a>
-                  <a href={`#wrapper_post_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(putUserCmsReregisterAlpha, putUserCmsReregisterAlpha)) ? "black" : "red" }}> v2/users/{"{me}"}/reregister {"(cms)"}</span> </button></a>
+                  <a href={`#wrapper_post_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postUserCmsUnregisterAlpha, postUserCmsUnregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/unregister {"(cms)"}</span> </button></a>
+                  <a href={`#wrapper_post_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postUserCmsReregisterAlpha, postUserCmsReregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/reregister {"(cms)"}</span> </button></a>
+                  <a href={`#wrapper_post_5`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postVerificationSendEmailAlpha, postVerificationSendEmailBeta)) ? "black" : "red" }}> v2/verifications/send-email</span> </button></a>
 
                   {/* ==================================================================================== DEL ====================================================================================*/}
 

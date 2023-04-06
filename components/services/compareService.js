@@ -613,40 +613,40 @@ class compareService {
 
   // ====== ======= ====== PUT unregister ====== ======= ======
 
-  putUserCmsUnregisterAlpha(access_token, userId, putData, locale) {
+  postUserCmsUnregisterAlpha(access_token, userId, postData, locale) {
     const headers = {
       'Content-Type': 'application/json',
       'x-lz-locale': locale,
       Authorization: `Bearer ${access_token}`,
     };
-    return axios.post(API_CMS_URL_ALPHA + `/v2/users/${userId}/unregister`, putData, { headers })
+    return axios.post(API_CMS_URL_ALPHA + `/v2/users/${userId}/unregister`, postData, { headers })
   }
 
-  putUserCmsUnregisterBeta(access_token, userId, putData, locale) {
+  postUserCmsUnregisterBeta(access_token, userId, postData, locale) {
     const headers = {
       'Content-Type': 'application/json',
       'x-lz-locale': locale,
       Authorization: `Bearer ${access_token}`,
     };
-    return axios.post(API_CMS_URL_BETA + `/v2/users/${userId}/unregister`, putData, { headers })
+    return axios.post(API_CMS_URL_BETA + `/v2/users/${userId}/unregister`, postData, { headers })
   }
 
   // ====== ======= ====== PUT Reregister ====== ======= ======
 
-  putUserCmsReregisterAlpha(access_token, userId, putData) {
+  postUserCmsReregisterAlpha(access_token, userId, postData) {
     const headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${access_token}`,
     };
-    return axios.post(API_CMS_URL_ALPHA + `/v2/users/${userId}/reregister`, putData, { headers })
+    return axios.post(API_CMS_URL_ALPHA + `/v2/users/${userId}/reregister`, postData, { headers })
   }
 
-  putUserCmsReregisterBeta(access_token, userId, putData) {
+  postUserCmsReregisterBeta(access_token, userId, postData) {
     const headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${access_token}`,
     };
-    return axios.post(API_CMS_URL_BETA + `/v2/users/${userId}/reregister`, putData, { headers })
+    return axios.post(API_CMS_URL_BETA + `/v2/users/${userId}/reregister`, postData, { headers })
   }
 
   // ====== ======= ====== Get Search User By Name or Id ====== ======= ======
@@ -665,6 +665,59 @@ class compareService {
       Authorization: `Bearer ${access_token}`,
     };
     return axios.get(API_CMS_URL_BETA + `/v2/users/${search}?limit=10`, { headers })
+  }
+
+  // ====== ======= ====== Post send email verifications ====== ======= ======
+
+  postVerificationSendEmailAlpha(email) {
+    const data = { email: email };
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    return axios.post(API_BASE_URL_ALPHA + `/v2/verifications/send-mail`, data, { headers })
+  }
+
+  postVerificationSendEmailBeta(email) {
+    const data = { email: email };
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    return axios.post(API_BASE_URL_BETA + `/v2/verifications/send-mail`, data, { headers })
+  }
+
+  // ====== ======= ====== Put verifications ====== ======= ======
+
+  putVerificationsAlpha(putVerificationsData) {
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    return axios.put(API_BASE_URL_ALPHA + `/v2/verifications`, putVerificationsData, { headers })
+  }
+
+  putVerificationsBeta(putVerificationsData) {
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    return axios.put(API_BASE_URL_BETA + `/v2/verifications`, putVerificationsData, { headers })
+  }
+
+  // ====== ======= ====== Post user signup ====== ======= ======
+
+  postUserSignupAlpha(postUserSignupData, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+    };
+    return axios.post(API_BASE_URL_ALPHA + `/users/signup`, postUserSignupData, { headers })
+  }
+
+  postUserSignupBeta(postUserSignupData, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${token}`,
+    };
+    return axios.post(API_BASE_URL_BETA + `/users/signup`, postUserSignupData, { headers })
   }
 
   // ===============================================================
