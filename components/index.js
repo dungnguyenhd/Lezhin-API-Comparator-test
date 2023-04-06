@@ -5,6 +5,7 @@ import JsonCompare from '../lib/index.js';
 import compareService from './services/compareService.js';
 import './style.css';
 import { isEqual } from 'lodash';
+import './mystyle.scss';
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -889,7 +890,7 @@ function App() {
     <div>
       <div className='container'>
         <div className='row'>
-          <div className='col-4 ms-4 me-4 mt-4'>
+          <div className='col-4 ms-4 me-4 ps-4 pe-4 mt-4'>
             {!userAlpha || !userBeta ?
               (
                 <>
@@ -956,7 +957,23 @@ function App() {
                 </>
               )}
           </div>
-          <div className='col-7 text-center text-danger h1 pt-5 mt-5' style={{ backgroundImage: `url(https://image.slidesdocs.com/responsive-images/background/white-clean-abstract-portfolio-simple-powerpoint-background_a97a4601d6__960_540.jpg)`, backgroundRepeat: "no-repeat", backgroundSize: "auto" }}> <span>Lezhin API Comparator</span> </div>
+          <div className='col-7 text-center text-danger h1 pt-5 mt-5' style={{ backgroundImage: `url(https://image.slidesdocs.com/responsive-images/background/white-clean-abstract-portfolio-simple-powerpoint-background_a97a4601d6__960_540.jpg)`, backgroundRepeat: "no-repeat", backgroundSize: "auto" }}>
+            <div className="mainText">
+              <div className="box">
+
+                <div className="title">
+                  <span className="block"></span>
+                  <h1>Lezhin Comic<span></span></h1>
+                </div>
+
+                <div className="role">
+                  <div className="block"></div>
+                  <p className='ps-5'>API Comparator</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -1105,7 +1122,27 @@ function App() {
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeBeta} newData={userMeAlpha} />
+            {!isLoadingAlpha ?
+              <><JsonCompare oldData={userMeBeta} newData={userMeAlpha} /></> : (<><div className='text-center'><img src='https://www.ucreative.com/wp-content/uploads/2014/09/fusion.gif' height={390} /> <br />
+                <div className='waviy'>
+                  <span style={{ '--i': 1 }}>M</span>
+                  <span style={{ '--i': 2 }}>e</span>
+                  <span style={{ '--i': 3 }}>r</span>
+                  <span style={{ '--i': 4 }}>g</span>
+                  <span style={{ '--i': 5 }}>i</span>
+                  <span style={{ '--i': 6 }}>n</span>
+                  <span style={{ '--i': 7 }}>g</span>
+                  &#160;
+                  <span style={{ '--i': 8 }}>D</span>
+                  <span style={{ '--i': 9 }}>a</span>
+                  <span style={{ '--i': 10 }}>t</span>
+                  <span style={{ '--i': 11 }}>a</span>
+                  <span style={{ '--i': 12 }}>.</span>
+                  <span style={{ '--i': 13 }}>.</span>
+                  <span style={{ '--i': 14 }}>.</span>
+                </div>
+              </div>
+              </>)}
 
             {/* API get user me meta */}
             <hr id='wrapper_get_2' />
