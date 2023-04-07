@@ -30,6 +30,7 @@ function App() {
   const [postSignupAlpha, setPostSignupApha] = useState({ agreements: { marketingEmail: false, collectingBirth: false }, birthDate: null, gender: null, account: { username: verificationEmail, password: null }, verificationToken: putVerificationsDataAlpha.token });
   const [postSignupBeta, setPostSignupBeta] = useState({ agreements: { marketingEmail: false, collectingBirth: false }, birthDate: null, gender: null, account: { username: verificationEmail, password: null }, verificationToken: putVerificationsDataBeta.token });
   const [verifyEmail, setVerifyEmail] = useState(null);
+  const [isLoadingRequest, setIsLoadingRequest] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -769,9 +770,10 @@ function App() {
     if (userAlpha && userBeta && t == 1) {
 
       // call post users/{me}/unregister alpha
-
+      setIsLoadingRequest(true);
       compareService.putUserMeUnregisterAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, putUnregister, locale).then((res) => {
         localStorage.setItem('putUserMeUnregisterAlpha', JSON.stringify(res.data));
+        setIsLoadingRequest(false);
       }).catch((err) => {
         localStorage.setItem('putUserMeUnregisterAlpha', JSON.stringify(err.response.data));
       })
@@ -786,9 +788,10 @@ function App() {
 
     } else if (adminAlpha && adminBeta && t == 2) {
       // call post v2/users/{me}/unregister cms alpha
-
+      setIsLoadingRequest(true);
       compareService.postUserCmsUnregisterAlpha(adminAlpha.access_token, userAlpha.data.user.userId, null).then((res) => {
         localStorage.setItem('postUserCmsUnregisterAlpha', JSON.stringify(res.data));
+        setIsLoadingRequest(false);
       }).catch((err) => {
         localStorage.setItem('postUserCmsUnregisterAlpha', JSON.stringify(err.response.data));
       })
@@ -804,9 +807,10 @@ function App() {
     } else if (adminAlpha && adminBeta && t == 3) {
 
       // call post v2/users/{me}/Reregister cms alpha
-
+      setIsLoadingRequest(true);
       compareService.postUserCmsReregisterAlpha(adminAlpha.access_token, userAlpha.data.user.userId, null).then((res) => {
         localStorage.setItem('postUserCmsReregisterAlpha', JSON.stringify(res.data));
+        setIsLoadingRequest(false);
       }).catch((err) => {
         localStorage.setItem('postUserCmsReregisterAlpha', JSON.stringify(err.response.data));
       })
@@ -821,9 +825,10 @@ function App() {
     } else if (adminAlpha && adminBeta && t == 4) {
 
       // call post v2/get/{me}/Search cms alpha
-
+      setIsLoadingRequest(true);
       compareService.getUserCmsSearchUserAlpha(adminAlpha.access_token, usernameSearch).then((res) => {
         localStorage.setItem('getUserCmsSearchAlpha', JSON.stringify(res.data));
+        setIsLoadingRequest(false);
       }).catch((err) => {
         localStorage.setItem('getUserCmsSearchAlpha', JSON.stringify(err.response.data));
       })
@@ -837,9 +842,10 @@ function App() {
       })
     } else if (t == 5) {
       // send verification email
-
+      setIsLoadingRequest(true);
       compareService.postVerificationSendEmailAlpha(verifyEmail).then((res) => {
         localStorage.setItem('postVerificationSendEmailAlpha', JSON.stringify(res.data));
+        setIsLoadingRequest(false);
       }).catch((err) => {
         localStorage.setItem('postVerificationSendEmailAlpha', JSON.stringify(err.response.data));
       })
@@ -852,9 +858,10 @@ function App() {
 
     } else if (t == 6) {
       // entry verification code
-
+      setIsLoadingRequest(true);
       compareService.putVerificationsAlpha(putVerificationsDataAlpha).then((res) => {
         localStorage.setItem('putVerificationsAlpha', JSON.stringify(res.data));
+        setIsLoadingRequest(false);
       }).catch((err) => {
         localStorage.setItem('putVerificationsAlpha', JSON.stringify(err.response.data));
       })
@@ -867,9 +874,10 @@ function App() {
 
     } else if (t == 7) {
       // send post sign up user
-
+      setIsLoadingRequest(true);
       compareService.postUserSignupAlpha(postSignupAlpha, locale).then((res) => {
         localStorage.setItem('postUserSignupAlpha', JSON.stringify(res.data));
+        setIsLoadingRequest(false);
       }).catch((err) => {
         localStorage.setItem('postUserSignupAlpha', JSON.stringify(err.response.data));
       })
@@ -1724,12 +1732,12 @@ function App() {
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(putUserMePasswordBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMePasswordBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
                 <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(putUserMePassowrdAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMePassowrdAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
@@ -1779,12 +1787,12 @@ function App() {
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(putUserMeUsernameBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUsernameBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
                 <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(putUserMeUsernameAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUsernameAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
@@ -1829,12 +1837,12 @@ function App() {
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(putUserMeUsernameBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUsernameBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
                 <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(putUserMeUsernameAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUsernameAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
@@ -1842,7 +1850,87 @@ function App() {
             <p className="title">- The merged different:</p>
             <JsonCompare oldData={putUserMeUsernameBeta} newData={putUserMeUsernameAlpha} />
 
+            {/* ====================== ====================== API post user me unregister cms ======================  ====================== */}
 
+            <hr id='wrapper_put_6' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-primary'> &#160;<strong>PUT</strong></span> v2/users/{'{me}'}/unregister {'(cms)'} &#160;
+              <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#postUserUnregisterCmsModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="postUserUnregisterCmsModal" tabIndex="-1" aria-labelledby="postUserUnregisterCmsModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="postUserUnregisterCmsModalLabel">PUT /users/me/unregister {'(cms)'}</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 2)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserCmsUnregisterBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserCmsUnregisterAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={postUserCmsUnregisterBeta} newData={postUserCmsUnregisterAlpha} />
+
+            {/* ====================== ====================== API post user me unregister cms ======================  ====================== */}
+
+            <hr id='wrapper_put_7' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-primary'> &#160;<strong>PUT</strong></span> v2/users/{'{me}'}/reregister {'(cms)'} &#160;
+              <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#postUsersCmsReregisterCmsModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="postUsersCmsReregisterCmsModal" tabIndex="-1" aria-labelledby="postUsersCmsReregisterCmsModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="postUsersCmsReregisterCmsModalLabel">PUT v2/users/{'{me}'}/reregister</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 3)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserCmsReregisterBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserCmsReregisterAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={postUserCmsReregisterBeta} newData={postUserCmsReregisterAlpha} />
 
             {/* ====================================POST==================================== */}
             {/* API get user me devices */}
@@ -1857,12 +1945,12 @@ function App() {
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userBeta, null, 2)) : (<>  <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(userBeta, null, 2)) : (<>  <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
                 <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(userAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
@@ -1928,100 +2016,18 @@ function App() {
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(putUserMeUnregisterBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUnregisterBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
                 <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(putUserMeUnregisterAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUnregisterAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
             <JsonCompare oldData={putUserMeUnregisterBeta} newData={putUserMeUnregisterAlpha} />
-
-            {/* ====================== ====================== API post user me unregister cms ======================  ====================== */}
-
-            <hr id='wrapper_post_3' />
-
-            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
-              {'>'} <span className='text-warning'> &#160;<strong>POST</strong></span> v2/users/{'{me}'}/unregister {'(cms)'} &#160;
-              <button type="button" className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#postUserUnregisterCmsModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
-
-              <div className="modal fade" id="postUserUnregisterCmsModal" tabIndex="-1" aria-labelledby="postUserUnregisterCmsModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h5 className="modal-title" id="postUserUnregisterCmsModalLabel">POST /users/me/unregister {'(cms)'}</h5>
-                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <div className="modal-footer">
-                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 2)}>Send Request</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="origin-data pt-3">
-              <div className="old-data">
-                <p className="title">- Beta data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(postUserCmsUnregisterBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  <span className='ps-2'>Calling API</span></>)}</pre>
-              </div>
-              <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(postUserCmsUnregisterAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  <span className='ps-2'>Calling API</span></>)}</pre>
-              </div>
-            </div>
-
-            <p className="title">- The merged different:</p>
-            <JsonCompare oldData={postUserCmsUnregisterBeta} newData={postUserCmsUnregisterAlpha} />
-
-            {/* ====================== ====================== API post user me unregister cms ======================  ====================== */}
-
-            <hr id='wrapper_post_4' />
-
-            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
-              {'>'} <span className='text-warning'> &#160;<strong>POST</strong></span> v2/users/{'{me}'}/reregister {'(cms)'} &#160;
-              <button type="button" className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#postUsersCmsReregisterCmsModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
-
-              <div className="modal fade" id="postUsersCmsReregisterCmsModal" tabIndex="-1" aria-labelledby="postUsersCmsReregisterCmsModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h5 className="modal-title" id="postUsersCmsReregisterCmsModalLabel">POST v2/users/{'{me}'}/reregister</h5>
-                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <div className="modal-footer">
-                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 3)}>Send Request</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="origin-data pt-3">
-              <div className="old-data">
-                <p className="title">- Beta data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(postUserCmsReregisterBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  <span className='ps-2'>Calling API</span></>)}</pre>
-              </div>
-              <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(postUserCmsReregisterAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  <span className='ps-2'>Calling API</span></>)}</pre>
-              </div>
-            </div>
-
-            <p className="title">- The merged different:</p>
-            <JsonCompare oldData={postUserCmsReregisterBeta} newData={postUserCmsReregisterAlpha} />
 
             {/* ====================== ====================== API post send verification email ======================  ====================== */}
 
@@ -2062,12 +2068,12 @@ function App() {
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(postVerificationSendEmailBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postVerificationSendEmailBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
                 <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(postVerificationSendEmailAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postVerificationSendEmailAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
@@ -2120,12 +2126,12 @@ function App() {
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(putVerificationsBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putVerificationsBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
                 <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(putVerificationsAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putVerificationsAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
@@ -2218,12 +2224,12 @@ function App() {
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- Beta data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(postUserSignupBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserSignupBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
                 <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(postUserSignupAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserSignupAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
@@ -2291,6 +2297,9 @@ function App() {
 
                   <a href={`#wrapper_put_1`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeAlpha, putUserMeBeta)) ? "black" : "red" }}> v2/users/{"{me}"} </span></button></a>
                   <a href={`#wrapper_put_5`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putVerificationsAlpha, putVerificationsBeta)) ? "black" : "red" }}> v2/verifications</span> </button></a>
+                  <a href={`#wrapper_put_6`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(postUserCmsUnregisterAlpha, postUserCmsUnregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/unregister {"(cms)"}</span> </button></a>
+                  <a href={`#wrapper_put_7`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(postUserCmsReregisterAlpha, postUserCmsReregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/reregister {"(cms)"}</span> </button></a>
+
 
                   <a href={`#wrapper_put_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeAlpha, putUserMeBeta)) ? "black" : "red" }}> /users/{"{me}"}/password</span> </button></a>
                   <a href={`#wrapper_put_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeAlpha, putUserMeBeta)) ? "black" : "red" }}> /users/{"{me}"}/username</span> </button></a>
@@ -2302,8 +2311,6 @@ function App() {
                   <a href={`#wrapper_post_6`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postUserSignupAlpha, postUserSignupBeta)) ? "black" : "red" }}> /users/signup</span> </button></a>
 
                   <a href={`#wrapper_post_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(putUserMeUnregisterAlpha, putUserMeUnregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/unregister</span> </button></a>
-                  <a href={`#wrapper_post_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postUserCmsUnregisterAlpha, postUserCmsUnregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/unregister {"(cms)"}</span> </button></a>
-                  <a href={`#wrapper_post_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postUserCmsReregisterAlpha, postUserCmsReregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/reregister {"(cms)"}</span> </button></a>
                   <a href={`#wrapper_post_5`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postVerificationSendEmailAlpha, postVerificationSendEmailBeta)) ? "black" : "red" }}> v2/verifications/send-email</span> </button></a>
 
                   {/* ==================================================================================== DEL ====================================================================================*/}

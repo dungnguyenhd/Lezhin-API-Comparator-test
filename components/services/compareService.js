@@ -619,7 +619,7 @@ class compareService {
       'x-lz-locale': locale,
       Authorization: `Bearer ${access_token}`,
     };
-    return axios.post(API_CMS_URL_ALPHA + `/v2/users/${userId}/unregister`, postData, { headers })
+    return axios.put(API_CMS_URL_ALPHA + `/v2/users/${userId}/unregister`, postData, { headers })
   }
 
   postUserCmsUnregisterBeta(access_token, userId, postData, locale) {
@@ -628,7 +628,7 @@ class compareService {
       'x-lz-locale': locale,
       Authorization: `Bearer ${access_token}`,
     };
-    return axios.post(API_CMS_URL_BETA + `/v2/users/${userId}/unregister`, postData, { headers })
+    return axios.put(API_CMS_URL_BETA + `/v2/users/${userId}/unregister`, postData, { headers })
   }
 
   // ====== ======= ====== PUT Reregister ====== ======= ======
@@ -638,7 +638,7 @@ class compareService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${access_token}`,
     };
-    return axios.post(API_CMS_URL_ALPHA + `/v2/users/${userId}/reregister`, postData, { headers })
+    return axios.put(API_CMS_URL_ALPHA + `/v2/users/${userId}/reregister`, postData, { headers })
   }
 
   postUserCmsReregisterBeta(access_token, userId, postData) {
@@ -646,7 +646,7 @@ class compareService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${access_token}`,
     };
-    return axios.post(API_CMS_URL_BETA + `/v2/users/${userId}/reregister`, postData, { headers })
+    return axios.put(API_CMS_URL_BETA + `/v2/users/${userId}/reregister`, postData, { headers })
   }
 
   // ====== ======= ====== Get Search User By Name or Id ====== ======= ======
