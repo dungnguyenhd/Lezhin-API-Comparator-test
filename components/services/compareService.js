@@ -570,6 +570,64 @@ class compareService {
     return axios.delete(API_BASE_URL_BETA + `/v2/users/${userId}/connections/${socialType}`, putData, { headers })
   }
 
+  // ================== del user logout Social ==================
+
+  delUserByeAlpha(access_token) {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.delete(API_BASE_URL_ALPHA + `/v2/users/bye`, { headers })
+  }
+
+  delUserByeBeta(access_token) {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.delete(API_BASE_URL_BETA + `/v2/users/bye`, { headers })
+  }
+
+  // ================== del user Me devices all Social ==================
+
+  delUserDevicesAllAlpha(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.delete(API_BASE_URL_ALPHA + `/users/${userId}/devices/all`, { headers })
+  }
+
+  delUserDevicesAllBeta(access_token, userId, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.delete(API_BASE_URL_BETA + `/users/${userId}/devices/all`, { headers })
+  }
+
+    // ================== del user Me device by id Social ==================
+
+    delUserDevicesByIdAlpha(access_token, userId, deviceCode, locale) {
+      const headers = {
+        'Content-Type': 'application/json',
+        'x-lz-locale': locale,
+        Authorization: `Bearer ${access_token}`,
+      };
+      return axios.delete(API_BASE_URL_ALPHA + `/users/${userId}/devices/${deviceCode}`, { headers })
+    }
+
+    delUserDevicesByIdBeta(access_token, userId, deviceCode, locale) {
+      const headers = {
+        'Content-Type': 'application/json',
+        'x-lz-locale': locale,
+        Authorization: `Bearer ${access_token}`,
+      };
+      return axios.delete(API_BASE_URL_BETA + `/users/${userId}/devices/${deviceCode}`, { headers })
+    }
+
 
   // ====================================================== CMS API =======================================================================================
   // ====================================================== CMS API =======================================================================================

@@ -31,6 +31,7 @@ function App() {
   const [postSignupBeta, setPostSignupBeta] = useState({ agreements: { marketingEmail: false, collectingBirth: false }, birthDate: null, gender: null, account: { username: verificationEmail, password: null }, verificationToken: putVerificationsDataBeta.token });
   const [verifyEmail, setVerifyEmail] = useState(null);
   const [isLoadingRequest, setIsLoadingRequest] = useState(false);
+  const [delDeviceId, setDelDeviceId] = useState(null);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -293,15 +294,6 @@ function App() {
       // ============================== ============================== del API ============================== ==============================
       // ============================== ============================== del API ============================== ==============================
 
-      // call del users/{me}/connect/{socialType} alpha
-
-      if (isAutoDel) {
-        compareService.delUserMeSocialAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, delUserSocial, socialTypeDel, locale).then((res) => {
-          localStorage.setItem('delUserMeSocialAlpha', JSON.stringify(res.data));
-        }).catch((err) => {
-          localStorage.setItem('delUserMeSocialAlpha', JSON.stringify(err.response.data));
-        })
-      }
 
 
       // ==================================================== beta ======================================================================================
@@ -493,16 +485,6 @@ function App() {
       // ============================== ============================== del API ============================== ==============================
       // ============================== ============================== del API ============================== ==============================
 
-      // call del users/{me}/connect/{socialType} Beta
-
-      if (isAutoDel) {
-        compareService.delUserMeSocialBeta(userBeta.data.access_token, userBeta.data.user.userId, delUserSocial, socialTypeDel, locale).then((res) => {
-          localStorage.setItem('delUserMeSocialBeta', JSON.stringify(res.data));
-        }).catch((err) => {
-          localStorage.setItem('delUserMeSocialBeta', JSON.stringify(err.response.data));
-        })
-      }
-
       //
 
     }
@@ -545,6 +527,9 @@ function App() {
   const postVerificationSendEmailBeta = JSON.parse(localStorage.getItem('postVerificationSendEmailBeta'));
   const putVerificationsBeta = JSON.parse(localStorage.getItem('putVerificationsBeta'));
   const postUserSignupBeta = JSON.parse(localStorage.getItem('postUserSignupBeta'));
+  const delUserByeBeta = JSON.parse(localStorage.getItem('delUserByeBeta'));
+  const delUserDevicesAllBeta = JSON.parse(localStorage.getItem('delUserDevicesAllBeta'));
+  const delUserDevicesByIdBeta = JSON.parse(localStorage.getItem('delUserDevicesByIdBeta'));
 
   // ----
 
@@ -582,6 +567,9 @@ function App() {
   const postVerificationSendEmailAlpha = JSON.parse(localStorage.getItem('postVerificationSendEmailAlpha'));
   const putVerificationsAlpha = JSON.parse(localStorage.getItem('putVerificationsAlpha'));
   const postUserSignupAlpha = JSON.parse(localStorage.getItem('postUserSignupAlpha'));
+  const delUserByeAlpha = JSON.parse(localStorage.getItem('delUserByeAlpha'));
+  const delUserDevicesAllAlpha = JSON.parse(localStorage.getItem('delUserDevicesAllAlpha'));
+  const delUserDevicesByIdAlpha = JSON.parse(localStorage.getItem('delUserDevicesByIdAlpha'));
 
   const verificationEmail = localStorage.getItem('verificationEmail');
   // handle request ===================================================================================================================================
@@ -672,6 +660,8 @@ function App() {
         data[name] = value;
         setPutVerificationsDataBeta(data);
         break;
+      case 11:
+        setDelDeviceId(value);
       default:
         break;
     }
@@ -731,163 +721,257 @@ function App() {
   }
 
   const handleSelectAuto = (e, t) => {
-    if (t == 1) {
-      if (e.target.value == 'false') {
-        setIsAutoPut(false);
-        if (isLoggedIn) {
-          setPutUserMe({ locale: userAlpha.data.user.locale, isAdultFilterOn: userAlpha.data.user.isAdultFilterOn, birthDate: userAlpha.data.user.birthDate, gender: userAlpha.data.user.gender, agreements: { marketingEmail: userAlpha.data.user.agreements.marketingEmail, collectingBirth: userAlpha.data.user.agreements.collectingBirth, timer: userAlpha.data.user.agreements.timer, subscription: userAlpha.data.user.agreements.subscription } });
-          setPutUserPassword({ password: null, newPassword: null });
-          setPutUserUsername({ username: userAlpha.data.user.username, password: 'lezhin123!' });
-          setPutUserSocial({ accessToken: null });
+    switch (t) {
+      case 1:
+        if (e.target.value == 'false') {
+          setIsAutoPut(false);
+          if (isLoggedIn) {
+            setPutUserMe({ locale: userAlpha.data.user.locale, isAdultFilterOn: userAlpha.data.user.isAdultFilterOn, birthDate: userAlpha.data.user.birthDate, gender: userAlpha.data.user.gender, agreements: { marketingEmail: userAlpha.data.user.agreements.marketingEmail, collectingBirth: userAlpha.data.user.agreements.collectingBirth, timer: userAlpha.data.user.agreements.timer, subscription: userAlpha.data.user.agreements.subscription } });
+            setPutUserPassword({ password: null, newPassword: null });
+            setPutUserUsername({ username: userAlpha.data.user.username, password: 'lezhin123!' });
+            setPutUserSocial({ accessToken: null });
+          }
+        } else {
+          setIsAutoPut(true);
+          setPutUserMe({ locale: "ko-KR", isAdultFilterOn: true, birthDate: "19990304", gender: "male", agreements: { marketingEmail: true, collectingBirth: true, timer: true, subscription: true } });
+          setPutUserUsername({ username: userAlpha ? userAlpha.data.user.username : null, password: 'lezhin123!' });
+          setPutUserPassword({ password: 'lezhin123!', newPassword: 'lezhin123!' });
+          setPutUserSocial({ accessToken: 'EAAK4nWXU8zgBAPGjurSpIiakdFv2UAGfGpjxXGdqMgeT7dqscJmVWZAkZBwjaQCHGVuzpyNhni0Mt4JnOiCZBFqKnZAFvkn6OQIDqO9u0jZAmXm7GEjtqclyyCdQ8JZBFtaL30zs02CGOMxCMkpe5NPOHYFod19JxdrVtS6lo53OhFO8uOwo2fX2u0m7JU6RD7H79IHRZBRk66p31axknK36FtQBk0BhmO7wDmcciFMZCD6vewP4f8ZBq' });
         }
-      } else {
-        setIsAutoPut(true);
-        setPutUserMe({ locale: "ko-KR", isAdultFilterOn: true, birthDate: "19990304", gender: "male", agreements: { marketingEmail: true, collectingBirth: true, timer: true, subscription: true } });
-        setPutUserUsername({ username: userAlpha ? userAlpha.data.user.username : null, password: 'lezhin123!' });
-        setPutUserPassword({ password: 'lezhin123!', newPassword: 'lezhin123!' });
-        setPutUserSocial({ accessToken: 'EAAK4nWXU8zgBAPGjurSpIiakdFv2UAGfGpjxXGdqMgeT7dqscJmVWZAkZBwjaQCHGVuzpyNhni0Mt4JnOiCZBFqKnZAFvkn6OQIDqO9u0jZAmXm7GEjtqclyyCdQ8JZBFtaL30zs02CGOMxCMkpe5NPOHYFod19JxdrVtS6lo53OhFO8uOwo2fX2u0m7JU6RD7H79IHRZBRk66p31axknK36FtQBk0BhmO7wDmcciFMZCD6vewP4f8ZBq' });
-      }
-    } else if (t == 2) {
-      if (e.target.value == 'false') {
-        setIsAutoPost(false);
-        setPutUnregister(null);
-        setUsernameSearch(null);
-      } else {
-        setIsAutoPost(true);
-        setPutUnregister({ password: 'lezhin123!', reason: 'test', kind: '123', selected: '123', cause: '23' });
-        setUsernameSearch('dungnguyent9902@gmail.com')
-      }
-    } else if (t == 3) {
-      if (e.target.value == 'false') {
-        setIsAutoDel(false);
-      } else {
-        setIsAutoDel(true);
-      }
+        break;
+      case 2:
+        if (e.target.value == 'false') {
+          setIsAutoPost(false);
+          setPutUnregister(null);
+          setUsernameSearch(null);
+        } else {
+          setIsAutoPost(true);
+          setPutUnregister({ password: 'lezhin123!', reason: 'test', kind: '123', selected: '123', cause: '23' });
+          setUsernameSearch('dungnguyent9902@gmail.com');
+        }
+        break;
+      case 3:
+        if (e.target.value == 'false') {
+          setIsAutoDel(false);
+        } else {
+          setIsAutoDel(true);
+        }
+        break;
+      default:
+        break;
     }
   }
 
   const handClickRequest = (e, t) => {
-    if (userAlpha && userBeta && t == 1) {
+    if (userAlpha && userBeta) {
+      switch (t) {
+        case 1:
 
-      // call post users/{me}/unregister alpha
-      setIsLoadingRequest(true);
-      compareService.putUserMeUnregisterAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, putUnregister, locale).then((res) => {
-        localStorage.setItem('putUserMeUnregisterAlpha', JSON.stringify(res.data));
-        setIsLoadingRequest(false);
-      }).catch((err) => {
-        localStorage.setItem('putUserMeUnregisterAlpha', JSON.stringify(err.response.data));
-      })
+          // call post users/{me}/unregister alpha
+          setIsLoadingRequest(true);
+          compareService.putUserMeUnregisterAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, putUnregister, locale).then((res) => {
+            localStorage.setItem('putUserMeUnregisterAlpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('putUserMeUnregisterAlpha', JSON.stringify(err.response.data));
+            setIsLoadingRequest(false);
+          });
 
-      // call post users/{me}/unregister Beta
+          // call post users/{me}/unregister Beta
 
-      compareService.putUserMeUnregisterBeta(userBeta.data.access_token, userBeta.data.user.userId, putUnregister, locale).then((res) => {
-        localStorage.setItem('putUserMeUnregisterBeta', JSON.stringify(res.data));
-      }).catch((err) => {
-        localStorage.setItem('putUserMeUnregisterBeta', JSON.stringify(err.response.data));
-      })
+          compareService.putUserMeUnregisterBeta(userBeta.data.access_token, userBeta.data.user.userId, putUnregister, locale).then((res) => {
+            localStorage.setItem('putUserMeUnregisterBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('putUserMeUnregisterBeta', JSON.stringify(err.response.data));
+          });
 
-    } else if (adminAlpha && adminBeta && t == 2) {
-      // call post v2/users/{me}/unregister cms alpha
-      setIsLoadingRequest(true);
-      compareService.postUserCmsUnregisterAlpha(adminAlpha.access_token, userAlpha.data.user.userId, null).then((res) => {
-        localStorage.setItem('postUserCmsUnregisterAlpha', JSON.stringify(res.data));
-        setIsLoadingRequest(false);
-      }).catch((err) => {
-        localStorage.setItem('postUserCmsUnregisterAlpha', JSON.stringify(err.response.data));
-      })
+          break;
+        case 2:
+          // call post v2/users/{me}/unregister cms alpha
+          setIsLoadingRequest(true);
+          compareService.postUserCmsUnregisterAlpha(adminAlpha.access_token, userAlpha.data.user.userId, null).then((res) => {
+            localStorage.setItem('postUserCmsUnregisterAlpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('postUserCmsUnregisterAlpha', JSON.stringify(err.response.data));
+            setIsLoadingRequest(false);
+          });
 
-      // call post v2/users/{me}/unregister cms Beta
+          // call post v2/users/{me}/unregister cms Beta
 
-      compareService.postUserCmsUnregisterBeta(adminBeta.access_token, userBeta.data.user.userId, null).then((res) => {
-        localStorage.setItem('postUserCmsUnregisterBeta', JSON.stringify(res.data));
-      }).catch((err) => {
-        localStorage.setItem('postUserCmsUnregisterBeta', JSON.stringify(err.response.data));
-      })
+          compareService.postUserCmsUnregisterBeta(adminBeta.access_token, userBeta.data.user.userId, null).then((res) => {
+            localStorage.setItem('postUserCmsUnregisterBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('postUserCmsUnregisterBeta', JSON.stringify(err.response.data));
+          });
 
-    } else if (adminAlpha && adminBeta && t == 3) {
+          break;
+        case 3:
 
-      // call post v2/users/{me}/Reregister cms alpha
-      setIsLoadingRequest(true);
-      compareService.postUserCmsReregisterAlpha(adminAlpha.access_token, userAlpha.data.user.userId, null).then((res) => {
-        localStorage.setItem('postUserCmsReregisterAlpha', JSON.stringify(res.data));
-        setIsLoadingRequest(false);
-      }).catch((err) => {
-        localStorage.setItem('postUserCmsReregisterAlpha', JSON.stringify(err.response.data));
-      })
+          // call post v2/users/{me}/Reregister cms alpha
+          setIsLoadingRequest(true);
+          compareService.postUserCmsReregisterAlpha(adminAlpha.access_token, userAlpha.data.user.userId, null).then((res) => {
+            localStorage.setItem('postUserCmsReregisterAlpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('postUserCmsReregisterAlpha', JSON.stringify(err.response.data));
+            setIsLoadingRequest(false);
+          });
 
-      // call post v2/users/{me}/Reregister cms Beta
+          // call post v2/users/{me}/Reregister cms Beta
 
-      compareService.postUserCmsReregisterBeta(adminBeta.access_token, userBeta.data.user.userId, null).then((res) => {
-        localStorage.setItem('postUserCmsReregisterBeta', JSON.stringify(res.data));
-      }).catch((err) => {
-        localStorage.setItem('postUserCmsReregisterBeta', JSON.stringify(err.response.data));
-      })
-    } else if (adminAlpha && adminBeta && t == 4) {
+          compareService.postUserCmsReregisterBeta(adminBeta.access_token, userBeta.data.user.userId, null).then((res) => {
+            localStorage.setItem('postUserCmsReregisterBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('postUserCmsReregisterBeta', JSON.stringify(err.response.data));
+          });
+          break;
+        case 4:
 
-      // call post v2/get/{me}/Search cms alpha
-      setIsLoadingRequest(true);
-      compareService.getUserCmsSearchUserAlpha(adminAlpha.access_token, usernameSearch).then((res) => {
-        localStorage.setItem('getUserCmsSearchAlpha', JSON.stringify(res.data));
-        setIsLoadingRequest(false);
-      }).catch((err) => {
-        localStorage.setItem('getUserCmsSearchAlpha', JSON.stringify(err.response.data));
-      })
+          // call post v2/get/{me}/Search cms alpha
+          setIsLoadingRequest(true);
+          compareService.getUserCmsSearchUserAlpha(adminAlpha.access_token, usernameSearch).then((res) => {
+            localStorage.setItem('getUserCmsSearchAlpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('getUserCmsSearchAlpha', JSON.stringify(err.response.data));
+            setIsLoadingRequest(false);
+          });
 
-      // call post v2/get/{me}/Search cms Beta
+          // call post v2/get/{me}/Search cms Beta
 
-      compareService.getUserCmsSearchUserBeta(adminBeta.access_token, usernameSearch).then((res) => {
-        localStorage.setItem('getUserCmsSearchBeta', JSON.stringify(res.data));
-      }).catch((err) => {
-        localStorage.setItem('getUserCmsSearchBeta', JSON.stringify(err.response.data));
-      })
-    } else if (t == 5) {
-      // send verification email
-      setIsLoadingRequest(true);
-      compareService.postVerificationSendEmailAlpha(verifyEmail).then((res) => {
-        localStorage.setItem('postVerificationSendEmailAlpha', JSON.stringify(res.data));
-        setIsLoadingRequest(false);
-      }).catch((err) => {
-        localStorage.setItem('postVerificationSendEmailAlpha', JSON.stringify(err.response.data));
-      })
+          compareService.getUserCmsSearchUserBeta(adminBeta.access_token, usernameSearch).then((res) => {
+            localStorage.setItem('getUserCmsSearchBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('getUserCmsSearchBeta', JSON.stringify(err.response.data));
+          });
+          break;
+        case 5:
+          // send verification email
+          setIsLoadingRequest(true);
+          compareService.postVerificationSendEmailAlpha(verifyEmail).then((res) => {
+            localStorage.setItem('postVerificationSendEmailAlpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('postVerificationSendEmailAlpha', JSON.stringify(err.response.data));
+            setIsLoadingRequest(false);
+          });
 
-      compareService.postVerificationSendEmailBeta(verifyEmail).then((res) => {
-        localStorage.setItem('postVerificationSendEmailBeta', JSON.stringify(res.data));
-      }).catch((err) => {
-        localStorage.setItem('postVerificationSendEmailBeta', JSON.stringify(err.response.data));
-      })
+          compareService.postVerificationSendEmailBeta(verifyEmail).then((res) => {
+            localStorage.setItem('postVerificationSendEmailBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('postVerificationSendEmailBeta', JSON.stringify(err.response.data));
+          });
 
-    } else if (t == 6) {
-      // entry verification code
-      setIsLoadingRequest(true);
-      compareService.putVerificationsAlpha(putVerificationsDataAlpha).then((res) => {
-        localStorage.setItem('putVerificationsAlpha', JSON.stringify(res.data));
-        setIsLoadingRequest(false);
-      }).catch((err) => {
-        localStorage.setItem('putVerificationsAlpha', JSON.stringify(err.response.data));
-      })
+          break;
+        case 6:
+          // entry verification code
+          setIsLoadingRequest(true);
+          compareService.putVerificationsAlpha(putVerificationsDataAlpha).then((res) => {
+            localStorage.setItem('putVerificationsAlpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('putVerificationsAlpha', JSON.stringify(err.response.data));
+            setIsLoadingRequest(false);
+          });
 
-      compareService.putVerificationsBeta(putVerificationsDataBeta).then((res) => {
-        localStorage.setItem('putVerificationsBeta', JSON.stringify(res.data));
-      }).catch((err) => {
-        localStorage.setItem('putVerificationsBeta', JSON.stringify(err.response.data));
-      })
+          compareService.putVerificationsBeta(putVerificationsDataBeta).then((res) => {
+            localStorage.setItem('putVerificationsBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('putVerificationsBeta', JSON.stringify(err.response.data));
+          });
 
-    } else if (t == 7) {
-      // send post sign up user
-      setIsLoadingRequest(true);
-      compareService.postUserSignupAlpha(postSignupAlpha, locale).then((res) => {
-        localStorage.setItem('postUserSignupAlpha', JSON.stringify(res.data));
-        setIsLoadingRequest(false);
-      }).catch((err) => {
-        localStorage.setItem('postUserSignupAlpha', JSON.stringify(err.response.data));
-      })
+          break;
+        case 7:
+          // send post sign up user
+          setIsLoadingRequest(true);
+          compareService.postUserSignupAlpha(postSignupAlpha, locale).then((res) => {
+            localStorage.setItem('postUserSignupAlpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('postUserSignupAlpha', JSON.stringify(err.response.data));
+            setIsLoadingRequest(false);
+          });
 
-      compareService.postUserSignupBeta(postSignupBeta, locale).then((res) => {
-        localStorage.setItem('postUserSignupBeta', JSON.stringify(res.data));
-      }).catch((err) => {
-        localStorage.setItem('postUserSignupBeta', JSON.stringify(err.response.data));
-      })
+          compareService.postUserSignupBeta(postSignupBeta, locale).then((res) => {
+            localStorage.setItem('postUserSignupBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('postUserSignupBeta', JSON.stringify(err.response.data));
+          });
 
+          break;
+        case 8:
+          // send del user bye
+          setIsLoadingRequest(true);
+          compareService.delUserByeAlpha(userAlpha.data.access_token).then((res) => {
+            localStorage.setItem('delUserByeAlpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('delUserByeAlpha', JSON.stringify(err.response.data));
+            setIsLoadingRequest(false);
+          });
+
+          compareService.delUserByeBeta(userBeta.data.access_token).then((res) => {
+            localStorage.setItem('delUserByeBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('delUserByeBeta', JSON.stringify(err.response.data));
+          });
+
+          break;
+        case 9:
+          // send del user devices all
+          setIsLoadingRequest(true);
+          compareService.delUserDevicesAllAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
+            localStorage.setItem('delUserDevicesAllAlpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('delUserDevicesAllAlpha', JSON.stringify(err.response.data));
+            setIsLoadingRequest(false);
+          });
+
+          compareService.delUserDevicesAllBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
+            localStorage.setItem('delUserDevicesAllBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('delUserDevicesAllBeta', JSON.stringify(err.response.data));
+          });
+          break;
+        case 10:
+          // call del users/{me}/connect/{socialType} alpha
+          setIsLoadingRequest(true);
+          compareService.delUserMeSocialAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, delUserSocial, socialTypeDel, locale).then((res) => {
+            localStorage.setItem('delUserMeSocialAlpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('delUserMeSocialAlpha', JSON.stringify(err.response.data));
+          });
+
+          compareService.delUserMeSocialBeta(userBeta.data.access_token, userBeta.data.user.userId, delUserSocial, socialTypeDel, locale).then((res) => {
+            localStorage.setItem('delUserMeSocialBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('delUserMeSocialBeta', JSON.stringify(err.response.data));
+          });
+          break;
+        case 11:
+          // send del user devices ById
+          setIsLoadingRequest(true);
+          compareService.delUserDevicesByIdAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
+            localStorage.setItem('delUserDevicesByIdAlpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('delUserDevicesByIdAlpha', JSON.stringify(err.response.data));
+            setIsLoadingRequest(false);
+          });
+
+          compareService.delUserDevicesByIdBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
+            localStorage.setItem('delUserDevicesByIdBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('delUserDevicesByIdBeta', JSON.stringify(err.response.data));
+          });
+          break;
+
+        default:
+          break;
+      }
     }
   }
 
@@ -2245,6 +2329,23 @@ function App() {
 
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
               {'>'} <span className='text-danger'> &#160;<strong>DEL</strong></span> /users/{'{me}'}/connections/{socialTypeDel} &#160;
+
+              <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delUserConnection" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="delUserConnection" tabIndex="-1" aria-labelledby="delUserConnectionLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="delUserConnectionLabel">DEL /users/{'{me}'}/connections/{socialTypeDel}</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 10)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="origin-data pt-3">
@@ -2262,6 +2363,140 @@ function App() {
 
             <p className="title">- The merged different:</p>
             <JsonCompare oldData={delUserMeSocialBeta} newData={delUserMeSocialAlpha} />
+
+            {/* ====================== ====================== API dell user bye ======================  ====================== */}
+
+            <hr id='wrapper_del_2' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-danger'> &#160;<strong>DEL</strong></span> v2/users/bye &#160;
+              <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delUserBye" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="delUserBye" tabIndex="-1" aria-labelledby="delUserByeLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="delUserByeLabel">DEL v2/users/bye</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 8)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(delUserByeBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(delUserByeAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={delUserByeBeta} newData={delUserByeAlpha} />
+
+            {/* ====================== ====================== API dell user bye ======================  ====================== */}
+
+            <hr id='wrapper_del_3' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-danger'> &#160;<strong>DEL</strong></span> /users/me/devices/all &#160;
+              <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delUserDeviceAll" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="delUserDeviceAll" tabIndex="-1" aria-labelledby="delUserDeviceAllLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="delUserDeviceAllLabel">DEL /users/me/devices/all</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 9)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(delUserDevicesAllBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(delUserDevicesAllAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={delUserDevicesAllBeta} newData={delUserDevicesAllAlpha} />
+
+            {/* ====================== ====================== API put verifications ======================  ====================== */}
+
+            <hr id='wrapper_del_4' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-danger'> &#160;<strong>DEL</strong></span> /users/me/devices/deviceId &#160;
+              <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DelDeviceByIdModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="DelDeviceByIdModal" tabIndex="-1" aria-labelledby="DelDeviceByIdModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="DelDeviceByIdModalLabel">DEL /users/me/devices/deviceId</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div className="modal-body">
+                      <form>
+                        <div className="row align-items-center">
+                          <span>
+                            <label htmlFor="tokenAlpha" className="col-form-label">deviceId&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="tokenAlpha" name='token' onChange={(e) => handlePutChangeValue1(e, 11)} defaultValue={delDeviceId ? delDeviceId : null} />
+                          </span>
+                        </div>
+                      </form>
+                    </div>
+
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 11)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(delUserDevicesByIdBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(delUserDevicesByIdBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={delUserDevicesByIdBeta} newData={delUserDevicesByIdBeta} />
+
+            {/* ====================== ====================== END OF API DEL ======================  ====================== */}
 
           </div>
 
@@ -2316,6 +2551,9 @@ function App() {
                   {/* ==================================================================================== DEL ====================================================================================*/}
 
                   <a href={`#wrapper_del_1`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-danger'>DEL &#160; </span> <span style={{ color: (isEqual(delUserMeSocialAlpha, delUserMeSocialBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/connections/{socialTypeDel} </span></button></a>
+                  <a href={`#wrapper_del_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-danger'>DEL &#160; </span> <span style={{ color: (isEqual(delUserByeAlpha, delUserByeBeta)) ? "black" : "red" }}> v2/users/bye </span></button></a>
+                  <a href={`#wrapper_del_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-danger'>DEL &#160; </span> <span style={{ color: (isEqual(delUserDevicesAllAlpha, delUserDevicesAllBeta)) ? "black" : "red" }}> users/{"{me}"}/devices/all </span></button></a>
+                  <a href={`#wrapper_del_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-danger'>DEL &#160; </span> <span style={{ color: (isEqual(delUserDevicesByIdAlpha, delUserDevicesByIdBeta)) ? "black" : "red" }}> users/{"{me}"}/devices/deviceId </span></button></a>
 
                 </div>
               </div>
