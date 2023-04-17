@@ -253,22 +253,6 @@ function App() {
       // ============================== ============================== put API ============================== ==============================
       // ============================== ============================== put API ============================== ==============================
 
-      // call put users/{me}/password alpha
-
-      compareService.putUserMePasswordAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, { password: putUserPassword.password, newPassword: putUserPassword.newPassword }, locale).then((res) => {
-        localStorage.setItem('putUserMePasswordAlpha', JSON.stringify(res.data));
-      }).catch((err) => {
-        localStorage.setItem('putUserMePasswordAlpha', JSON.stringify(err.response.data));
-      })
-
-      // call put users/{me}/username alpha
-
-      compareService.putUserMeUsernameAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, { username: putUserUsername.username, password: putUserUsername.password }, locale).then((res) => {
-        localStorage.setItem('putUserMeUsernameAlpha', JSON.stringify(res.data));
-      }).catch((err) => {
-        localStorage.setItem('putUserMeUsernameAlpha', JSON.stringify(err.response.data));
-      })
-
       // call put users/{me}/connect/{socialType} alpha
 
       compareService.putUserMeSocialAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, putUserSocial, socialTypePut, locale).then((res) => {
@@ -458,22 +442,6 @@ function App() {
         localStorage.setItem('putUserMeBeta', JSON.stringify(err.response.data));
       })
 
-      // call put users/{me}/password Beta
-
-      compareService.putUserMePasswordBeta(userBeta.data.access_token, userBeta.data.user.userId, { password: putUserPassword.password, newPassword: putUserPassword.newPassword }, locale).then((res) => {
-        localStorage.setItem('putUserMePasswordBeta', JSON.stringify(res.data));
-      }).catch((err) => {
-        localStorage.setItem('putUserMePasswordBeta', JSON.stringify(err.response.data));
-      })
-
-      // call put users/{me}/username Beta
-
-      compareService.putUserMeUsernameBeta(userBeta.data.access_token, userBeta.data.user.userId, { username: putUserUsername.username, password: putUserUsername.password }, locale).then((res) => {
-        localStorage.setItem('putUserMeUsernameBeta', JSON.stringify(res.data));
-      }).catch((err) => {
-        localStorage.setItem('putUserMeUsernameBeta', JSON.stringify(err.response.data));
-      })
-
       // call put users/{me}/connection/{social-type} Beta
 
       compareService.putUserMeSocialBeta(userBeta.data.access_token, userBeta.data.user.userId, putUserSocial, socialTypePut, locale).then((res) => {
@@ -531,7 +499,7 @@ function App() {
   const delUserDevicesAllBeta = JSON.parse(localStorage.getItem('delUserDevicesAllBeta'));
   const delUserDevicesByIdBeta = JSON.parse(localStorage.getItem('delUserDevicesByIdBeta'));
 
-  // ----
+  // ------------------------
 
   const adminAlpha = JSON.parse(localStorage.getItem('adminAlpha'));
   const postUserCmsUnregisterAlpha = JSON.parse(localStorage.getItem('postUserCmsUnregisterAlpha'));
@@ -766,7 +734,6 @@ function App() {
     if (userAlpha && userBeta) {
       switch (t) {
         case 1:
-
           // call post users/{me}/unregister alpha
           setIsLoadingRequest(true);
           compareService.putUserMeUnregisterAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, putUnregister, locale).then((res) => {
@@ -968,7 +935,40 @@ function App() {
             localStorage.setItem('delUserDevicesByIdBeta', JSON.stringify(err.response.data));
           });
           break;
+        case 12:
+          setIsLoadingRequest(true);
+          // call put users/{me}/password Beta
 
+          compareService.putUserMePasswordBeta(userBeta.data.access_token, userBeta.data.user.userId, { password: putUserPassword.password, newPassword: putUserPassword.newPassword }, locale).then((res) => {
+            localStorage.setItem('putUserMePasswordBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('putUserMePasswordBeta', JSON.stringify(err.response.data));
+          })
+
+          // call put users/{me}/password alpha
+
+          compareService.putUserMePasswordAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, { password: putUserPassword.password, newPassword: putUserPassword.newPassword }, locale).then((res) => {
+            localStorage.setItem('putUserMePasswordAlpha', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('putUserMePasswordAlpha', JSON.stringify(err.response.data));
+          })
+        case 13:
+          setIsLoadingRequest(true);
+          // call put users/{me}/username Beta
+
+          compareService.putUserMeUsernameBeta(userBeta.data.access_token, userBeta.data.user.userId, { username: putUserUsername.username, password: putUserUsername.password }, locale).then((res) => {
+            localStorage.setItem('putUserMeUsernameBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('putUserMeUsernameBeta', JSON.stringify(err.response.data));
+          })
+
+          // call put users/{me}/username alpha
+
+          compareService.putUserMeUsernameAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, { username: putUserUsername.username, password: putUserUsername.password }, locale).then((res) => {
+            localStorage.setItem('putUserMeUsernameAlpha', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('putUserMeUsernameAlpha', JSON.stringify(err.response.data));
+          })
         default:
           break;
       }
@@ -1806,7 +1806,7 @@ function App() {
                     </div>
                     <div className="modal-footer">
                       <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Done</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 12)}>Send Request</button>
                     </div>
                   </div>
                 </div>
@@ -1861,7 +1861,7 @@ function App() {
                     </div>
                     <div className="modal-footer">
                       <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Done</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 13)}>Send Request</button>
                     </div>
                   </div>
                 </div>
