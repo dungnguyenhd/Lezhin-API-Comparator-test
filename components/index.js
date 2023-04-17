@@ -952,6 +952,7 @@ function App() {
           }).catch((err) => {
             localStorage.setItem('putUserMePasswordAlpha', JSON.stringify(err.response.data));
           })
+          break;
         case 13:
           setIsLoadingRequest(true);
           // call put users/{me}/username Beta
@@ -969,6 +970,7 @@ function App() {
           }).catch((err) => {
             localStorage.setItem('putUserMeUsernameAlpha', JSON.stringify(err.response.data));
           })
+          break;
         default:
           break;
       }
