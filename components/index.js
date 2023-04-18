@@ -32,18 +32,25 @@ function App() {
   const [verifyEmail, setVerifyEmail] = useState(null);
   const [isLoadingRequest, setIsLoadingRequest] = useState(false);
   const [delDeviceId, setDelDeviceId] = useState(null);
+  const [postUserSendChangeEmailData, setPostUserSendChangeEmailData] = useState(null);
+  const [postUserChangeEmailData, setPostUserChangeEmailData] = useState(null);
+  const [postUserSendResetPasswordUsername, setPostUserSendResetPasswordUsername] = useState(null);
+  const [putUserResetPasswordData, setPutUserResetPasswordData] = useState({password: null, resetKey: null});
 
   const handleLogin = (e) => {
     e.preventDefault();
     setStateLogin({
       ...stateLogin
     })
+
+    setPostUserSendChangeEmailData({ email: 'email mới', password: stateLogin.password });
     setIsLoading(true);
 
     // call login alpha
     compareService.postLoginAlpha(stateLogin.username, stateLogin.password, locale).then((res) => {
       localStorage.setItem('userAlpha', JSON.stringify(res.data));
       localStorage.setItem('isLoggedIn', true)
+
       setIsLoading(false);
     }).catch((err) => {
       if (err.response) {
@@ -488,6 +495,7 @@ function App() {
   const getUserCmsSearchBeta = JSON.parse(localStorage.getItem('getUserCmsSearchBeta'));
   const putUserMeBeta = JSON.parse(localStorage.getItem('putUserMeBeta'));
   const putUserMePasswordBeta = JSON.parse(localStorage.getItem('putUserMePasswordBeta'));
+  const putUserMePasswordV2Beta = JSON.parse(localStorage.getItem('putUserMePasswordV2Beta'));
   const putUserMeUsernameBeta = JSON.parse(localStorage.getItem('putUserMeUsernameBeta'));
   const putUserMeSocialBeta = JSON.parse(localStorage.getItem('putUserMeSocialBeta'));
   const putUserMeUnregisterBeta = JSON.parse(localStorage.getItem('putUserMeUnregisterBeta'));
@@ -498,6 +506,10 @@ function App() {
   const delUserByeBeta = JSON.parse(localStorage.getItem('delUserByeBeta'));
   const delUserDevicesAllBeta = JSON.parse(localStorage.getItem('delUserDevicesAllBeta'));
   const delUserDevicesByIdBeta = JSON.parse(localStorage.getItem('delUserDevicesByIdBeta'));
+  const postUserSendChangeEmailBeta = JSON.parse(localStorage.getItem('postUserSendChangeEmailBeta'));
+  const postUserChangeEmailBeta = JSON.parse(localStorage.getItem('postUserChangeEmailBeta'));
+  const postUserSendResetPasswordBeta = JSON.parse(localStorage.getItem('postUserSendResetPasswordBeta'));
+  const putUserResetPasswordBeta = JSON.parse(localStorage.getItem('putUserResetPasswordBeta'));
 
   // ------------------------
 
@@ -528,6 +540,7 @@ function App() {
   const getUserCmsSearchAlpha = JSON.parse(localStorage.getItem('getUserCmsSearchAlpha'));
   const putUserMeAlpha = JSON.parse(localStorage.getItem('putUserMeAlpha'));
   const putUserMePassowrdAlpha = JSON.parse(localStorage.getItem('putUserMePasswordAlpha'));
+  const putUserMePasswordV2Alpha = JSON.parse(localStorage.getItem('putUserMePasswordV2Alpha'));
   const putUserMeUsernameAlpha = JSON.parse(localStorage.getItem('putUserMeUsernameAlpha'));
   const putUserMeSocialAlpha = JSON.parse(localStorage.getItem('putUserMeSocialAlpha'));
   const putUserMeUnregisterAlpha = JSON.parse(localStorage.getItem('putUserMeUnregisterAlpha'));
@@ -538,6 +551,10 @@ function App() {
   const delUserByeAlpha = JSON.parse(localStorage.getItem('delUserByeAlpha'));
   const delUserDevicesAllAlpha = JSON.parse(localStorage.getItem('delUserDevicesAllAlpha'));
   const delUserDevicesByIdAlpha = JSON.parse(localStorage.getItem('delUserDevicesByIdAlpha'));
+  const postUserSendChangeEmailAlpha = JSON.parse(localStorage.getItem('postUserSendChangeEmailAlpha'));
+  const postUserChangeEmailAlpha = JSON.parse(localStorage.getItem('postUserChangeEmailAlpha'));
+  const postUserSendResetPasswordAlpha = JSON.parse(localStorage.getItem('postUserSendResetPasswordAlpha'));
+  const putUserResetPasswordAlpha = JSON.parse(localStorage.getItem('putUserResetPasswordAlpha'));
 
   const verificationEmail = localStorage.getItem('verificationEmail');
   // handle request ===================================================================================================================================
@@ -630,6 +647,25 @@ function App() {
         break;
       case 11:
         setDelDeviceId(value);
+        break;
+      case 12:
+        data = { ...postUserSendChangeEmailData };
+        data[name] = value;
+        setPostUserSendChangeEmailData(data);
+        break;
+      case 13:
+        data = { ...postUserChangeEmailData };
+        data[name] = value;
+        setPostUserChangeEmailData(data);
+        break;
+      case 14:
+        setPostUserSendResetPasswordUsername(value);
+        break;
+      case 15:
+        data = { ...putUserResetPasswordData };
+        data[name] = value;
+        setPutUserResetPasswordData(data);
+        break;
       default:
         break;
     }
@@ -731,6 +767,8 @@ function App() {
   }
 
   const handClickRequest = (e, t) => {
+    e.preventDefault();
+
     if (userAlpha && userBeta) {
       switch (t) {
         case 1:
@@ -813,60 +851,7 @@ function App() {
             localStorage.setItem('getUserCmsSearchBeta', JSON.stringify(err.response.data));
           });
           break;
-        case 5:
-          // send verification email
-          setIsLoadingRequest(true);
-          compareService.postVerificationSendEmailAlpha(verifyEmail).then((res) => {
-            localStorage.setItem('postVerificationSendEmailAlpha', JSON.stringify(res.data));
-            setIsLoadingRequest(false);
-          }).catch((err) => {
-            localStorage.setItem('postVerificationSendEmailAlpha', JSON.stringify(err.response.data));
-            setIsLoadingRequest(false);
-          });
 
-          compareService.postVerificationSendEmailBeta(verifyEmail).then((res) => {
-            localStorage.setItem('postVerificationSendEmailBeta', JSON.stringify(res.data));
-          }).catch((err) => {
-            localStorage.setItem('postVerificationSendEmailBeta', JSON.stringify(err.response.data));
-          });
-
-          break;
-        case 6:
-          // entry verification code
-          setIsLoadingRequest(true);
-          compareService.putVerificationsAlpha(putVerificationsDataAlpha).then((res) => {
-            localStorage.setItem('putVerificationsAlpha', JSON.stringify(res.data));
-            setIsLoadingRequest(false);
-          }).catch((err) => {
-            localStorage.setItem('putVerificationsAlpha', JSON.stringify(err.response.data));
-            setIsLoadingRequest(false);
-          });
-
-          compareService.putVerificationsBeta(putVerificationsDataBeta).then((res) => {
-            localStorage.setItem('putVerificationsBeta', JSON.stringify(res.data));
-          }).catch((err) => {
-            localStorage.setItem('putVerificationsBeta', JSON.stringify(err.response.data));
-          });
-
-          break;
-        case 7:
-          // send post sign up user
-          setIsLoadingRequest(true);
-          compareService.postUserSignupAlpha(postSignupAlpha, locale).then((res) => {
-            localStorage.setItem('postUserSignupAlpha', JSON.stringify(res.data));
-            setIsLoadingRequest(false);
-          }).catch((err) => {
-            localStorage.setItem('postUserSignupAlpha', JSON.stringify(err.response.data));
-            setIsLoadingRequest(false);
-          });
-
-          compareService.postUserSignupBeta(postSignupBeta, locale).then((res) => {
-            localStorage.setItem('postUserSignupBeta', JSON.stringify(res.data));
-          }).catch((err) => {
-            localStorage.setItem('postUserSignupBeta', JSON.stringify(err.response.data));
-          });
-
-          break;
         case 8:
           // send del user bye
           setIsLoadingRequest(true);
@@ -970,6 +955,163 @@ function App() {
           }).catch((err) => {
             localStorage.setItem('putUserMeUsernameAlpha', JSON.stringify(err.response.data));
           })
+          break;
+        case 14:
+          setIsLoadingRequest(true);
+          // call post send change email Beta
+
+          compareService.postUserSendChangeEmailBeta(userBeta.data.access_token, userBeta.data.user.userId, postUserSendChangeEmailData, locale).then((res) => {
+            localStorage.setItem('postUserSendChangeEmailBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('postUserSendChangeEmailBeta', JSON.stringify(err.response.data));
+          })
+
+          // call post send change email alpha
+
+          setPostUserChangeEmailData({ email: postUserSendChangeEmailData ? postUserSendChangeEmailData.email : 'email mới', password: postUserSendChangeEmailData ? postUserSendChangeEmailData.password : 'lezhin123!', token: null });
+
+          compareService.postUserSendChangeEmailAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, postUserSendChangeEmailData, locale).then((res) => {
+            localStorage.setItem('postUserSendChangeEmailAlpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('postUserSendChangeEmailAlpha', JSON.stringify(err.response.data));
+            setIsLoadingRequest(false);
+          })
+          break;
+        case 15:
+          setIsLoadingRequest(true);
+          // call post send change email Beta
+
+          compareService.postUserChangeEmailBeta(userBeta.data.access_token, userBeta.data.user.userId, postUserChangeEmailData, locale).then((res) => {
+            localStorage.setItem('postUserChangeEmailBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('postUserChangeEmailBeta', JSON.stringify(err.response.data));
+          })
+
+          // call post send change email alpha
+
+          compareService.postUserChangeEmailAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, postUserChangeEmailData, locale).then((res) => {
+            localStorage.setItem('postUserChangeEmailAlpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('postUserChangeEmailAlpha', JSON.stringify(err.response.data));
+            setIsLoadingRequest(false);
+          })
+          break;
+        case 17:
+          setIsLoadingRequest(true);
+          // call put users/{me}/password Beta
+
+          compareService.putUserMePasswordV2Beta(userBeta.data.access_token, userBeta.data.user.userId, { password: putUserPassword.password, newPassword: putUserPassword.newPassword }, locale).then((res) => {
+            localStorage.setItem('putUserMePasswordV2Beta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('putUserMePasswordV2Beta', JSON.stringify(err.response.data));
+          })
+
+          // call put users/{me}/password alpha
+
+          compareService.putUserMePasswordAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, { password: putUserPassword.password, newPassword: putUserPassword.newPassword }, locale).then((res) => {
+            localStorage.setItem('putUserMePasswordV2Alpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('putUserMePasswordV2Alpha', JSON.stringify(err.response.data));
+            setIsLoadingRequest(false);
+          })
+          break;
+        default:
+          break;
+      }
+    } else {
+      switch (t) {
+        case 5:
+          // send verification email
+          setIsLoadingRequest(true);
+          compareService.postVerificationSendEmailAlpha(verifyEmail).then((res) => {
+            localStorage.setItem('postVerificationSendEmailAlpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('postVerificationSendEmailAlpha', JSON.stringify(err.response.data));
+            setIsLoadingRequest(false);
+          });
+
+          compareService.postVerificationSendEmailBeta(verifyEmail).then((res) => {
+            localStorage.setItem('postVerificationSendEmailBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('postVerificationSendEmailBeta', JSON.stringify(err.response.data));
+          });
+
+          break;
+        case 6:
+          // entry verification code
+          setIsLoadingRequest(true);
+          compareService.putVerificationsAlpha(putVerificationsDataAlpha).then((res) => {
+            localStorage.setItem('putVerificationsAlpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('putVerificationsAlpha', JSON.stringify(err.response.data));
+            setIsLoadingRequest(false);
+          });
+
+          compareService.putVerificationsBeta(putVerificationsDataBeta).then((res) => {
+            localStorage.setItem('putVerificationsBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('putVerificationsBeta', JSON.stringify(err.response.data));
+          });
+
+          break;
+        case 7:
+          // send post sign up user
+          setIsLoadingRequest(true);
+          compareService.postUserSignupAlpha(postSignupAlpha, locale).then((res) => {
+            localStorage.setItem('postUserSignupAlpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('postUserSignupAlpha', JSON.stringify(err.response.data));
+            setIsLoadingRequest(false);
+          });
+
+          compareService.postUserSignupBeta(postSignupBeta, locale).then((res) => {
+            localStorage.setItem('postUserSignupBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('postUserSignupBeta', JSON.stringify(err.response.data));
+          });
+
+          break;
+        case 18:
+          setIsLoadingRequest(true);
+
+          compareService.postUserSendResetPasswordAlpha(postUserSendResetPasswordUsername, locale).then((res) => {
+            localStorage.setItem('postUserSendResetPasswordAlpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('postUserSendResetPasswordAlpha', JSON.stringify(err.response.data));
+            setIsLoadingRequest(false);
+          });
+
+          compareService.postUserSendResetPasswordBeta(postUserSendResetPasswordUsername, locale).then((res) => {
+            localStorage.setItem('postUserSendResetPasswordBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('postUserSendResetPasswordBeta', JSON.stringify(err.response.data));
+          });
+
+          break;
+        case 19:
+          setIsLoadingRequest(true);
+
+          compareService.putUserResetPasswordAlpha(putUserResetPasswordData, locale).then((res) => {
+            localStorage.setItem('putUserResetPasswordAlpha', JSON.stringify(res.data));
+            setIsLoadingRequest(false);
+          }).catch((err) => {
+            localStorage.setItem('putUserResetPasswordAlpha', JSON.stringify(err.response.data));
+            setIsLoadingRequest(false);
+          });
+
+          compareService.putUserResetPasswordBeta(putUserResetPasswordData, locale).then((res) => {
+            localStorage.setItem('putUserResetPasswordBeta', JSON.stringify(res.data));
+          }).catch((err) => {
+            localStorage.setItem('putUserResetPasswordBeta', JSON.stringify(err.response.data));
+          });
+
           break;
         default:
           break;
@@ -2018,6 +2160,61 @@ function App() {
             <p className="title">- The merged different:</p>
             <JsonCompare oldData={postUserCmsReregisterBeta} newData={postUserCmsReregisterAlpha} />
 
+            {/* ====================== ====================== API put user me password ======================  ====================== */}
+
+            <hr id='wrapper_put_9' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-primary'> &#160;<strong>PUT</strong></span> v2/users/{'{me}'}/password &#160;
+              <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#putUserPasswordV2Modal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="putUserPasswordV2Modal" tabIndex="-1" aria-labelledby="putUserPasswordV2ModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="putUserPasswordV2ModalLabel">PUT v2/users/me/password</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                      <form>
+                        <div className="row align-items-center">
+                          <span>
+                            <label htmlFor="" className="col-form-label">oldPassword&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='password' onChange={(e) => handlePutChangeValue1(e, 2)} defaultValue={putUserPassword ? putUserPassword.password : null} />
+                          </span>
+
+                          <span>
+                            <label htmlFor="" className="col-form-label">newPassword&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='newPassword' onChange={(e) => handlePutChangeValue1(e, 2)} defaultValue={putUserPassword ? putUserPassword.newPassword : null} />
+                          </span>
+                        </div>
+                      </form>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 17)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMePasswordV2Beta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMePasswordV2Alpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={putUserMePasswordV2Beta} newData={putUserMePasswordV2Alpha} />
+
             {/* ====================================POST==================================== */}
             {/* API get user me devices */}
 
@@ -2166,7 +2363,6 @@ function App() {
 
             <p className="title">- The merged different:</p>
             <JsonCompare oldData={postVerificationSendEmailBeta} newData={postVerificationSendEmailAlpha} />
-
 
             {/* ====================== ====================== API put verifications ======================  ====================== */}
 
@@ -2322,6 +2518,235 @@ function App() {
 
             <p className="title">- The merged different:</p>
             <JsonCompare oldData={postUserSignupBeta} newData={postUserSignupAlpha} />
+
+
+            {/* ====================== ====================== API post send verification email ======================  ====================== */}
+
+            <hr id='wrapper_post_7' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-warning'> &#160;<strong>POST</strong></span> /v2/verifications/me/send-change-mail &#160;
+              <button type="button" className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#postSendChangeEmailModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="postSendChangeEmailModal" tabIndex="-1" aria-labelledby="postSendChangeEmailModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="postSendChangeEmailModalLabel">POST /v2/verifications/me/send-change-mail</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div className="modal-body">
+                      <form>
+                        <div className="row align-items-center">
+                          <span>
+                            <label htmlFor="" className="col-form-label">email&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='email' onChange={(e) => handlePutChangeValue1(e, 12)} defaultValue={postUserSendChangeEmailData ? postUserSendChangeEmailData.email : null} />
+                          </span>
+
+                          <span>
+                            <label htmlFor="" className="col-form-label">password&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='password' onChange={(e) => handlePutChangeValue1(e, 12)} defaultValue={postUserSendChangeEmailData ? postUserSendChangeEmailData.password : null} />
+                          </span>
+                        </div>
+                      </form>
+                    </div>
+
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 14)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserSendChangeEmailBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserSendChangeEmailAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={postUserSendChangeEmailBeta} newData={postUserSendChangeEmailAlpha} />
+
+            {/* ====================== ====================== API post send verification email ======================  ====================== */}
+
+            <hr id='wrapper_put_8' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-primary'> &#160;<strong>PUT</strong></span> /v2/users/me/email &#160;
+              <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#putUserChangeEmailV2" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="putUserChangeEmailV2" tabIndex="-1" aria-labelledby="putUserChangeEmailV2Label" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="putUserChangeEmailV2Label">PUT /v2/users/me/email</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div className="modal-body">
+                      <form>
+                        <div className="row align-items-center">
+                          <span>
+                            <label htmlFor="" className="col-form-label">email&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='email' onChange={(e) => handlePutChangeValue1(e, 13)} defaultValue={postUserChangeEmailData ? postUserChangeEmailData.email : null} />
+                          </span>
+
+                          <span>
+                            <label htmlFor="" className="col-form-label">password&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='password' onChange={(e) => handlePutChangeValue1(e, 13)} defaultValue={postUserChangeEmailData ? postUserChangeEmailData.password : null} />
+                          </span>
+
+                          <span>
+                            <label htmlFor="" className="col-form-label">token&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='token' onChange={(e) => handlePutChangeValue1(e, 13)} defaultValue={postUserChangeEmailData ? postUserChangeEmailData.token : null} />
+                          </span>
+                        </div>
+                      </form>
+                    </div>
+
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 15)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserChangeEmailBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserChangeEmailAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={postUserChangeEmailBeta} newData={postUserChangeEmailAlpha} />
+
+            {/* ====================== ====================== API post send verification email ======================  ====================== */}
+
+            <hr id='wrapper_post_8' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-warning'> &#160;<strong>POST</strong></span> v2/users/me/password/reset &#160;
+              <button type="button" className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#postUserSendResetPassword" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="postUserSendResetPassword" tabIndex="-1" aria-labelledby="postUserSendResetPasswordLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="postUserSendResetPasswordLabel">POST v2/users/me/password/reset</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div className="modal-body">
+                      <form>
+                        <div className="row align-items-center">
+                          <span>
+                            <label htmlFor="" className="col-form-label">email&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='email' onChange={(e) => handlePutChangeValue1(e, 14)} defaultValue={postUserSendResetPasswordUsername ? postUserSendResetPasswordUsername : null} />
+                          </span>
+                        </div>
+                      </form>
+                    </div>
+
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 18)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserSendResetPasswordBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserSendResetPasswordAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={postUserSendResetPasswordBeta} newData={postUserSendResetPasswordAlpha} />
+
+            {/* ====================== ====================== API post send verification email ======================  ====================== */}
+
+            <hr id='wrapper_put_10' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-primary'> &#160;<strong>PUT</strong></span> v2/users/password/reset &#160;
+              <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#putUserResetPassword" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="putUserResetPassword" tabIndex="-1" aria-labelledby="putUserResetPasswordLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="putUserResetPasswordLabel">PUT v2/users/password/reset</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div className="modal-body">
+                      <form>
+                        <div className="row align-items-center">
+                          <span>
+                            <label htmlFor="" className="col-form-label">password&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='password' onChange={(e) => handlePutChangeValue1(e, 15)} defaultValue={putUserResetPasswordData ? putUserResetPasswordData.password : null} />
+                          </span>
+
+                          <span>
+                            <label htmlFor="" className="col-form-label">resetKey&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='resetKey' onChange={(e) => handlePutChangeValue1(e, 15)} defaultValue={putUserResetPasswordData ? putUserResetPasswordData.resetKey : null} />
+                          </span>
+                        </div>
+                      </form>
+                    </div>
+
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 19)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- Beta data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserResetPasswordBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserResetPasswordAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={putUserResetPasswordBeta} newData={putUserResetPasswordAlpha} />
 
             {/* ====================================DEL==================================== */}
 
@@ -2536,9 +2961,11 @@ function App() {
                   <a href={`#wrapper_put_5`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putVerificationsAlpha, putVerificationsBeta)) ? "black" : "red" }}> v2/verifications</span> </button></a>
                   <a href={`#wrapper_put_6`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(postUserCmsUnregisterAlpha, postUserCmsUnregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/unregister {"(cms)"}</span> </button></a>
                   <a href={`#wrapper_put_7`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(postUserCmsReregisterAlpha, postUserCmsReregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/reregister {"(cms)"}</span> </button></a>
+                  <a href={`#wrapper_put_8`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(postUserChangeEmailAlpha, postUserChangeEmailBeta)) ? "black" : "red" }}> /v2/users/me/email</span> </button></a>
+                  <a href={`#wrapper_put_9`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMePasswordV2Alpha, putUserMePasswordV2Beta)) ? "black" : "red" }}> /v2/users/me/password</span> </button></a>
+                  <a href={`#wrapper_put_10`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserResetPasswordAlpha, putUserResetPasswordBeta)) ? "black" : "red" }}> /v2/users/password/reset</span> </button></a>
 
-
-                  <a href={`#wrapper_put_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeAlpha, putUserMeBeta)) ? "black" : "red" }}> /users/{"{me}"}/password</span> </button></a>
+                  <a href={`#wrapper_put_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMePassowrdAlpha, putUserMePasswordBeta)) ? "black" : "red" }}> /users/{"{me}"}/password</span> </button></a>
                   <a href={`#wrapper_put_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeAlpha, putUserMeBeta)) ? "black" : "red" }}> /users/{"{me}"}/username</span> </button></a>
                   <a href={`#wrapper_put_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeSocialAlpha, putUserMeSocialBeta)) ? "black" : "red" }}> /users/{"{me}"}/connect/{socialTypePut}</span> </button></a>
 
@@ -2549,6 +2976,8 @@ function App() {
 
                   <a href={`#wrapper_post_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(putUserMeUnregisterAlpha, putUserMeUnregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/unregister</span> </button></a>
                   <a href={`#wrapper_post_5`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postVerificationSendEmailAlpha, postVerificationSendEmailBeta)) ? "black" : "red" }}> v2/verifications/send-email</span> </button></a>
+                  <a href={`#wrapper_post_7`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postUserSendChangeEmailAlpha, postUserSendChangeEmailBeta)) ? "black" : "red" }}> /v2/verifications/me/send-change-mail</span> </button></a>
+                  <a href={`#wrapper_post_8`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postUserSendResetPasswordAlpha, postUserSendResetPasswordBeta)) ? "black" : "red" }}> /v2/users/me/password/reset</span> </button></a>
 
                   {/* ==================================================================================== DEL ====================================================================================*/}
 

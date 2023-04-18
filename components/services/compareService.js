@@ -484,6 +484,26 @@ class compareService {
     return axios.put(API_BASE_URL_BETA + `/users/${userId}/password`, putData, { headers })
   }
 
+  // ================== put user Me Password V2==================
+
+  putUserMePasswordV2Alpha(access_token, userId, putData, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.put(API_BASE_URL_ALPHA + `/users/${userId}/password`, putData, { headers })
+  }
+
+  putUserMePasswordV2Beta(access_token, userId, putData, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.put(API_BASE_URL_BETA + `/users/${userId}/password`, putData, { headers })
+  }
+
   // ================== put user Me Username ==================
 
   putUserMeUsernameAlpha(access_token, userId, putData, locale) {
@@ -608,25 +628,25 @@ class compareService {
     return axios.delete(API_BASE_URL_BETA + `/users/${userId}/devices/all`, { headers })
   }
 
-    // ================== del user Me device by id Social ==================
+  // ================== del user Me device by id Social ==================
 
-    delUserDevicesByIdAlpha(access_token, userId, deviceCode, locale) {
-      const headers = {
-        'Content-Type': 'application/json',
-        'x-lz-locale': locale,
-        Authorization: `Bearer ${access_token}`,
-      };
-      return axios.delete(API_BASE_URL_ALPHA + `/users/${userId}/devices/${deviceCode}`, { headers })
-    }
+  delUserDevicesByIdAlpha(access_token, userId, deviceCode, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.delete(API_BASE_URL_ALPHA + `/users/${userId}/devices/${deviceCode}`, { headers })
+  }
 
-    delUserDevicesByIdBeta(access_token, userId, deviceCode, locale) {
-      const headers = {
-        'Content-Type': 'application/json',
-        'x-lz-locale': locale,
-        Authorization: `Bearer ${access_token}`,
-      };
-      return axios.delete(API_BASE_URL_BETA + `/users/${userId}/devices/${deviceCode}`, { headers })
-    }
+  delUserDevicesByIdBeta(access_token, userId, deviceCode, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.delete(API_BASE_URL_BETA + `/users/${userId}/devices/${deviceCode}`, { headers })
+  }
 
 
   // ====================================================== CMS API =======================================================================================
@@ -759,6 +779,26 @@ class compareService {
     return axios.put(API_BASE_URL_BETA + `/v2/verifications`, putVerificationsData, { headers })
   }
 
+  // ====== ======= ====== Put change email v2 ====== ======= ======
+
+  postUserChangeEmailAlpha(access_token, userId, postUserChangeEmail, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.put(API_BASE_URL_ALPHA + `/v2/users/${userId}/email`, postUserChangeEmail, { headers })
+  }
+
+  postUserChangeEmailBeta(access_token, userId, postUserChangeEmail, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.put(API_BASE_URL_BETA + `/v2/users/${userId}/email`, postUserChangeEmail, { headers })
+  }
+
   // ====== ======= ====== Post user signup ====== ======= ======
 
   postUserSignupAlpha(postUserSignupData, locale) {
@@ -776,6 +816,62 @@ class compareService {
       Authorization: `Bearer ${token}`,
     };
     return axios.post(API_BASE_URL_BETA + `/users/signup`, postUserSignupData, { headers })
+  }
+
+  // ====== ======= ====== Post send change email verification ====== ======= ======
+
+  postUserSendChangeEmailAlpha(access_token, userId, postUserSendChangeEmailData, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.post(API_BASE_URL_ALPHA + `/v2/verifications/${userId}/send-change-mail`, postUserSendChangeEmailData, { headers })
+  }
+
+  postUserSendChangeEmailBeta(access_token, userId, postUserSendChangeEmailData, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+      Authorization: `Bearer ${access_token}`,
+    };
+    return axios.post(API_BASE_URL_BETA + `/v2/verifications/${userId}/send-change-mail`, postUserSendChangeEmailData, { headers })
+  }
+
+  // ====== ======= ====== Post send reset password ====== ======= ======
+
+  postUserSendResetPasswordAlpha(username, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+    };
+    return axios.post(API_BASE_URL_ALPHA + `/v2/users/${username}/password/reset`, { headers })
+  }
+
+  postUserSendResetPasswordBeta(username, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+    };
+    return axios.post(API_BASE_URL_BETA + `/v2/users/${username}/password/reset`, { headers })
+  }
+
+  // ====== ======= ====== Put reset password ====== ======= ======
+
+  putUserResetPasswordAlpha(putUserResetPasswordData, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+    };
+    return axios.put(API_BASE_URL_ALPHA + `/v2/users/password/reset`, putUserResetPasswordData, { headers })
+  }
+
+  putUserResetPasswordBeta(putUserResetPasswordData, locale) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-lz-locale': locale,
+    };
+    return axios.put(API_BASE_URL_BETA + `/v2/users/password/reset`, putUserResetPasswordData, { headers })
   }
 
   // ===============================================================
