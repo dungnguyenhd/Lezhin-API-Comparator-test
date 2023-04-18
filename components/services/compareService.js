@@ -1,12 +1,29 @@
 import axios from "axios";
 
 const API_BASE_URL_ALPHA = process.env.REACT_APP_ALPHA_DOMAIN;
-const API_BASE_URL_BETA = process.env.REACT_APP_BETA_DOMAIN;
+let API_BASE_URL_BETA = process.env.REACT_APP_BETA_DOMAIN;
 const API_CMS_URL_ALPHA = process.env.REACT_APP_ALPHA_CMS_DOMAIN;
 const API_CMS_URL_BETA = process.env.REACT_APP_BETA_CMS_DOMAIN;
-const token = process.env.REACT_APP_BETA_TOKEN;
+let token = process.env.REACT_APP_BETA_TOKEN;
 
 class compareService {
+
+  switchEnvironment(e) {
+    switch(e) {
+      case 1:
+        API_BASE_URL_BETA = process.env.REACT_APP_BETA_DOMAIN;
+        token = process.env.REACT_APP_BETA_TOKEN;
+        break;
+      case 2:
+        API_BASE_URL_BETA = process.env.REACT_APP_QA_DOMAIN
+        token = process.env.REACT_APP_QA_TOKEN;
+        break;
+      default:
+        API_BASE_URL_BETA = process.env.REACT_APP_BETA_DOMAIN;
+        token = process.env.REACT_APP_BETA_TOKEN;
+        break;
+    }
+  }
 
   // {{base_url}}/users/signin
   postLoginAlpha(username, password, locale) {

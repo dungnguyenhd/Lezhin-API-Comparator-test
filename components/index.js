@@ -35,7 +35,8 @@ function App() {
   const [postUserSendChangeEmailData, setPostUserSendChangeEmailData] = useState(null);
   const [postUserChangeEmailData, setPostUserChangeEmailData] = useState(null);
   const [postUserSendResetPasswordUsername, setPostUserSendResetPasswordUsername] = useState(null);
-  const [putUserResetPasswordData, setPutUserResetPasswordData] = useState({password: null, resetKey: null});
+  const [putUserResetPasswordData, setPutUserResetPasswordData] = useState({ password: null, resetKey: null });
+  const [env, setEnv] = useState('beta');
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -720,6 +721,22 @@ function App() {
     }
   }
 
+  const handleSelectEnv = (e) => {
+    switch(e.target.value) {
+      case 'beta':
+        setEnv(e.target.value)
+        compareService.switchEnvironment(1);
+        break;
+      case 'qa':
+        setEnv(e.target.value)
+        compareService.switchEnvironment(2);
+        break;
+      default:
+        compareService.switchEnvironment(1);
+        break;
+    }
+  }
+
   const handleSelectLocale = (e) => {
     setLocale(e.target.value);
   }
@@ -1236,6 +1253,17 @@ function App() {
 
                 </select>
 
+                <br></br>
+
+                Compare Env &#160;
+                <select className="form-select-sm mt-1" style={{ fontSize: '.8rem' }} aria-label="Default select example"
+                  id='socialTypeBase' value={env} onChange={handleSelectEnv}
+                >
+                  <option value="beta">Beta</option>
+                  <option value="qa">QA</option>
+
+                </select>
+
                 {/* socialType */}
 
                 <div className='mb-2 mt-3 fw-bold text-success'> GET Condition</div>
@@ -1346,7 +1374,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'} </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMeBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1386,7 +1414,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/meta </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMeMetaBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1406,7 +1434,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/cohort </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMeCohortBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1426,7 +1454,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/subscription </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMeSubscriptionBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1447,7 +1475,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/certifications </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMeCertificationsBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1467,7 +1495,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/identity/{'{access_token}'} </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userIdentityBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1487,7 +1515,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/connections/<span className='text-danger'>{socialType}</span> </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMeConnectionsSocialBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1507,7 +1535,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/genres </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMeGenresBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1527,7 +1555,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/balance </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMeBalanceBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1547,7 +1575,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/ga </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMeGaBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1567,7 +1595,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/badge-counts </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMeBadgeCountBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1587,7 +1615,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/presents </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMePresentsBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1607,7 +1635,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/library/filters </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMeLibraryBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1627,7 +1655,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/dailyfree/recent </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMeDailyFreeBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1647,7 +1675,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/recents </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMeRecentsBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1667,7 +1695,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/charges </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMeChargesBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1717,7 +1745,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(getUserCmsSearchBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1737,7 +1765,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /users/{'{me}'}/invitations </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMeInvitationsBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1757,7 +1785,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /users/{'{me}'} </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMeV1Beta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1777,7 +1805,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /users/{'{me}'}/meta </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMeMetaV1Beta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1797,7 +1825,7 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /users/{'{me}'}/devices </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(userMeDevicesBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1904,7 +1932,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(putUserMeBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -1959,7 +1987,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingRequest ? (JSON.stringify(putUserMePasswordBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -2014,7 +2042,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUsernameBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -2064,7 +2092,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUsernameBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -2105,7 +2133,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingRequest ? (JSON.stringify(postUserCmsUnregisterBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -2146,7 +2174,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingRequest ? (JSON.stringify(postUserCmsReregisterBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -2201,7 +2229,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingRequest ? (JSON.stringify(putUserMePasswordV2Beta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -2227,7 +2255,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingRequest ? (JSON.stringify(userBeta, null, 2)) : (<>  <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -2298,7 +2326,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUnregisterBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -2350,7 +2378,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingRequest ? (JSON.stringify(postVerificationSendEmailBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -2407,7 +2435,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingRequest ? (JSON.stringify(putVerificationsBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -2505,7 +2533,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingRequest ? (JSON.stringify(postUserSignupBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -2563,7 +2591,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingRequest ? (JSON.stringify(postUserSendChangeEmailBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -2625,7 +2653,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingRequest ? (JSON.stringify(postUserChangeEmailBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -2677,7 +2705,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingRequest ? (JSON.stringify(postUserSendResetPasswordBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -2734,7 +2762,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingRequest ? (JSON.stringify(putUserResetPasswordBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -2777,7 +2805,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingBeta ? (JSON.stringify(delUserMeSocialBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -2817,7 +2845,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingRequest ? (JSON.stringify(delUserByeBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -2857,7 +2885,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingRequest ? (JSON.stringify(delUserDevicesAllBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
@@ -2909,7 +2937,7 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- Beta data:</p>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
                 <pre>{!isLoadingRequest ? (JSON.stringify(delUserDevicesByIdBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
