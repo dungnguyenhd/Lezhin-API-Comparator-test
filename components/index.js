@@ -46,16 +46,26 @@ function App() {
 
     setPostUserSendChangeEmailData({ email: 'email mới', password: stateLogin.password });
     setIsLoading(true);
-
+    const start = new Date();
     // call login alpha
     compareService.postLoginAlpha(stateLogin.username, stateLogin.password, locale).then((res) => {
-      localStorage.setItem('userAlpha', JSON.stringify(res.data));
+      const timeTaken = (new Date()) - start;
+      const userData = {
+        response: res.data,
+        timeTaken: timeTaken,
+      };
+      localStorage.setItem('userAlpha', JSON.stringify(userData));
       localStorage.setItem('isLoggedIn', true)
 
       setIsLoading(false);
     }).catch((err) => {
       if (err.response) {
-        localStorage.setItem('userAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const userData = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userAlpha', JSON.stringify(userData));
         localStorage.setItem('isLoggedIn', false)
         setIsLoading(false);
       }
@@ -63,11 +73,21 @@ function App() {
 
     // call login beta
     compareService.postLoginBeta(stateLogin.username, stateLogin.password, locale).then((res) => {
-      localStorage.setItem('userBeta', JSON.stringify(res.data));
+      const timeTaken = (new Date()) - start;
+      const userData = {
+        response: res.data,
+        timeTaken: timeTaken,
+      };
+      localStorage.setItem('userBeta', JSON.stringify(userData));
       setPutUserMe({ locale: res.data.data.user.locale, isAdultFilterOn: res.data.data.user.isAdultFilterOn, birthDate: res.data.data.user.birthDate, gender: res.data.data.user.gender, agreements: { marketingEmail: res.data.data.user.agreements.marketingEmail, collectingBirth: res.data.data.user.agreements.collectingBirth } });
     }).catch((err) => {
       if (err.response) {
-        localStorage.setItem('userBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const userData = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userBeta', JSON.stringify(userData));
         localStorage.setItem('isLoggedIn', false);
       }
     });
@@ -103,159 +123,379 @@ function App() {
       setIsLoadingBeta(true);
       setIsLoadingAlpha(true);
       setIsLoading(true);
+      const start = new Date();
 
       // call get users/me/meta alpha
-      compareService.getUserMeMetaAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeMetaAlpha', JSON.stringify(res.data));
+      compareService.getUserMeMetaAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeMetaAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeMetaAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeMetaAlpha', JSON.stringify(data));
       })
 
       // call get users/me alpha
-      compareService.getUserMeAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeAlpha', JSON.stringify(res.data));
+      compareService.getUserMeAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeAlpha', JSON.stringify(data));
       })
 
       // call get users/me/meta alpha
-      compareService.getUserMeMetaV1Alpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeMetaV1Alpha', JSON.stringify(res.data));
+      compareService.getUserMeMetaV1Alpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeMetaV1Alpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeMetaV1Alpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeMetaV1Alpha', JSON.stringify(data));
       })
 
       // call get users/me alpha
-      compareService.getUserMeV1Alpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeV1Alpha', JSON.stringify(res.data));
+      compareService.getUserMeV1Alpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeV1Alpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeV1Alpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeV1Alpha', JSON.stringify(data));
       })
 
       // call get users/me/cohort alpha
-      compareService.getUserMeCohortAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeCohortAlpha', JSON.stringify(res.data));
+      compareService.getUserMeCohortAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeCohortAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeCohortApha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeCohortApha', JSON.stringify(data));
       })
 
       // call get users/me/devices alpha
-      compareService.getUserMeDevicesAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeDevicesAlpha', JSON.stringify(res.data));
+      compareService.getUserMeDevicesAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeDevicesAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeDevicesBeta', err.response.data);
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeDevicesBeta', data);
       })
 
       // call get users/me/certifications alpha
-      compareService.getUserMeCertificationsAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeCertificationsAlpha', JSON.stringify(res.data));
+      compareService.getUserMeCertificationsAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeCertificationsAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeCertificationsAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeCertificationsAlpha', JSON.stringify(data));
       })
 
       // call get users/me/identity alpha
-      compareService.getUserIdentityAlpha(userAlpha.data.access_token, locale).then((res) => {
-        localStorage.setItem('userIdentityAlpha', JSON.stringify(res.data));
+      compareService.getUserIdentityAlpha(userAlpha.response.data.access_token, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userIdentityAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userIdentityAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userIdentityAlpha', JSON.stringify(data));
       })
 
       // call get v2/users/{{me}/connections/Social alpha
-      compareService.getUserMeConnectionsSocialAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, socialType, locale).then((res) => {
-        localStorage.setItem('userMeConnectionsSocialAlpha', JSON.stringify(res.data));
+      compareService.getUserMeConnectionsSocialAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, socialType, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeConnectionsSocialAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeConnectionsSocialAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeConnectionsSocialAlpha', JSON.stringify(data));
       })
 
       // call get v2/users/{{me}/genres alpha
-      compareService.getUserMeGenresAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeGenresAlpha', JSON.stringify(res.data));
+      compareService.getUserMeGenresAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeGenresAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeGenresAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeGenresAlpha', JSON.stringify(data));
       })
 
       // call get v2/users/{{me}/balance alpha
-      compareService.getUserMeBalanceAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeBalanceAlpha', JSON.stringify(res.data));
+      compareService.getUserMeBalanceAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeBalanceAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeBalanceAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeBalanceAlpha', JSON.stringify(data));
       })
 
       // call get v2/users/{{me}/ga alpha
-      compareService.getUserMeGAAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeGaAlpha', JSON.stringify(res.data));
+      compareService.getUserMeGAAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeGaAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeGaAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeGaAlpha', JSON.stringify(data));
       })
 
       // call get v2/users/{{me}/BadgeCount alpha
-      compareService.getUserMeBadgeCountAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeBadgeCountAlpha', JSON.stringify(res.data));
+      compareService.getUserMeBadgeCountAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeBadgeCountAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeBadgeCountAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeBadgeCountAlpha', JSON.stringify(data));
       })
 
       // call get v2/users/{{me}/BadgeCount alpha
-      compareService.getUserMeBadgeCountAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeBadgeCountAlpha', JSON.stringify(res.data));
+      compareService.getUserMeBadgeCountAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeBadgeCountAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeBadgeCountAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeBadgeCountAlpha', JSON.stringify(data));
       })
 
       // call get v2/users/{{me}/presents?offset=0&limit=50 alpha
-      compareService.getUserMePresentsAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMePresentsAlpha', JSON.stringify(res.data));
+      compareService.getUserMePresentsAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMePresentsAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMePresentsAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMePresentsAlpha', JSON.stringify(data));
       })
 
       // call get v2/users/{{me}/subscription?limit=30&offset=0&sort=createdAt&filter=all alpha
-      compareService.getUserMeSubscriptionAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeSubscriptionAlpha', JSON.stringify(res.data));
+      compareService.getUserMeSubscriptionAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeSubscriptionAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeSubscriptionAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeSubscriptionAlpha', JSON.stringify(data));
       })
 
       // call get /users/{{me}/invitations?page=0&limit=10 alpha
-      compareService.getUserMeInvitationsAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeInvitationsAlpha', JSON.stringify(res.data));
+      compareService.getUserMeInvitationsAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeInvitationsAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeInvitationsAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeInvitationsAlpha', JSON.stringify(data));
       })
 
       // call get /v2/users/{{me}/library/filters alpha
-      compareService.getUserMeLibraryAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeLibraryAlpha', JSON.stringify(res.data));
+      compareService.getUserMeLibraryAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeLibraryAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeLibraryAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeLibraryAlpha', JSON.stringify(data));
       })
 
       // call get /v2/users/{{me}/dailyfree/recent Alpha
-      compareService.getUserMeDailyFreeAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeDailyFreeAlpha', JSON.stringify(res.data));
+      compareService.getUserMeDailyFreeAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeDailyFreeAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeDailyFreeAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeDailyFreeAlpha', JSON.stringify(data));
       })
 
       // call get /v2/users/{{me}/recents Alpha
-      compareService.getUserMeRecentsAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeRecentsAlpha', JSON.stringify(res.data));
+      compareService.getUserMeRecentsAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeRecentsAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeRecentsAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeRecentsAlpha', JSON.stringify(data));
       })
 
       // call get /v2/users/{{me}/Charges Alpha
-      compareService.getUserMeChargesAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeChargesAlpha', JSON.stringify(res.data));
+      compareService.getUserMeChargesAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeChargesAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeChargesAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeChargesAlpha', JSON.stringify(data));
       })
 
       // call get search user Alpha
       compareService.getUserCmsSearchUserAlpha(adminAlpha.access_token, usernameSearch).then((res) => {
-        localStorage.setItem('getUserCmsSearchAlpha', JSON.stringify(res.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('getUserCmsSearchAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('getUserCmsSearchAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('getUserCmsSearchAlpha', JSON.stringify(data));
       })
 
       // ============================== ============================== put API ============================== ==============================
@@ -263,24 +503,44 @@ function App() {
 
       // call put users/{me}/connect/{socialType} alpha
 
-      compareService.putUserMeSocialAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, putUserSocial, socialTypePut, locale).then((res) => {
-        localStorage.setItem('putUserMeSocialAlpha', JSON.stringify(res.data));
+      compareService.putUserMeSocialAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, putUserSocial, socialTypePut, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('putUserMeSocialAlpha', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('putUserMeSocialAlpha', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('putUserMeSocialAlpha', JSON.stringify(data));
       })
 
       // call put users/{me} alpha
 
-      compareService.putUserMeAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, putUserMe, locale).then((res) => {
-        localStorage.setItem('putUserMeAlpha', JSON.stringify(res.data));
+      compareService.putUserMeAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, putUserMe, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('putUserMeAlpha', JSON.stringify(data));
         setIsLoadingAlpha(false);
         setIsLoading(false);
         setIsLoadingBeta(false);
       }).catch((err) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
         setIsLoadingAlpha(false);
         setIsLoading(false);
         setIsLoadingBeta(false);
-        localStorage.setItem('putUserMeAlpha', JSON.stringify(err.response.data));
+        localStorage.setItem('putUserMeAlpha', JSON.stringify(data));
       })
 
       // ============================== ============================== del API ============================== ==============================
@@ -293,169 +553,399 @@ function App() {
 
 
       // call get users/me beta
-      compareService.getUserMeBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeBeta', JSON.stringify(res.data));
+      compareService.getUserMeBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeBeta', JSON.stringify(data));
       })
 
       // call get users/me/meta beta
-      compareService.getUserMeMetaBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeMetaBeta', JSON.stringify(res.data));
+      compareService.getUserMeMetaBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeMetaBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeMetaBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeMetaBeta', JSON.stringify(data));
       })
 
       // call get users/me/cohort Beta
-      compareService.getUserMeCohortBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeCohortBeta', JSON.stringify(res.data));
+      compareService.getUserMeCohortBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeCohortBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeCohortBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeCohortBeta', JSON.stringify(data));
       })
 
       // call get users/me/Devices Beta
-      compareService.getUserMeDevicesBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeDevicesBeta', JSON.stringify(res.data));
+      compareService.getUserMeDevicesBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeDevicesBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeDevicesBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeDevicesBeta', JSON.stringify(data));
       })
 
       // call get users/me/certifications Beta
-      compareService.getUserMeCertificationsBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeCertificationsBeta', JSON.stringify(res.data));
+      compareService.getUserMeCertificationsBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeCertificationsBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeCertificationsBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeCertificationsBeta', JSON.stringify(data));
       })
 
       // call get users/me/identity Beta
-      compareService.getUserIdentityBeta(userBeta.data.access_token, locale).then((res) => {
-        localStorage.setItem('userIdentityBeta', JSON.stringify(res.data));
+      compareService.getUserIdentityBeta(userBeta.response.data.access_token, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userIdentityBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userIdentityBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userIdentityBeta', JSON.stringify(data));
       })
 
       // call get v2/users/{{me}/connections/Social Beta
-      compareService.getUserMeConnectionsSocialBeta(userBeta.data.access_token, userBeta.data.user.userId, socialType, locale).then((res) => {
-        localStorage.setItem('userMeConnectionsSocialBeta', JSON.stringify(res.data));
+      compareService.getUserMeConnectionsSocialBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, socialType, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeConnectionsSocialBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeConnectionsSocialBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeConnectionsSocialBeta', JSON.stringify(data));
       })
 
       // call get v2/users/{{me}/genres Beta
-      compareService.getUserMeGenresBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeGenresBeta', JSON.stringify(res.data));
+      compareService.getUserMeGenresBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeGenresBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeGenresBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeGenresBeta', JSON.stringify(data));
       })
 
       // call get v2/users/{{me}/balance Beta
-      compareService.getUserMeBalanceBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeBalanceBeta', JSON.stringify(res.data));
+      compareService.getUserMeBalanceBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeBalanceBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeBalanceBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeBalanceBeta', JSON.stringify(data));
       })
 
       // call get v2/users/{{me}/ga Beta
-      compareService.getUserMeGABeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeGaBeta', JSON.stringify(res.data));
+      compareService.getUserMeGABeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeGaBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeGaBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeGaBeta', JSON.stringify(data));
       })
 
       // call get v2/users/{{me}/BadgeCount Beta
-      compareService.getUserMeBadgeCountBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeBadgeCountBeta', JSON.stringify(res.data));
+      compareService.getUserMeBadgeCountBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeBadgeCountBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeBadgeCountBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeBadgeCountBeta', JSON.stringify(data));
       })
 
       // call get v2/users/{{me}/presents?offset=0&limit=50 Beta
-      compareService.getUserMePresentsBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMePresentsBeta', JSON.stringify(res.data));
+      compareService.getUserMePresentsBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMePresentsBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMePresentsBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMePresentsBeta', JSON.stringify(data));
       })
 
       // call get v2/users/{{me}/subscription?limit=30&offset=0&sort=createdAt&filter=all Beta
-      compareService.getUserMeSubscriptionBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeSubscriptionBeta', JSON.stringify(res.data));
+      compareService.getUserMeSubscriptionBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeSubscriptionBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeSubscriptionBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeSubscriptionBeta', JSON.stringify(data));
       })
 
       // call get /users/{{me}/invitations?page=0&limit=10 Beta
-      compareService.getUserMeInvitationsBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeInvitationsBeta', JSON.stringify(res.data));
+      compareService.getUserMeInvitationsBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeInvitationsBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeInvitationsBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeInvitationsBeta', JSON.stringify(data));
       })
 
       // call get /v2/users/{{me}/library/filters Beta
-      compareService.getUserMeLibraryBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeLibraryBeta', JSON.stringify(res.data));
+      compareService.getUserMeLibraryBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeLibraryBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeLibraryBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeLibraryBeta', JSON.stringify(data));
       })
 
       // call get /v2/users/{{me}/dailyfree/recent Beta
-      compareService.getUserMeDailyFreeBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeDailyFreeBeta', JSON.stringify(res.data));
+      compareService.getUserMeDailyFreeBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeDailyFreeBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeDailyFreeBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeDailyFreeBeta', JSON.stringify(data));
       })
 
       // call get /v2/users/{{me}/recents Beta
-      compareService.getUserMeRecentsBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeRecentsBeta', JSON.stringify(res.data));
+      compareService.getUserMeRecentsBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeRecentsBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeRecentsBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeRecentsBeta', JSON.stringify(data));
       })
 
       // call get /v2/users/{{me}/Charges Beta
-      compareService.getUserMeChargesBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeChargesBeta', JSON.stringify(res.data));
+      compareService.getUserMeChargesBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeChargesBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeChargesBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeChargesBeta', JSON.stringify(data));
       })
 
       // call get users/me/meta Beta
-      compareService.getUserMeMetaV1Beta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeMetaV1Beta', JSON.stringify(res.data));
+      compareService.getUserMeMetaV1Beta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeMetaV1Beta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeMetaV1Beta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeMetaV1Beta', JSON.stringify(data));
       })
 
       // call get users/me Beta
-      compareService.getUserMeV1Beta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-        localStorage.setItem('userMeV1Beta', JSON.stringify(res.data));
+      compareService.getUserMeV1Beta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeV1Beta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('userMeV1Beta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('userMeV1Beta', JSON.stringify(data));
       })
 
       // call post v2/get/{me}/Search cms Beta
 
       compareService.getUserCmsSearchUserBeta(adminBeta.access_token, usernameSearch).then((res) => {
-        localStorage.setItem('getUserCmsSearchBeta', JSON.stringify(res.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('getUserCmsSearchBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('getUserCmsSearchBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('getUserCmsSearchBeta', JSON.stringify(data));
       })
 
       // ============================== ============================== put API ============================== ==============================
       // ============================== ============================== put API ============================== ==============================
 
       // call put users/{me} Beta
-      compareService.putUserMeBeta(userBeta.data.access_token, userBeta.data.user.userId, putUserMe, locale).then((res) => {
-        localStorage.setItem('putUserMeBeta', JSON.stringify(res.data));
+      compareService.putUserMeBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, putUserMe, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('putUserMeBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('putUserMeBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('putUserMeBeta', JSON.stringify(data));
       })
 
       // call put users/{me}/connection/{social-type} Beta
 
-      compareService.putUserMeSocialBeta(userBeta.data.access_token, userBeta.data.user.userId, putUserSocial, socialTypePut, locale).then((res) => {
-        localStorage.setItem('putUserMeSocialBeta', JSON.stringify(res.data));
+      compareService.putUserMeSocialBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, putUserSocial, socialTypePut, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: res.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('putUserMeSocialBeta', JSON.stringify(data));
       }).catch((err) => {
-        localStorage.setItem('putUserMeSocialBeta', JSON.stringify(err.response.data));
+        const timeTaken = (new Date()) - start;
+        const data = {
+          response: err.response.data,
+          timeTaken: timeTaken,
+        };
+        localStorage.setItem('putUserMeSocialBeta', JSON.stringify(data));
       })
 
       // ============================== ============================== del API ============================== ==============================
@@ -575,10 +1065,10 @@ function App() {
   useEffect(() => {
     if (isLoggedIn) {
       if (!isAutoPut && userAlpha && userBeta) {
-        if (!userAlpha.error || !userBeta.error) {
-          setPutUserMe({ locale: userAlpha.data.user.locale, isAdultFilterOn: userAlpha.data.user.isAdultFilterOn, birthDate: userAlpha.data.user.birthDate, gender: userAlpha.data.user.gender, agreements: { marketingEmail: userAlpha.data.user.agreements.marketingEmail, collectingBirth: userAlpha.data.user.agreements.collectingBirth, timer: userAlpha.data.user.agreements.timer, subscription: userAlpha.data.user.agreements.subscription } });
+        if (!userBeta.response.error && !userAlpha.response.error) {
+          setPutUserMe({ locale: userAlpha.response.data.user.locale, isAdultFilterOn: userAlpha.response.data.user.isAdultFilterOn, birthDate: userAlpha.response.data.user.birthDate, gender: userAlpha.response.data.user.gender, agreements: { marketingEmail: userAlpha.response.data.user.agreements.marketingEmail, collectingBirth: userAlpha.response.data.user.agreements.collectingBirth, timer: userAlpha.response.data.user.agreements.timer, subscription: userAlpha.response.data.user.agreements.subscription } });
           setPutUserPassword({ password: null, newPassword: null });
-          setPutUserUsername({ username: userAlpha.data.user.username, password: 'lezhin123!' });
+          setPutUserUsername({ username: userAlpha.response.data.user.username, password: 'lezhin123!' });
           setPutUserSocial({ accessToken: null });
         }
       } else if (!isAutoPost) {
@@ -747,15 +1237,15 @@ function App() {
         if (e.target.value == 'false') {
           setIsAutoPut(false);
           if (isLoggedIn) {
-            setPutUserMe({ locale: userAlpha.data.user.locale, isAdultFilterOn: userAlpha.data.user.isAdultFilterOn, birthDate: userAlpha.data.user.birthDate, gender: userAlpha.data.user.gender, agreements: { marketingEmail: userAlpha.data.user.agreements.marketingEmail, collectingBirth: userAlpha.data.user.agreements.collectingBirth, timer: userAlpha.data.user.agreements.timer, subscription: userAlpha.data.user.agreements.subscription } });
+            setPutUserMe({ locale: userAlpha.response.data.user.locale, isAdultFilterOn: userAlpha.response.data.user.isAdultFilterOn, birthDate: userAlpha.response.data.user.birthDate, gender: userAlpha.response.data.user.gender, agreements: { marketingEmail: userAlpha.response.data.user.agreements.marketingEmail, collectingBirth: userAlpha.response.data.user.agreements.collectingBirth, timer: userAlpha.response.data.user.agreements.timer, subscription: userAlpha.response.data.user.agreements.subscription } });
             setPutUserPassword({ password: null, newPassword: null });
-            setPutUserUsername({ username: userAlpha.data.user.username, password: 'lezhin123!' });
+            setPutUserUsername({ username: userAlpha.response.data.user.username, password: 'lezhin123!' });
             setPutUserSocial({ accessToken: null });
           }
         } else {
           setIsAutoPut(true);
           setPutUserMe({ locale: "ko-KR", isAdultFilterOn: true, birthDate: "19990304", gender: "male", agreements: { marketingEmail: true, collectingBirth: true, timer: true, subscription: true } });
-          setPutUserUsername({ username: userAlpha ? userAlpha.data.user.username : null, password: 'lezhin123!' });
+          setPutUserUsername({ username: userAlpha ? userAlpha.response.data.user.username : null, password: 'lezhin123!' });
           setPutUserPassword({ password: 'lezhin123!', newPassword: 'lezhin123!' });
           setPutUserSocial({ accessToken: 'EAAK4nWXU8zgBAPGjurSpIiakdFv2UAGfGpjxXGdqMgeT7dqscJmVWZAkZBwjaQCHGVuzpyNhni0Mt4JnOiCZBFqKnZAFvkn6OQIDqO9u0jZAmXm7GEjtqclyyCdQ8JZBFtaL30zs02CGOMxCMkpe5NPOHYFod19JxdrVtS6lo53OhFO8uOwo2fX2u0m7JU6RD7H79IHRZBRk66p31axknK36FtQBk0BhmO7wDmcciFMZCD6vewP4f8ZBq' });
         }
@@ -787,44 +1277,85 @@ function App() {
     e.preventDefault();
 
     if (userAlpha && userBeta) {
+      const start = new Date();
       switch (t) {
         case 1:
           // call post users/{me}/unregister alpha
           setIsLoadingRequest(true);
-          compareService.putUserMeUnregisterAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, putUnregister, locale).then((res) => {
-            localStorage.setItem('putUserMeUnregisterAlpha', JSON.stringify(res.data));
+          compareService.putUserMeUnregisterAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, putUnregister, locale).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserMeUnregisterAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           }).catch((err) => {
-            localStorage.setItem('putUserMeUnregisterAlpha', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserMeUnregisterAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           });
 
           // call post users/{me}/unregister Beta
 
-          compareService.putUserMeUnregisterBeta(userBeta.data.access_token, userBeta.data.user.userId, putUnregister, locale).then((res) => {
-            localStorage.setItem('putUserMeUnregisterBeta', JSON.stringify(res.data));
+          compareService.putUserMeUnregisterBeta(userBeta.response.data.access_token, userAlpha.response.data.user.userId, putUnregister, locale).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserMeUnregisterBeta', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('putUserMeUnregisterBeta', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserMeUnregisterBeta', JSON.stringify(data));
           });
 
           break;
         case 2:
           // call post v2/users/{me}/unregister cms alpha
           setIsLoadingRequest(true);
-          compareService.postUserCmsUnregisterAlpha(adminAlpha.access_token, userAlpha.data.user.userId, null).then((res) => {
-            localStorage.setItem('postUserCmsUnregisterAlpha', JSON.stringify(res.data));
+          compareService.postUserCmsUnregisterAlpha(adminAlpha.access_token, userAlpha.response.data.user.userId, null).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserCmsUnregisterAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           }).catch((err) => {
-            localStorage.setItem('postUserCmsUnregisterAlpha', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserCmsUnregisterAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           });
 
           // call post v2/users/{me}/unregister cms Beta
 
-          compareService.postUserCmsUnregisterBeta(adminBeta.access_token, userBeta.data.user.userId, null).then((res) => {
-            localStorage.setItem('postUserCmsUnregisterBeta', JSON.stringify(res.data));
+          compareService.postUserCmsUnregisterBeta(adminBeta.access_token, userBeta.response.data.user.userId, null).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserCmsUnregisterBeta', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('postUserCmsUnregisterBeta', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserCmsUnregisterBeta', JSON.stringify(data));
           });
 
           break;
@@ -832,20 +1363,40 @@ function App() {
 
           // call post v2/users/{me}/Reregister cms alpha
           setIsLoadingRequest(true);
-          compareService.postUserCmsReregisterAlpha(adminAlpha.access_token, userAlpha.data.user.userId, null).then((res) => {
-            localStorage.setItem('postUserCmsReregisterAlpha', JSON.stringify(res.data));
+          compareService.postUserCmsReregisterAlpha(adminAlpha.access_token, userAlpha.response.data.user.userId, null).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserCmsReregisterAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           }).catch((err) => {
-            localStorage.setItem('postUserCmsReregisterAlpha', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserCmsReregisterAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           });
 
           // call post v2/users/{me}/Reregister cms Beta
 
-          compareService.postUserCmsReregisterBeta(adminBeta.access_token, userBeta.data.user.userId, null).then((res) => {
-            localStorage.setItem('postUserCmsReregisterBeta', JSON.stringify(res.data));
+          compareService.postUserCmsReregisterBeta(adminBeta.access_token, userBeta.response.data.user.userId, null).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserCmsReregisterBeta', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('postUserCmsReregisterBeta', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserCmsReregisterBeta', JSON.stringify(data));
           });
           break;
         case 4:
@@ -853,145 +1404,305 @@ function App() {
           // call post v2/get/{me}/Search cms alpha
           setIsLoadingRequest(true);
           compareService.getUserCmsSearchUserAlpha(adminAlpha.access_token, usernameSearch).then((res) => {
-            localStorage.setItem('getUserCmsSearchAlpha', JSON.stringify(res.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getUserCmsSearchAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           }).catch((err) => {
-            localStorage.setItem('getUserCmsSearchAlpha', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getUserCmsSearchAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           });
 
           // call post v2/get/{me}/Search cms Beta
 
           compareService.getUserCmsSearchUserBeta(adminBeta.access_token, usernameSearch).then((res) => {
-            localStorage.setItem('getUserCmsSearchBeta', JSON.stringify(res.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getUserCmsSearchBeta', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('getUserCmsSearchBeta', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getUserCmsSearchBeta', JSON.stringify(data));
           });
           break;
 
         case 8:
           // send del user bye
           setIsLoadingRequest(true);
-          compareService.delUserByeAlpha(userAlpha.data.access_token).then((res) => {
-            localStorage.setItem('delUserByeAlpha', JSON.stringify(res.data));
+          compareService.delUserByeAlpha(userAlpha.response.data.access_token).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('delUserByeAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           }).catch((err) => {
-            localStorage.setItem('delUserByeAlpha', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('delUserByeAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           });
 
-          compareService.delUserByeBeta(userBeta.data.access_token).then((res) => {
-            localStorage.setItem('delUserByeBeta', JSON.stringify(res.data));
+          compareService.delUserByeBeta(userBeta.response.data.access_token).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('delUserByeBeta', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('delUserByeBeta', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('delUserByeBeta', JSON.stringify(data));
           });
 
           break;
         case 9:
           // send del user devices all
           setIsLoadingRequest(true);
-          compareService.delUserDevicesAllAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-            localStorage.setItem('delUserDevicesAllAlpha', JSON.stringify(res.data));
+          compareService.delUserDevicesAllAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('delUserDevicesAllAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           }).catch((err) => {
-            localStorage.setItem('delUserDevicesAllAlpha', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('delUserDevicesAllAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           });
 
-          compareService.delUserDevicesAllBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-            localStorage.setItem('delUserDevicesAllBeta', JSON.stringify(res.data));
+          compareService.delUserDevicesAllBeta(userBeta.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('delUserDevicesAllBeta', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('delUserDevicesAllBeta', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('delUserDevicesAllBeta', JSON.stringify(data));
           });
           break;
         case 10:
           // call del users/{me}/connect/{socialType} alpha
           setIsLoadingRequest(true);
-          compareService.delUserMeSocialAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, delUserSocial, socialTypeDel, locale).then((res) => {
-            localStorage.setItem('delUserMeSocialAlpha', JSON.stringify(res.data));
+          compareService.delUserMeSocialAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, delUserSocial, socialTypeDel, locale).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('delUserMeSocialAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           }).catch((err) => {
-            localStorage.setItem('delUserMeSocialAlpha', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('delUserMeSocialAlpha', JSON.stringify(data));
           });
 
-          compareService.delUserMeSocialBeta(userBeta.data.access_token, userBeta.data.user.userId, delUserSocial, socialTypeDel, locale).then((res) => {
-            localStorage.setItem('delUserMeSocialBeta', JSON.stringify(res.data));
+          compareService.delUserMeSocialBeta(userBeta.response.data.access_token, userAlpha.response.data.user.userId, delUserSocial, socialTypeDel, locale).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('delUserMeSocialBeta', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('delUserMeSocialBeta', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('delUserMeSocialBeta', JSON.stringify(data));
           });
           break;
         case 11:
           // send del user devices ById
           setIsLoadingRequest(true);
-          compareService.delUserDevicesByIdAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, locale).then((res) => {
-            localStorage.setItem('delUserDevicesByIdAlpha', JSON.stringify(res.data));
+          compareService.delUserDevicesByIdAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('delUserDevicesByIdAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           }).catch((err) => {
-            localStorage.setItem('delUserDevicesByIdAlpha', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('delUserDevicesByIdAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           });
 
-          compareService.delUserDevicesByIdBeta(userBeta.data.access_token, userBeta.data.user.userId, locale).then((res) => {
-            localStorage.setItem('delUserDevicesByIdBeta', JSON.stringify(res.data));
+          compareService.delUserDevicesByIdBeta(userBeta.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('delUserDevicesByIdBeta', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('delUserDevicesByIdBeta', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('delUserDevicesByIdBeta', JSON.stringify(data));
           });
           break;
         case 12:
           setIsLoadingRequest(true);
           // call put users/{me}/password Beta
 
-          compareService.putUserMePasswordBeta(userBeta.data.access_token, userBeta.data.user.userId, { password: putUserPassword.password, newPassword: putUserPassword.newPassword }, locale).then((res) => {
-            localStorage.setItem('putUserMePasswordBeta', JSON.stringify(res.data));
+          compareService.putUserMePasswordBeta(userBeta.response.data.access_token, userAlpha.response.data.user.userId, { password: putUserPassword.password, newPassword: putUserPassword.newPassword }, locale).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserMePasswordBeta', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('putUserMePasswordBeta', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserMePasswordBeta', JSON.stringify(data));
           })
 
           // call put users/{me}/password alpha
 
-          compareService.putUserMePasswordAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, { password: putUserPassword.password, newPassword: putUserPassword.newPassword }, locale).then((res) => {
-            localStorage.setItem('putUserMePasswordAlpha', JSON.stringify(res.data));
+          compareService.putUserMePasswordAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, { password: putUserPassword.password, newPassword: putUserPassword.newPassword }, locale).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserMePasswordAlpha', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('putUserMePasswordAlpha', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserMePasswordAlpha', JSON.stringify(data));
           })
           break;
         case 13:
           setIsLoadingRequest(true);
           // call put users/{me}/username Beta
 
-          compareService.putUserMeUsernameBeta(userBeta.data.access_token, userBeta.data.user.userId, { username: putUserUsername.username, password: putUserUsername.password }, locale).then((res) => {
-            localStorage.setItem('putUserMeUsernameBeta', JSON.stringify(res.data));
+          compareService.putUserMeUsernameBeta(userBeta.response.data.access_token, userAlpha.response.data.user.userId, { username: putUserUsername.username, password: putUserUsername.password }, locale).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserMeUsernameBeta', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('putUserMeUsernameBeta', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserMeUsernameBeta', JSON.stringify(data));
           })
 
           // call put users/{me}/username alpha
 
-          compareService.putUserMeUsernameAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, { username: putUserUsername.username, password: putUserUsername.password }, locale).then((res) => {
-            localStorage.setItem('putUserMeUsernameAlpha', JSON.stringify(res.data));
+          compareService.putUserMeUsernameAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, { username: putUserUsername.username, password: putUserUsername.password }, locale).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserMeUsernameAlpha', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('putUserMeUsernameAlpha', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserMeUsernameAlpha', JSON.stringify(data));
           })
           break;
         case 14:
           setIsLoadingRequest(true);
           // call post send change email Beta
 
-          compareService.postUserSendChangeEmailBeta(userBeta.data.access_token, userBeta.data.user.userId, postUserSendChangeEmailData, locale).then((res) => {
-            localStorage.setItem('postUserSendChangeEmailBeta', JSON.stringify(res.data));
+          compareService.postUserSendChangeEmailBeta(userBeta.response.data.access_token, userAlpha.response.data.user.userId, postUserSendChangeEmailData, locale).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserSendChangeEmailBeta', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('postUserSendChangeEmailBeta', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserSendChangeEmailBeta', JSON.stringify(data));
           })
 
           // call post send change email alpha
 
           setPostUserChangeEmailData({ email: postUserSendChangeEmailData ? postUserSendChangeEmailData.email : 'email mới', password: postUserSendChangeEmailData ? postUserSendChangeEmailData.password : 'lezhin123!', token: null });
 
-          compareService.postUserSendChangeEmailAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, postUserSendChangeEmailData, locale).then((res) => {
-            localStorage.setItem('postUserSendChangeEmailAlpha', JSON.stringify(res.data));
+          compareService.postUserSendChangeEmailAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, postUserSendChangeEmailData, locale).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserSendChangeEmailAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           }).catch((err) => {
-            localStorage.setItem('postUserSendChangeEmailAlpha', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserSendChangeEmailAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           })
           break;
@@ -999,19 +1710,39 @@ function App() {
           setIsLoadingRequest(true);
           // call post send change email Beta
 
-          compareService.postUserChangeEmailBeta(userBeta.data.access_token, userBeta.data.user.userId, postUserChangeEmailData, locale).then((res) => {
-            localStorage.setItem('postUserChangeEmailBeta', JSON.stringify(res.data));
+          compareService.postUserChangeEmailBeta(userBeta.response.data.access_token, userAlpha.response.data.user.userId, postUserChangeEmailData, locale).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserChangeEmailBeta', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('postUserChangeEmailBeta', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserChangeEmailBeta', JSON.stringify(data));
           })
 
           // call post send change email alpha
 
-          compareService.postUserChangeEmailAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, postUserChangeEmailData, locale).then((res) => {
-            localStorage.setItem('postUserChangeEmailAlpha', JSON.stringify(res.data));
+          compareService.postUserChangeEmailAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, postUserChangeEmailData, locale).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserChangeEmailAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           }).catch((err) => {
-            localStorage.setItem('postUserChangeEmailAlpha', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserChangeEmailAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           })
           break;
@@ -1019,19 +1750,39 @@ function App() {
           setIsLoadingRequest(true);
           // call put users/{me}/password Beta
 
-          compareService.putUserMePasswordV2Beta(userBeta.data.access_token, userBeta.data.user.userId, { password: putUserPassword.password, newPassword: putUserPassword.newPassword }, locale).then((res) => {
-            localStorage.setItem('putUserMePasswordV2Beta', JSON.stringify(res.data));
+          compareService.putUserMePasswordV2Beta(userBeta.response.data.access_token, userAlpha.response.data.user.userId, { password: putUserPassword.password, newPassword: putUserPassword.newPassword }, locale).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserMePasswordV2Beta', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('putUserMePasswordV2Beta', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserMePasswordV2Beta', JSON.stringify(data));
           })
 
           // call put users/{me}/password alpha
 
-          compareService.putUserMePasswordAlpha(userAlpha.data.access_token, userAlpha.data.user.userId, { password: putUserPassword.password, newPassword: putUserPassword.newPassword }, locale).then((res) => {
-            localStorage.setItem('putUserMePasswordV2Alpha', JSON.stringify(res.data));
+          compareService.putUserMePasswordAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, { password: putUserPassword.password, newPassword: putUserPassword.newPassword }, locale).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserMePasswordV2Alpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           }).catch((err) => {
-            localStorage.setItem('putUserMePasswordV2Alpha', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserMePasswordV2Alpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           })
           break;
@@ -1044,17 +1795,37 @@ function App() {
           // send verification email
           setIsLoadingRequest(true);
           compareService.postVerificationSendEmailAlpha(verifyEmail).then((res) => {
-            localStorage.setItem('postVerificationSendEmailAlpha', JSON.stringify(res.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postVerificationSendEmailAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           }).catch((err) => {
-            localStorage.setItem('postVerificationSendEmailAlpha', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postVerificationSendEmailAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           });
 
           compareService.postVerificationSendEmailBeta(verifyEmail).then((res) => {
-            localStorage.setItem('postVerificationSendEmailBeta', JSON.stringify(res.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postVerificationSendEmailBeta', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('postVerificationSendEmailBeta', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postVerificationSendEmailBeta', JSON.stringify(data));
           });
 
           break;
@@ -1062,17 +1833,37 @@ function App() {
           // entry verification code
           setIsLoadingRequest(true);
           compareService.putVerificationsAlpha(putVerificationsDataAlpha).then((res) => {
-            localStorage.setItem('putVerificationsAlpha', JSON.stringify(res.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putVerificationsAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           }).catch((err) => {
-            localStorage.setItem('putVerificationsAlpha', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putVerificationsAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           });
 
           compareService.putVerificationsBeta(putVerificationsDataBeta).then((res) => {
-            localStorage.setItem('putVerificationsBeta', JSON.stringify(res.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putVerificationsBeta', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('putVerificationsBeta', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putVerificationsBeta', JSON.stringify(data));
           });
 
           break;
@@ -1080,17 +1871,37 @@ function App() {
           // send post sign up user
           setIsLoadingRequest(true);
           compareService.postUserSignupAlpha(postSignupAlpha, locale).then((res) => {
-            localStorage.setItem('postUserSignupAlpha', JSON.stringify(res.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserSignupAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           }).catch((err) => {
-            localStorage.setItem('postUserSignupAlpha', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserSignupAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           });
 
           compareService.postUserSignupBeta(postSignupBeta, locale).then((res) => {
-            localStorage.setItem('postUserSignupBeta', JSON.stringify(res.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserSignupBeta', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('postUserSignupBeta', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserSignupBeta', JSON.stringify(data));
           });
 
           break;
@@ -1098,17 +1909,37 @@ function App() {
           setIsLoadingRequest(true);
 
           compareService.postUserSendResetPasswordAlpha(postUserSendResetPasswordUsername, locale).then((res) => {
-            localStorage.setItem('postUserSendResetPasswordAlpha', JSON.stringify(res.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserSendResetPasswordAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           }).catch((err) => {
-            localStorage.setItem('postUserSendResetPasswordAlpha', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserSendResetPasswordAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           });
 
           compareService.postUserSendResetPasswordBeta(postUserSendResetPasswordUsername, locale).then((res) => {
-            localStorage.setItem('postUserSendResetPasswordBeta', JSON.stringify(res.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserSendResetPasswordBeta', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('postUserSendResetPasswordBeta', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('postUserSendResetPasswordBeta', JSON.stringify(data));
           });
 
           break;
@@ -1116,17 +1947,37 @@ function App() {
           setIsLoadingRequest(true);
 
           compareService.putUserResetPasswordAlpha(putUserResetPasswordData, locale).then((res) => {
-            localStorage.setItem('putUserResetPasswordAlpha', JSON.stringify(res.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserResetPasswordAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           }).catch((err) => {
-            localStorage.setItem('putUserResetPasswordAlpha', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserResetPasswordAlpha', JSON.stringify(data));
             setIsLoadingRequest(false);
           });
 
           compareService.putUserResetPasswordBeta(putUserResetPasswordData, locale).then((res) => {
-            localStorage.setItem('putUserResetPasswordBeta', JSON.stringify(res.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserResetPasswordBeta', JSON.stringify(data));
           }).catch((err) => {
-            localStorage.setItem('putUserResetPasswordBeta', JSON.stringify(err.response.data));
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('putUserResetPasswordBeta', JSON.stringify(data));
           });
 
           break;
@@ -1196,8 +2047,8 @@ function App() {
               (
                 <>
                   <div className='ms-4 mt-5 text-center' style={{ fontSize: 13 }}>
-                    <span className="title">- Alpha:</span> {userAlpha.data && !userAlpha.error ? userAlpha.data.user.username : (<>not found</>)} - {userAlpha.data && !userAlpha.error ? userAlpha.data.user.userId : (<>not found</>)}
-                    <br /> <span className="title">- Beta :</span> {userBeta.data && !userBeta.error ? userBeta.data.user.username : (<>not found</>)} - {userBeta.data && !userBeta.error ? userBeta.data.user.userId : <>not found</>}
+                    <span className="title">- Alpha:</span> {userAlpha.response.data && !userAlpha.response.error ? userAlpha.response.data.user.username : (<>not found</>)} - {userAlpha.response.data && !userAlpha.response.error ? userAlpha.response.data.user.userId : (<>not found</>)}
+                    <br /> <span className="title">- Beta :</span> {userBeta.response.data && !userBeta.response.error ? userBeta.response.data.user.username : (<>not found</>)} - {userBeta.response.data && !userBeta.response.error ? userBeta.response.data.user.userId : <>not found</>}
                     <br />
                     <button
                       className="btn btn-primary btn-block mb-4 mt-3"
@@ -1374,20 +2225,20 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'} </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMeBeta ? userMeBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeBeta ? userMeBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data ({userMeAlpha ? userMeAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeAlpha ? userMeAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
             {!isLoadingAlpha ?
-              <><JsonCompare oldData={userMeBeta} newData={userMeAlpha} /></> : (<><div className='text-center'><img src='https://www.ucreative.com/wp-content/uploads/2014/09/fusion.gif' height={390} /> <br />
+              <><JsonCompare oldData={userMeBeta ? userMeBeta.response : null} newData={userMeAlpha ? userMeAlpha.response : null} /></> : (<><div className='text-center'><img src='https://www.ucreative.com/wp-content/uploads/2014/09/fusion.gif' height={390} /> <br />
                 <div className='waviy'>
                   <span style={{ '--i': 1 }}>M</span>
                   <span style={{ '--i': 2 }}>e</span>
@@ -1414,19 +2265,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/meta </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeMetaBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMeMetaBeta ? userMeMetaBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeMetaBeta ? userMeMetaBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeMetaAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data ({userMeMetaAlpha ? userMeMetaAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeMetaAlpha ? userMeMetaAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeMetaBeta} newData={userMeMetaAlpha} />
+            <JsonCompare oldData={userMeMetaBeta ? userMeMetaBeta.response : null} newData={userMeMetaAlpha ? userMeMetaAlpha.response : null} />
 
             {/* API get user me cohort */}
             <hr id='wrapper_get_3' />
@@ -1434,19 +2285,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/cohort </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeCohortBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMeCohortBeta ? userMeCohortBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeCohortBeta ? userMeCohortBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeCohortAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({userMeCohortAlpha ? userMeCohortAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeCohortAlpha ? userMeCohortAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeCohortBeta} newData={userMeCohortAlpha} />
+            <JsonCompare oldData={userMeCohortBeta ? userMeCohortBeta.response : null} newData={userMeCohortAlpha ? userMeCohortAlpha.response : null} />
 
             {/* API get user me presents */}
             <hr id='wrapper_get_4' />
@@ -1454,19 +2305,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/subscription </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeSubscriptionBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMeSubscriptionBeta ? userMeSubscriptionBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeSubscriptionBeta ? userMeSubscriptionBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeSubscriptionAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({userMeSubscriptionAlpha ? userMeSubscriptionAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeSubscriptionAlpha ? userMeSubscriptionAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeSubscriptionBeta} newData={userMeSubscriptionAlpha} />
+            <JsonCompare oldData={userMeSubscriptionBeta ? userMeSubscriptionBeta.response : null} newData={userMeSubscriptionAlpha ? userMeSubscriptionAlpha.response : null} />
 
 
             {/* API get user me certifications */}
@@ -1475,19 +2326,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/certifications </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeCertificationsBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMeCertificationsBeta ? userMeCertificationsBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeCertificationsBeta ? userMeCertificationsBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeCertificationsAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({userMeCertificationsAlpha ? userMeCertificationsAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeCertificationsAlpha ? userMeCertificationsAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeCertificationsBeta} newData={userMeCertificationsAlpha} />
+            <JsonCompare oldData={userMeCertificationsBeta ? userMeCertificationsBeta.response : null} newData={userMeCertificationsAlpha ? userMeCertificationsAlpha.response : null} />
 
             {/* API get user me identity */}
             <hr id='wrapper_get_6' />
@@ -1495,19 +2346,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/identity/{'{access_token}'} </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userIdentityBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userIdentityBeta ? userIdentityBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userIdentityBeta ? userIdentityBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userIdentityAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({userIdentityAlpha ? userIdentityAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userIdentityAlpha ? userIdentityAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userIdentityBeta} newData={userIdentityAlpha} />
+            <JsonCompare oldData={userIdentityBeta ? userIdentityBeta.response : null} newData={userIdentityAlpha ? userIdentityAlpha.response : null} />
 
             {/* API get user me connections social */}
             <hr id='wrapper_get_7' />
@@ -1515,19 +2366,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/connections/<span className='text-danger'>{socialType}</span> </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeConnectionsSocialBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMeConnectionsSocialBeta ? userMeConnectionsSocialBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeConnectionsSocialBeta ? userMeConnectionsSocialBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeConnectionsSocialAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({userMeConnectionsSocialAlpha ? userMeConnectionsSocialAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeConnectionsSocialAlpha ? userMeConnectionsSocialAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeConnectionsSocialBeta} newData={userMeConnectionsSocialAlpha} />
+            <JsonCompare oldData={userMeConnectionsSocialBeta ? userMeConnectionsSocialBeta.response : null} newData={userMeConnectionsSocialAlpha ? userMeConnectionsSocialAlpha.response : null} />
 
             {/* API get user me genres */}
             <hr id='wrapper_get_8' />
@@ -1535,19 +2386,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/genres </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeGenresBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMeGenresBeta ? userMeGenresBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeGenresBeta ? userMeGenresBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeGenresAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({userMeGenresAlpha ? userMeGenresAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeGenresAlpha ? userMeGenresAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeGenresBeta} newData={userMeGenresAlpha} />
+            <JsonCompare oldData={userMeGenresBeta ? userMeGenresBeta.response : null} newData={userMeGenresAlpha ? userMeGenresAlpha.response : null} />
 
             {/* API get user me balance */}
             <hr id='wrapper_get_9' />
@@ -1555,19 +2406,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/balance </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeBalanceBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMeBalanceBeta ? userMeBalanceBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeBalanceBeta ? userMeBalanceBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeBalanceAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({userMeBalanceAlpha ? userMeBalanceAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeBalanceAlpha ? userMeBalanceAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeBalanceBeta} newData={userMeBalanceAlpha} />
+            <JsonCompare oldData={userMeBalanceBeta ? userMeBalanceBeta.response : null} newData={userMeBalanceAlpha ? userMeBalanceAlpha.response : null} />
 
             {/* API get user me ga */}
             <hr id='wrapper_get_10' />
@@ -1575,19 +2426,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/ga </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeGaBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMeGaBeta ? userMeGaBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeGaBeta ? userMeGaBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeGaAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({userMeGaAlpha ? userMeGaAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeGaAlpha ? userMeGaAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeGaBeta} newData={userMeGaAlpha} />
+            <JsonCompare oldData={userMeGaBeta ? userMeGaBeta.response : null} newData={userMeGaAlpha ? userMeGaAlpha.response : null} />
 
             {/* API get user me badge-counts */}
             <hr id='wrapper_get_11' />
@@ -1595,19 +2446,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/badge-counts </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeBadgeCountBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMeBadgeCountBeta ? userMeBadgeCountBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeBadgeCountBeta ? userMeBadgeCountBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeBadgeCountAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({userMeBadgeCountAlpha ? userMeBadgeCountAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeBadgeCountAlpha ? userMeBadgeCountAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeBadgeCountBeta} newData={userMeBadgeCountAlpha} />
+            <JsonCompare oldData={userMeBadgeCountBeta ? userMeBadgeCountBeta.response : null} newData={userMeBadgeCountAlpha ? userMeBadgeCountAlpha.response : null} />
 
             {/* API get user me presents */}
             <hr id='wrapper_get_12' />
@@ -1615,19 +2466,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/presents </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMePresentsBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMePresentsBeta ? userMePresentsBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMePresentsBeta ? userMePresentsBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMePresentsAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({userMePresentsAlpha ? userMePresentsAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMePresentsAlpha ? userMePresentsAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMePresentsBeta} newData={userMePresentsAlpha} />
+            <JsonCompare oldData={userMePresentsBeta ? userMePresentsBeta.response : null} newData={userMePresentsAlpha ? userMePresentsAlpha.response : null} />
 
             {/* API get user me library */}
             <hr id='wrapper_get_13' />
@@ -1635,19 +2486,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/library/filters </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeLibraryBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMeLibraryBeta ? userMeLibraryBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeLibraryBeta ? userMeLibraryBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeLibraryAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({userMeLibraryAlpha ? userMeLibraryAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeLibraryAlpha ? userMeLibraryAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeLibraryBeta} newData={userMeLibraryAlpha} />
+            <JsonCompare oldData={userMeLibraryBeta ? userMeLibraryBeta.response : null} newData={userMeLibraryAlpha ? userMeLibraryAlpha.response : null} />
 
             {/* API get user me dailyfree/recent */}
             <hr id='wrapper_get_15' />
@@ -1655,19 +2506,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/dailyfree/recent </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeDailyFreeBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMeDailyFreeBeta ? userMeDailyFreeBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeDailyFreeBeta ? userMeDailyFreeBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeDailyFreeAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({userMeDailyFreeAlpha ? userMeDailyFreeAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeDailyFreeAlpha ? userMeDailyFreeAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeDailyFreeBeta} newData={userMeDailyFreeAlpha} />
+            <JsonCompare oldData={userMeDailyFreeBeta ? userMeDailyFreeBeta.response : null} newData={userMeDailyFreeAlpha ? userMeDailyFreeAlpha.response : null} />
 
             {/* API get user me dailyfree/recent */}
             <hr id='wrapper_get_16' />
@@ -1675,19 +2526,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/recents </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeRecentsBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMeRecentsBeta ? userMeRecentsBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeRecentsBeta ? userMeRecentsBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeRecentsAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({userMeRecentsAlpha ? userMeRecentsAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeRecentsAlpha ? userMeRecentsAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeRecentsBeta} newData={userMeRecentsAlpha} />
+            <JsonCompare oldData={userMeRecentsBeta ? userMeRecentsBeta.response : null} newData={userMeRecentsAlpha ? userMeRecentsAlpha.response : null} />
 
             {/* API get user me dailyfree/recent */}
             <hr id='wrapper_get_17' />
@@ -1695,19 +2546,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/{'{me}'}/charges </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeChargesBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMeChargesBeta ? userMeChargesBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeChargesBeta ? userMeChargesBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeChargesAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({userMeChargesAlpha ? userMeChargesAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeChargesAlpha ? userMeChargesAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeChargesBeta} newData={userMeChargesAlpha} />
+            <JsonCompare oldData={userMeChargesBeta ? userMeChargesBeta.response : null} newData={userMeChargesAlpha ? userMeChargesAlpha.response : null} />
 
             {/* ====================== ====================== API get search user cms ======================  ====================== */}
 
@@ -1745,19 +2596,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(getUserCmsSearchBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({getUserCmsSearchBeta ? getUserCmsSearchBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(getUserCmsSearchBeta ? getUserCmsSearchBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(getUserCmsSearchAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({getUserCmsSearchAlpha ? getUserCmsSearchAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(getUserCmsSearchAlpha ? getUserCmsSearchAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={getUserCmsSearchBeta} newData={getUserCmsSearchAlpha} />
+            <JsonCompare oldData={getUserCmsSearchBeta ? getUserCmsSearchBeta.response : null} newData={getUserCmsSearchAlpha ? getUserCmsSearchAlpha.response : null} />
 
             {/* API get user me invitations */}
             <hr id='wrapper_get_19' />
@@ -1765,19 +2616,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /users/{'{me}'}/invitations </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeInvitationsBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMeInvitationsBeta ? userMeInvitationsBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeInvitationsBeta ? userMeInvitationsBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeInvitationsAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({userMeInvitationsAlpha ? userMeInvitationsAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeInvitationsAlpha ? userMeInvitationsAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeInvitationsBeta} newData={userMeInvitationsAlpha} />
+            <JsonCompare oldData={userMeInvitationsBeta ? userMeInvitationsBeta.response : null} newData={userMeInvitationsAlpha ? userMeInvitationsAlpha.response : null} />
 
             {/* API get user me v1 */}
             <hr id='wrapper_get_20' />
@@ -1785,19 +2636,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /users/{'{me}'} </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeV1Beta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMeV1Beta ? userMeV1Beta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeV1Beta ? userMeV1Beta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeV1Alpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({userMeV1Alpha ? userMeV1Alpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeV1Alpha ? userMeV1Alpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeV1Beta} newData={userMeV1Alpha} />
+            <JsonCompare oldData={userMeV1Beta ? userMeV1Beta.response : null} newData={userMeV1Alpha ? userMeV1Alpha.response : null} />
 
             {/* API get user me meta v1 */}
             <hr id='wrapper_get_21' />
@@ -1805,19 +2656,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /users/{'{me}'}/meta </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeMetaV1Beta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMeMetaV1Beta ? userMeMetaV1Beta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeMetaV1Beta ? userMeMetaV1Beta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeMetaV1Alpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({userMeMetaV1Alpha ? userMeMetaV1Alpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeMetaV1Alpha ? userMeMetaV1Alpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeMetaV1Beta} newData={userMeMetaV1Alpha} />
+            <JsonCompare oldData={userMeMetaV1Beta ? userMeMetaV1Beta.response : null} newData={userMeMetaV1Alpha ? userMeMetaV1Alpha.response : null} />
 
             {/* API get user me devices */}
             <hr id='wrapper_get_22' />
@@ -1825,19 +2676,19 @@ function App() {
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /users/{'{me}'}/devices </div>
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(userMeDevicesBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userMeDevicesBeta ? userMeDevicesBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(userMeDevicesBeta ? userMeDevicesBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeDevicesAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({userMeDevicesAlpha ? userMeDevicesAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(userMeDevicesAlpha ? userMeDevicesAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userMeDevicesBeta} newData={userMeDevicesAlpha} />
+            <JsonCompare oldData={userMeDevicesBeta ? userMeDevicesBeta.response : null} newData={userMeDevicesAlpha ? userMeDevicesAlpha.response : null} />
 
 
             {/* ==================================== ==================== PUT ==================== ==================================== */}
@@ -1932,19 +2783,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(putUserMeBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({putUserMeBeta ? putUserMeBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(putUserMeBeta ? putUserMeBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(putUserMeAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({putUserMeAlpha ? putUserMeAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(putUserMeAlpha ? putUserMeAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={putUserMeBeta} newData={putUserMeAlpha} />
+            <JsonCompare oldData={putUserMeBeta ? putUserMeBeta.response : null} newData={putUserMeAlpha ? putUserMeAlpha.response : null} />
 
             {/* ====================== ====================== API put user me password ======================  ====================== */}
 
@@ -1987,19 +2838,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMePasswordBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({putUserMePasswordBeta ? putUserMePasswordBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMePasswordBeta ? putUserMePasswordBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMePassowrdAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({putUserMePassowrdAlpha ? putUserMePassowrdAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMePassowrdAlpha ? putUserMePassowrdAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={putUserMePasswordBeta} newData={putUserMePassowrdAlpha} />
+            <JsonCompare oldData={putUserMePasswordBeta ? putUserMePasswordBeta.response : null} newData={putUserMePassowrdAlpha ? putUserMePassowrdAlpha.response : null} />
 
             {/* ====================== ====================== API put user me username ======================  ====================== */}
 
@@ -2042,19 +2893,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUsernameBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({putUserMeUsernameBeta ? putUserMeUsernameBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUsernameBeta ? putUserMeUsernameBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUsernameAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({putUserMeUsernameAlpha ? putUserMeUsernameAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUsernameAlpha ? putUserMeUsernameAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={putUserMeUsernameBeta} newData={putUserMeUsernameAlpha} />
+            <JsonCompare oldData={putUserMeUsernameBeta ? putUserMeUsernameBeta.response : null} newData={putUserMeUsernameAlpha ? putUserMeUsernameAlpha.response : null} />
 
             {/* ====================== ====================== API put user me social ======================  ====================== */}
 
@@ -2092,19 +2943,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUsernameBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({putUserMeUsernameBeta ? putUserMeUsernameBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUsernameBeta ? putUserMeUsernameBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUsernameAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({putUserMeUsernameAlpha ? putUserMeUsernameAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUsernameAlpha ? putUserMeUsernameAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={putUserMeUsernameBeta} newData={putUserMeUsernameAlpha} />
+            <JsonCompare oldData={putUserMeUsernameBeta ? putUserMeUsernameBeta.response : null} newData={putUserMeUsernameAlpha ? putUserMeUsernameAlpha.response : null} />
 
             {/* ====================== ====================== API post user me unregister cms ======================  ====================== */}
 
@@ -2133,19 +2984,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(postUserCmsUnregisterBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({postUserCmsUnregisterBeta ? postUserCmsUnregisterBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserCmsUnregisterBeta ? postUserCmsUnregisterBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(postUserCmsUnregisterAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({postUserCmsUnregisterAlpha ? postUserCmsUnregisterAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserCmsUnregisterAlpha ? postUserCmsUnregisterAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={postUserCmsUnregisterBeta} newData={postUserCmsUnregisterAlpha} />
+            <JsonCompare oldData={postUserCmsUnregisterBeta ? postUserCmsUnregisterBeta.response : null} newData={postUserCmsUnregisterAlpha ? postUserCmsUnregisterAlpha.response : null} />
 
             {/* ====================== ====================== API post user me unregister cms ======================  ====================== */}
 
@@ -2174,19 +3025,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(postUserCmsReregisterBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({postUserCmsReregisterBeta ? postUserCmsReregisterBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserCmsReregisterBeta ? postUserCmsReregisterBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(postUserCmsReregisterAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({postUserCmsReregisterAlpha ? postUserCmsReregisterAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserCmsReregisterAlpha ? postUserCmsReregisterAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={postUserCmsReregisterBeta} newData={postUserCmsReregisterAlpha} />
+            <JsonCompare oldData={postUserCmsReregisterBeta ? postUserCmsReregisterBeta.response : null} newData={postUserCmsReregisterAlpha ? postUserCmsReregisterAlpha.response : null} />
 
             {/* ====================== ====================== API put user me password ======================  ====================== */}
 
@@ -2229,19 +3080,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMePasswordV2Beta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({putUserMePasswordV2Beta ? putUserMePasswordV2Beta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMePasswordV2Beta ? putUserMePasswordV2Beta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMePasswordV2Alpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({putUserMePasswordV2Alpha ? putUserMePasswordV2Alpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMePasswordV2Alpha ? putUserMePasswordV2Alpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={putUserMePasswordV2Beta} newData={putUserMePasswordV2Alpha} />
+            <JsonCompare oldData={putUserMePasswordV2Beta ? putUserMePasswordV2Beta.response : null} newData={putUserMePasswordV2Alpha ? putUserMePasswordV2Alpha.response : null} />
 
             {/* ====================================POST==================================== */}
             {/* API get user me devices */}
@@ -2255,19 +3106,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(userBeta, null, 2)) : (<>  <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({userBeta ? userBeta.timeTaken : null} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(userBeta ? userBeta.response : null, null, 2)) : (<>  <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(userAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data ({userAlpha ? userAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(userAlpha ? userAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userBeta} newData={userAlpha} />
+            <JsonCompare oldData={userBeta ? userBeta.response : null} newData={userAlpha ? userAlpha.response : null} />
 
             {/* ====================== ====================== API post user me unregister ======================  ====================== */}
 
@@ -2326,19 +3177,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUnregisterBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({putUserMeUnregisterBeta ? putUserMeUnregisterBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUnregisterBeta ? putUserMeUnregisterBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUnregisterAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({putUserMeUnregisterAlpha ? putUserMeUnregisterAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserMeUnregisterAlpha ? putUserMeUnregisterAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={putUserMeUnregisterBeta} newData={putUserMeUnregisterAlpha} />
+            <JsonCompare oldData={putUserMeUnregisterBeta ? putUserMeUnregisterBeta.response : null} newData={putUserMeUnregisterAlpha ? putUserMeUnregisterAlpha.response : null} />
 
             {/* ====================== ====================== API post send verification email ======================  ====================== */}
 
@@ -2378,19 +3229,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(postVerificationSendEmailBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({postVerificationSendEmailBeta ? postVerificationSendEmailBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postVerificationSendEmailBeta ? postVerificationSendEmailBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(postVerificationSendEmailAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({postVerificationSendEmailAlpha ? postVerificationSendEmailAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postVerificationSendEmailAlpha ? postVerificationSendEmailAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={postVerificationSendEmailBeta} newData={postVerificationSendEmailAlpha} />
+            <JsonCompare oldData={postVerificationSendEmailBeta ? postVerificationSendEmailBeta.response : null} newData={postVerificationSendEmailAlpha ? postVerificationSendEmailAlpha.response : null} />
 
             {/* ====================== ====================== API put verifications ======================  ====================== */}
 
@@ -2435,19 +3286,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(putVerificationsBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({putVerificationsBeta ? putVerificationsBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putVerificationsBeta ? putVerificationsBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(putVerificationsAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({putVerificationsAlpha ? putVerificationsAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putVerificationsAlpha ? putVerificationsAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={putVerificationsBeta} newData={putVerificationsAlpha} />
+            <JsonCompare oldData={putVerificationsBeta ? putVerificationsBeta.response : null} newData={putVerificationsAlpha ? putVerificationsAlpha.response : null} />
 
             {/* ====================================== API post sign up ====================================== */}
             <hr id='wrapper_post_6' />
@@ -2533,19 +3384,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(postUserSignupBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({postUserSignupBeta ? postUserSignupBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserSignupBeta ? postUserSignupBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(postUserSignupAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({postUserSignupAlpha ? postUserSignupAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserSignupAlpha ? postUserSignupAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={postUserSignupBeta} newData={postUserSignupAlpha} />
+            <JsonCompare oldData={postUserSignupBeta ? postUserSignupBeta.response : null} newData={postUserSignupAlpha ? postUserSignupAlpha.response : null} />
 
 
             {/* ====================== ====================== API post send verification email ======================  ====================== */}
@@ -2591,19 +3442,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(postUserSendChangeEmailBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({postUserSendChangeEmailBeta ? postUserSendChangeEmailBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserSendChangeEmailBeta ? postUserSendChangeEmailBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(postUserSendChangeEmailAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({postUserSendChangeEmailAlpha ? postUserSendChangeEmailAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserSendChangeEmailAlpha ? postUserSendChangeEmailAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={postUserSendChangeEmailBeta} newData={postUserSendChangeEmailAlpha} />
+            <JsonCompare oldData={postUserSendChangeEmailBeta ? postUserSendChangeEmailBeta.response : null} newData={postUserSendChangeEmailAlpha ? postUserSendChangeEmailAlpha.response : null} />
 
             {/* ====================== ====================== API post send verification email ======================  ====================== */}
 
@@ -2653,19 +3504,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(postUserChangeEmailBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({postUserChangeEmailBeta ? postUserChangeEmailBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserChangeEmailBeta ? postUserChangeEmailBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(postUserChangeEmailAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({postUserChangeEmailAlpha ? postUserChangeEmailAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserChangeEmailAlpha ? postUserChangeEmailAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={postUserChangeEmailBeta} newData={postUserChangeEmailAlpha} />
+            <JsonCompare oldData={postUserChangeEmailBeta ? postUserChangeEmailBeta.response : null} newData={postUserChangeEmailAlpha ? postUserChangeEmailAlpha.response : null} />
 
             {/* ====================== ====================== API post send verification email ======================  ====================== */}
 
@@ -2705,19 +3556,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(postUserSendResetPasswordBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({postUserSendResetPasswordBeta ? postUserSendResetPasswordBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserSendResetPasswordBeta ? postUserSendResetPasswordBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(postUserSendResetPasswordAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({postUserSendResetPasswordAlpha ? postUserSendResetPasswordAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(postUserSendResetPasswordAlpha ? postUserSendResetPasswordAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={postUserSendResetPasswordBeta} newData={postUserSendResetPasswordAlpha} />
+            <JsonCompare oldData={postUserSendResetPasswordBeta ? postUserSendResetPasswordBeta.response : null} newData={postUserSendResetPasswordAlpha ? postUserSendResetPasswordAlpha.response : null} />
 
             {/* ====================== ====================== API post send verification email ======================  ====================== */}
 
@@ -2762,19 +3613,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(putUserResetPasswordBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({putUserResetPasswordBeta ? putUserResetPasswordBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserResetPasswordBeta ? putUserResetPasswordBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(putUserResetPasswordAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({putUserResetPasswordAlpha ? putUserResetPasswordAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(putUserResetPasswordAlpha ? putUserResetPasswordAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={putUserResetPasswordBeta} newData={putUserResetPasswordAlpha} />
+            <JsonCompare oldData={putUserResetPasswordBeta ? putUserResetPasswordBeta.response : null} newData={putUserResetPasswordAlpha ? putUserResetPasswordAlpha.response : null} />
 
             {/* ====================================DEL==================================== */}
 
@@ -2805,19 +3656,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(delUserMeSocialBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({delUserMeSocialBeta ? delUserMeSocialBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(delUserMeSocialBeta ? delUserMeSocialBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(delUserMeSocialAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({delUserMeSocialAlpha ? delUserMeSocialAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(delUserMeSocialAlpha ? delUserMeSocialAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={delUserMeSocialBeta} newData={delUserMeSocialAlpha} />
+            <JsonCompare oldData={delUserMeSocialBeta ? delUserMeSocialBeta.response : null} newData={delUserMeSocialAlpha ? delUserMeSocialAlpha.response : null} />
 
             {/* ====================== ====================== API dell user bye ======================  ====================== */}
 
@@ -2845,19 +3696,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(delUserByeBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({delUserByeBeta ? delUserByeBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(delUserByeBeta ? delUserByeBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(delUserByeAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({delUserByeAlpha ? delUserByeAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(delUserByeAlpha ? delUserByeAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={delUserByeBeta} newData={delUserByeAlpha} />
+            <JsonCompare oldData={delUserByeBeta ? delUserByeBeta.response : null} newData={delUserByeAlpha ? delUserByeAlpha.response : null} />
 
             {/* ====================== ====================== API dell user bye ======================  ====================== */}
 
@@ -2885,19 +3736,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(delUserDevicesAllBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({delUserDevicesAllBeta ? delUserDevicesAllBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(delUserDevicesAllBeta ? delUserDevicesAllBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(delUserDevicesAllAlpha, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({delUserDevicesAllAlpha ? delUserDevicesAllAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(delUserDevicesAllAlpha ? delUserDevicesAllAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={delUserDevicesAllBeta} newData={delUserDevicesAllAlpha} />
+            <JsonCompare oldData={delUserDevicesAllBeta ? delUserDevicesAllBeta.response : null} newData={delUserDevicesAllAlpha ? delUserDevicesAllAlpha.response : null} />
 
             {/* ====================== ====================== API put verifications ======================  ====================== */}
 
@@ -2937,19 +3788,19 @@ function App() {
 
             <div className="origin-data pt-3">
               <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(delUserDevicesByIdBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({delUserDevicesByIdBeta ? delUserDevicesByIdBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(delUserDevicesByIdBeta ? delUserDevicesByIdBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
-                <p className="title">- Alpha data:</p>
-                <pre>{!isLoadingRequest ? (JSON.stringify(delUserDevicesByIdBeta, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <p className="title">- Alpha data:({delUserDevicesByIdAlpha ? delUserDevicesByIdAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingRequest ? (JSON.stringify(delUserDevicesByIdAlpha ? delUserDevicesByIdAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={delUserDevicesByIdBeta} newData={delUserDevicesByIdBeta} />
+            <JsonCompare oldData={delUserDevicesByIdBeta ? delUserDevicesByIdBeta.response : null} newData={delUserDevicesByIdAlpha ? delUserDevicesByIdAlpha.response : null} />
 
             {/* ====================== ====================== END OF API DEL ======================  ====================== */}
 
@@ -2960,59 +3811,59 @@ function App() {
               <div className='btn-group-vertical wrapper_sidebar btn-light' style={{ width: 240, backgroundColor: '#f8f9fa', borderRadius: 10 }}>
                 <button type="button" className="btn text-danger" onClick={clickView} style={{ fontSize: '.74rem' }} data-bs-toggle="tooltip" title="Up">API</button>
                 <div style={{ height: "535px", overflowY: "scroll" }}>
-                  <a href={`#wrapper_get_1`}><button type="button" className="btn btn-md " style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeAlpha, userMeBeta)) ? "black" : "red" }}> v2/users/{"{me}"}</span></button></a>
-                  <a href={`#wrapper_get_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeMetaAlpha, userMeMetaBeta)) ? "black" : "red" }}>  v2/users/{"{me}"}/meta </span> </button></a>
-                  <a href={`#wrapper_get_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeCohortAlpha, userMeCohortBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/cohort </span> </button></a>
-                  <a href={`#wrapper_get_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeSubscriptionAlpha, userMeSubscriptionBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/subscription </span> </button></a>
-                  <a href={`#wrapper_get_5`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeCertificationsAlpha, userMeCertificationsBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/certifications </span> </button></a>
-                  <a href={`#wrapper_get_6`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userIdentityAlpha, userIdentityBeta)) ? "black" : "red" }}> v2/users/identity/{"{access_token}"} </span> </button></a>
-                  <a href={`#wrapper_get_7`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeConnectionsSocialAlpha, userMeConnectionsSocialBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/connections/{socialType} </span> </button></a>
-                  <a href={`#wrapper_get_8`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeGenresAlpha, userMeGenresBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/genres </span> </button></a>
-                  <a href={`#wrapper_get_9`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeBalanceAlpha, userMeBalanceBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/balance </span> </button></a>
-                  <a href={`#wrapper_get_10`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeGaAlpha, userMeGaBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/ga </span> </button></a>
-                  <a href={`#wrapper_get_11`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeBadgeCountAlpha, userMeBadgeCountBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/badge-counts </span> </button></a>
-                  <a href={`#wrapper_get_12`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMePresentsAlpha, userMePresentsBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/presents </span> </button></a>
-                  <a href={`#wrapper_get_13`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeLibraryAlpha, userMeLibraryBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/library/filters </span> </button></a>
-                  <a href={`#wrapper_get_15`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeDailyFreeAlpha, userMeDailyFreeBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/daily/recent </span> </button></a>
-                  <a href={`#wrapper_get_16`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeRecentsAlpha, userMeRecentsBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/recents </span> </button></a>
-                  <a href={`#wrapper_get_17`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeChargesAlpha, userMeChargesBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/charges </span> </button></a>
-                  <a href={`#wrapper_get_18`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(getUserCmsSearchAlpha, getUserCmsSearchBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/username?limit=10 </span> </button></a>
+                  <a href={`#wrapper_get_1`}><button type="button" className="btn btn-md " style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeAlpha ? userMeAlpha : null, userMeBeta ? userMeBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}</span></button></a>
+                  <a href={`#wrapper_get_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeMetaAlpha ? userMeMetaAlpha : null , userMeMetaBeta ? userMeMetaAlpha : null)) ? "black" : "red" }}>  v2/users/{"{me}"}/meta </span> </button></a>
+                  <a href={`#wrapper_get_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeCohortAlpha ? userMeCohortAlpha : null, userMeCohortBeta ? userMeCohortBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/cohort </span> </button></a>
+                  <a href={`#wrapper_get_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeSubscriptionAlpha ? userMeSubscriptionAlpha : null, userMeSubscriptionBeta ? userMeSubscriptionBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/subscription </span> </button></a>
+                  <a href={`#wrapper_get_5`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeCertificationsAlpha ? userMeCertificationsAlpha : null, userMeCertificationsBeta ? userMeCertificationsBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/certifications </span> </button></a>
+                  <a href={`#wrapper_get_6`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userIdentityAlpha ? userIdentityAlpha : null, userIdentityBeta ? userIdentityBeta : null)) ? "black" : "red" }}> v2/users/identity/{"{access_token}"} </span> </button></a>
+                  <a href={`#wrapper_get_7`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeConnectionsSocialAlpha ? userMeMetaBeta : null, userMeConnectionsSocialBeta ? userMeMetaBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/connections/{socialType} </span> </button></a>
+                  <a href={`#wrapper_get_8`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeGenresAlpha ? userMeGenresAlpha : null, userMeGenresBeta ? userMeGenresBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/genres </span> </button></a>
+                  <a href={`#wrapper_get_9`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeBalanceAlpha ? userMeBalanceAlpha : null, userMeBalanceBeta ? userMeBalanceBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/balance </span> </button></a>
+                  <a href={`#wrapper_get_10`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeGaAlpha ? userMeGaAlpha : null, userMeGaBeta ? userMeGaBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/ga </span> </button></a>
+                  <a href={`#wrapper_get_11`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeBadgeCountAlpha ? userMeBadgeCountAlpha : null, userMeBadgeCountBeta ? userMeBadgeCountBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/badge-counts </span> </button></a>
+                  <a href={`#wrapper_get_12`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMePresentsAlpha ? userMePresentsAlpha : null, userMePresentsBeta ? userMePresentsBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/presents </span> </button></a>
+                  <a href={`#wrapper_get_13`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeLibraryAlpha ? userMeLibraryAlpha : null, userMeLibraryBeta ? userMeLibraryBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/library/filters </span> </button></a>
+                  <a href={`#wrapper_get_15`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeDailyFreeAlpha ? userMeDailyFreeAlpha : null, userMeDailyFreeBeta ? userMeDailyFreeBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/daily/recent </span> </button></a>
+                  <a href={`#wrapper_get_16`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeRecentsAlpha ? userMeRecentsAlpha : null, userMeRecentsBeta ? userMeRecentsBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/recents </span> </button></a>
+                  <a href={`#wrapper_get_17`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeChargesAlpha ? userMeChargesAlpha : null, userMeChargesBeta ? userMeChargesBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/charges </span> </button></a>
+                  <a href={`#wrapper_get_18`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(getUserCmsSearchAlpha ? getUserCmsSearchAlpha : null, getUserCmsSearchBeta ? getUserCmsSearchBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/username?limit=10 </span> </button></a>
 
-                  <a href={`#wrapper_get_19`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeInvitationsAlpha, userMeInvitationsBeta)) ? "black" : "red" }}> /users/{"{me}"}/invitations </span> </button></a>
-                  <a href={`#wrapper_get_20`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeV1Alpha, userMeV1Beta)) ? "black" : "red" }}> /users/{"{me}"} </span> </button></a>
-                  <a href={`#wrapper_get_21`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeMetaV1Alpha, userMeMetaV1Beta)) ? "black" : "red" }}> /users/{"{me}"}/meta </span> </button></a>
-                  <a href={`#wrapper_get_22`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeDevicesAlpha, userMeDevicesBeta)) ? "black" : "red" }}> /users/{"{me}"}/devices </span> </button></a>
+                  <a href={`#wrapper_get_19`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeInvitationsAlpha ? userMeInvitationsAlpha : null, userMeInvitationsBeta ? userMeInvitationsBeta : null)) ? "black" : "red" }}> /users/{"{me}"}/invitations </span> </button></a>
+                  <a href={`#wrapper_get_20`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeV1Alpha ? userMeV1Alpha : null, userMeV1Beta ? userMeV1Beta : null)) ? "black" : "red" }}> /users/{"{me}"} </span> </button></a>
+                  <a href={`#wrapper_get_21`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeMetaV1Alpha ? userMeMetaV1Alpha : null, userMeMetaV1Beta ? userMeMetaV1Beta : null)) ? "black" : "red" }}> /users/{"{me}"}/meta </span> </button></a>
+                  <a href={`#wrapper_get_22`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeDevicesAlpha ? userMeDevicesAlpha : null, userMeDevicesBeta ? userMeDevicesBeta : null)) ? "black" : "red" }}> /users/{"{me}"}/devices </span> </button></a>
 
                   {/* ==================================================================================== PUT ====================================================================================*/}
 
-                  <a href={`#wrapper_put_1`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeAlpha, putUserMeBeta)) ? "black" : "red" }}> v2/users/{"{me}"} </span></button></a>
-                  <a href={`#wrapper_put_5`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putVerificationsAlpha, putVerificationsBeta)) ? "black" : "red" }}> v2/verifications</span> </button></a>
-                  <a href={`#wrapper_put_6`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(postUserCmsUnregisterAlpha, postUserCmsUnregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/unregister {"(cms)"}</span> </button></a>
-                  <a href={`#wrapper_put_7`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(postUserCmsReregisterAlpha, postUserCmsReregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/reregister {"(cms)"}</span> </button></a>
-                  <a href={`#wrapper_put_8`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(postUserChangeEmailAlpha, postUserChangeEmailBeta)) ? "black" : "red" }}> /v2/users/me/email</span> </button></a>
-                  <a href={`#wrapper_put_9`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMePasswordV2Alpha, putUserMePasswordV2Beta)) ? "black" : "red" }}> /v2/users/me/password</span> </button></a>
-                  <a href={`#wrapper_put_10`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserResetPasswordAlpha, putUserResetPasswordBeta)) ? "black" : "red" }}> /v2/users/password/reset</span> </button></a>
+                  <a href={`#wrapper_put_1`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeAlpha ? putUserMeAlpha : null, putUserMeBeta ? putUserMeBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"} </span></button></a>
+                  <a href={`#wrapper_put_5`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putVerificationsAlpha ? putVerificationsAlpha : null, putVerificationsBeta ? putVerificationsBeta : null)) ? "black" : "red" }}> v2/verifications</span> </button></a>
+                  <a href={`#wrapper_put_6`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(postUserCmsUnregisterAlpha ? postUserCmsUnregisterAlpha : null, postUserCmsUnregisterBeta ? postUserCmsUnregisterBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/unregister {"(cms)"}</span> </button></a>
+                  <a href={`#wrapper_put_7`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(postUserCmsReregisterAlpha ? postUserCmsReregisterAlpha : null, postUserCmsReregisterBeta ? postUserCmsReregisterBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/reregister {"(cms)"}</span> </button></a>
+                  <a href={`#wrapper_put_8`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(postUserChangeEmailAlpha ? postUserChangeEmailAlpha : null, postUserChangeEmailBeta ? postUserChangeEmailBeta : null)) ? "black" : "red" }}> /v2/users/me/email</span> </button></a>
+                  <a href={`#wrapper_put_9`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMePasswordV2Alpha ? putUserMePasswordV2Alpha : null, putUserMePasswordV2Beta ? putUserMePasswordV2Beta : null)) ? "black" : "red" }}> /v2/users/me/password</span> </button></a>
+                  <a href={`#wrapper_put_10`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserResetPasswordAlpha ? putUserResetPasswordAlpha : null, putUserResetPasswordBeta ? putUserResetPasswordBeta : null)) ? "black" : "red" }}> /v2/users/password/reset</span> </button></a>
 
-                  <a href={`#wrapper_put_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMePassowrdAlpha, putUserMePasswordBeta)) ? "black" : "red" }}> /users/{"{me}"}/password</span> </button></a>
-                  <a href={`#wrapper_put_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeAlpha, putUserMeBeta)) ? "black" : "red" }}> /users/{"{me}"}/username</span> </button></a>
-                  <a href={`#wrapper_put_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeSocialAlpha, putUserMeSocialBeta)) ? "black" : "red" }}> /users/{"{me}"}/connect/{socialTypePut}</span> </button></a>
+                  <a href={`#wrapper_put_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMePassowrdAlpha ? putUserMePassowrdAlpha : null, putUserMePasswordBeta ? putUserMePasswordBeta : null)) ? "black" : "red" }}> /users/{"{me}"}/password</span> </button></a>
+                  <a href={`#wrapper_put_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeAlpha ? putUserMeAlpha : null, putUserMeBeta ? putUserMeBeta : null)) ? "black" : "red" }}> /users/{"{me}"}/username</span> </button></a>
+                  <a href={`#wrapper_put_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeSocialAlpha ? putUserMeSocialAlpha : null, putUserMeSocialBeta ? putUserMeSocialBeta : null)) ? "black" : "red" }}> /users/{"{me}"}/connect/{socialTypePut}</span> </button></a>
 
                   {/* ==================================================================================== POST ====================================================================================*/}
 
-                  <a href={`#wrapper_post_1`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(userAlpha, userBeta)) ? "black" : "red" }}> /users/signin</span> </button></a>
-                  <a href={`#wrapper_post_6`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postUserSignupAlpha, postUserSignupBeta)) ? "black" : "red" }}> /users/signup</span> </button></a>
+                  <a href={`#wrapper_post_1`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(userAlpha ? userAlpha : null, userBeta ? userBeta : null)) ? "black" : "red" }}> /users/signin</span> </button></a>
+                  <a href={`#wrapper_post_6`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postUserSignupAlpha ? postUserSignupAlpha : null, postUserSignupBeta ? postUserSignupBeta : null)) ? "black" : "red" }}> /users/signup</span> </button></a>
 
-                  <a href={`#wrapper_post_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(putUserMeUnregisterAlpha, putUserMeUnregisterBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/unregister</span> </button></a>
-                  <a href={`#wrapper_post_5`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postVerificationSendEmailAlpha, postVerificationSendEmailBeta)) ? "black" : "red" }}> v2/verifications/send-email</span> </button></a>
-                  <a href={`#wrapper_post_7`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postUserSendChangeEmailAlpha, postUserSendChangeEmailBeta)) ? "black" : "red" }}> /v2/verifications/me/send-change-mail</span> </button></a>
-                  <a href={`#wrapper_post_8`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postUserSendResetPasswordAlpha, postUserSendResetPasswordBeta)) ? "black" : "red" }}> /v2/users/me/password/reset</span> </button></a>
+                  <a href={`#wrapper_post_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(putUserMeUnregisterAlpha ? putUserMeUnregisterAlpha : null, putUserMeUnregisterBeta ? putUserMeUnregisterBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/unregister</span> </button></a>
+                  <a href={`#wrapper_post_5`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postVerificationSendEmailAlpha ? postVerificationSendEmailAlpha : null, postVerificationSendEmailBeta ? postVerificationSendEmailBeta : null)) ? "black" : "red" }}> v2/verifications/send-email</span> </button></a>
+                  <a href={`#wrapper_post_7`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postUserSendChangeEmailAlpha ? postUserSendChangeEmailAlpha : null, postUserSendChangeEmailBeta ? postUserSendChangeEmailBeta : null)) ? "black" : "red" }}> /v2/verifications/me/send-change-mail</span> </button></a>
+                  <a href={`#wrapper_post_8`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postUserSendResetPasswordAlpha ? postUserSendResetPasswordAlpha : null, postUserSendResetPasswordBeta ? postUserSendResetPasswordBeta : null)) ? "black" : "red" }}> /v2/users/me/password/reset</span> </button></a>
 
                   {/* ==================================================================================== DEL ====================================================================================*/}
 
-                  <a href={`#wrapper_del_1`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-danger'>DEL &#160; </span> <span style={{ color: (isEqual(delUserMeSocialAlpha, delUserMeSocialBeta)) ? "black" : "red" }}> v2/users/{"{me}"}/connections/{socialTypeDel} </span></button></a>
-                  <a href={`#wrapper_del_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-danger'>DEL &#160; </span> <span style={{ color: (isEqual(delUserByeAlpha, delUserByeBeta)) ? "black" : "red" }}> v2/users/bye </span></button></a>
-                  <a href={`#wrapper_del_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-danger'>DEL &#160; </span> <span style={{ color: (isEqual(delUserDevicesAllAlpha, delUserDevicesAllBeta)) ? "black" : "red" }}> users/{"{me}"}/devices/all </span></button></a>
-                  <a href={`#wrapper_del_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-danger'>DEL &#160; </span> <span style={{ color: (isEqual(delUserDevicesByIdAlpha, delUserDevicesByIdBeta)) ? "black" : "red" }}> users/{"{me}"}/devices/deviceId </span></button></a>
+                  <a href={`#wrapper_del_1`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-danger'>DEL &#160; </span> <span style={{ color: (isEqual(delUserMeSocialAlpha ? delUserMeSocialAlpha : null, delUserMeSocialBeta ? delUserMeSocialBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/connections/{socialTypeDel} </span></button></a>
+                  <a href={`#wrapper_del_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-danger'>DEL &#160; </span> <span style={{ color: (isEqual(delUserByeAlpha ? delUserByeAlpha : null, delUserByeBeta ? delUserByeBeta : null)) ? "black" : "red" }}> v2/users/bye </span></button></a>
+                  <a href={`#wrapper_del_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-danger'>DEL &#160; </span> <span style={{ color: (isEqual(delUserDevicesAllAlpha ? delUserDevicesAllAlpha : null, delUserDevicesAllBeta ? delUserDevicesAllBeta : null)) ? "black" : "red" }}> users/{"{me}"}/devices/all </span></button></a>
+                  <a href={`#wrapper_del_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-danger'>DEL &#160; </span> <span style={{ color: (isEqual(delUserDevicesByIdAlpha ? delUserDevicesByIdAlpha : null, delUserDevicesByIdBeta ? delUserDevicesByIdBeta : null)) ? "black" : "red" }}> users/{"{me}"}/devices/deviceId </span></button></a>
 
                 </div>
               </div>
