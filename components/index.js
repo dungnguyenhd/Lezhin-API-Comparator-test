@@ -2735,56 +2735,6 @@ function App() {
             <p className="title">- The merged different:</p>
             <JsonCompare oldData={userMeChargesBeta ? userMeChargesBeta.response : null} newData={userMeChargesAlpha ? userMeChargesAlpha.response : null} />
 
-            {/* ====================== ====================== API get search user cms ======================  ====================== */}
-
-            <hr id='wrapper_get_18' />
-
-            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
-              {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/username?limit=10 &#160;
-              <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#searchUsersCmsModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
-
-              <div className="modal fade" id="searchUsersCmsModal" tabIndex="-1" aria-labelledby="searchUsersCmsModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h5 className="modal-title" id="searchUsersCmsModalLabel">GET v2/users/username?limit=10</h5>
-                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div className="modal-body">
-                      <form>
-                        <div className="row align-items-center">
-                          <span>
-                            <label htmlFor="" className="col-form-label">username or userId&#160;</label>
-                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='username' onChange={(e) => handlePutChangeValue1(e, 6)} defaultValue={usernameSearch ? usernameSearch : null} />
-                          </span>
-                        </div>
-                      </form>
-                    </div>
-                    <div className="modal-footer">
-                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 4)}>Send Request</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="origin-data pt-3">
-              <div className="old-data">
-                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({getUserCmsSearchBeta ? getUserCmsSearchBeta.timeTaken : 'NaN'} ms)</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(getUserCmsSearchBeta ? getUserCmsSearchBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  <span className='ps-2'>Calling API</span></>)}</pre>
-              </div>
-              <div className="new-data">
-                <p className="title">- Alpha data:({getUserCmsSearchAlpha ? getUserCmsSearchAlpha.timeTaken : 'NaN'} ms)</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(getUserCmsSearchAlpha ? getUserCmsSearchAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  <span className='ps-2'>Calling API</span></>)}</pre>
-              </div>
-            </div>
-
-            <p className="title">- The merged different:</p>
-            <JsonCompare oldData={getUserCmsSearchBeta ? getUserCmsSearchBeta.response : null} newData={getUserCmsSearchAlpha ? getUserCmsSearchAlpha.response : null} />
-
             {/* API get user me invitations */}
             <hr id='wrapper_get_19' />
 
@@ -3981,6 +3931,58 @@ function App() {
 
 
             {/* ====================== ====================== API get search user cms ======================  ====================== */}
+
+            {/* ====================== ====================== API get search user cms ======================  ====================== */}
+
+            <hr id='wrapper_get_18' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> v2/users/username?limit=10 &#160;
+              <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#searchUsersCmsModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="searchUsersCmsModal" tabIndex="-1" aria-labelledby="searchUsersCmsModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="searchUsersCmsModalLabel">GET v2/users/username?limit=10</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                      <form>
+                        <div className="row align-items-center">
+                          <span>
+                            <label htmlFor="" className="col-form-label">username or userId&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='username' onChange={(e) => handlePutChangeValue1(e, 6)} defaultValue={usernameSearch ? usernameSearch : null} />
+                          </span>
+                        </div>
+                      </form>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 4)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({getUserCmsSearchBeta ? getUserCmsSearchBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(getUserCmsSearchBeta ? getUserCmsSearchBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:({getUserCmsSearchAlpha ? getUserCmsSearchAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(getUserCmsSearchAlpha ? getUserCmsSearchAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={getUserCmsSearchBeta ? getUserCmsSearchBeta.response : null} newData={getUserCmsSearchAlpha ? getUserCmsSearchAlpha.response : null} />
+
+            {/* ============================================================================================================================= */}
 
             <hr id='wrapper_get_23' />
 
