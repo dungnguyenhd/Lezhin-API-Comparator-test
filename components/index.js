@@ -25,6 +25,10 @@ function App() {
   const [putUserSocial, setPutUserSocial] = useState({ accessToken: null });
   const [putUnregister, setPutUnregister] = useState(null);
   const [usernameSearch, setUsernameSearch] = useState(null);
+  const [usernameInactiveSearch, setUsernameInactiveSearch] = useState(null);
+  const [refundCmsSearch, setRefundCmsSearch] = useState({ userId: null, refundId: null });
+  const [invitationCmsSearch, setInvitationCmsSearch] = useState({ userId: null, invitationId: null });
+  const [deviceCmsSearch, setDeviceCmsSearch] = useState({ userId: null, deviceId: null });
   const [putVerificationsDataAlpha, setPutVerificationsDataAlpha] = useState({ email: verificationEmail, token: null });
   const [putVerificationsDataBeta, setPutVerificationsDataBeta] = useState({ email: verificationEmail, token: null });
   const [postSignupAlpha, setPostSignupApha] = useState({ agreements: { marketingEmail: false, collectingBirth: false }, birthDate: null, gender: null, account: { username: verificationEmail, password: null }, verificationToken: putVerificationsDataAlpha.token });
@@ -1001,6 +1005,10 @@ function App() {
   const postUserChangeEmailBeta = JSON.parse(localStorage.getItem('postUserChangeEmailBeta'));
   const postUserSendResetPasswordBeta = JSON.parse(localStorage.getItem('postUserSendResetPasswordBeta'));
   const putUserResetPasswordBeta = JSON.parse(localStorage.getItem('putUserResetPasswordBeta'));
+  const getUserInactiveCmsSearchUserBeta = JSON.parse(localStorage.getItem('getUserInactiveCmsSearchUserBeta'));
+  const getRefundsCmsBeta = JSON.parse(localStorage.getItem('getRefundsCmsBeta'));
+  const getInvitationsCmsBeta = JSON.parse(localStorage.getItem('getInvitationsCmsBeta'));
+  const getDevicesCmsBeta = JSON.parse(localStorage.getItem('getDevicesCmsBeta'));
 
   // ------------------------
 
@@ -1046,6 +1054,10 @@ function App() {
   const postUserChangeEmailAlpha = JSON.parse(localStorage.getItem('postUserChangeEmailAlpha'));
   const postUserSendResetPasswordAlpha = JSON.parse(localStorage.getItem('postUserSendResetPasswordAlpha'));
   const putUserResetPasswordAlpha = JSON.parse(localStorage.getItem('putUserResetPasswordAlpha'));
+  const getUserInactiveCmsSearchUserAlpha = JSON.parse(localStorage.getItem('getUserInactiveCmsSearchUserAlpha'));
+  const getRefundsCmsAlpha = JSON.parse(localStorage.getItem('getRefundsCmsAlpha'));
+  const getInvitationsCmsAlpha = JSON.parse(localStorage.getItem('getInvitationsCmsAlpha'));
+  const getDevicesCmsAlpha = JSON.parse(localStorage.getItem('getDevicesCmsAlpha'));
 
   const verificationEmail = localStorage.getItem('verificationEmail');
   // handle request ===================================================================================================================================
@@ -1157,6 +1169,24 @@ function App() {
         data[name] = value;
         setPutUserResetPasswordData(data);
         break;
+      case 16:
+        setUsernameInactiveSearch(value);
+        break;
+      case 17:
+        data = { ...refundCmsSearch };
+        data[name] = value;
+        setRefundCmsSearch(data);
+        break;
+      case 18:
+        data = { ...invitationCmsSearch };
+        data[name] = value;
+        setInvitationCmsSearch(data);
+        break;
+      case 19:
+        data = { ...deviceCmsSearch };
+        data[name] = value;
+        deviceCmsSearch(data);
+        break;
       default:
         break;
     }
@@ -1212,7 +1242,7 @@ function App() {
   }
 
   const handleSelectEnv = (e) => {
-    switch(e.target.value) {
+    switch (e.target.value) {
       case 'beta':
         setEnv(e.target.value)
         compareService.switchEnvironment(1);
@@ -1784,6 +1814,150 @@ function App() {
             };
             localStorage.setItem('putUserMePasswordV2Alpha', JSON.stringify(data));
             setIsLoadingRequest(false);
+          })
+          break;
+        case 20:
+          setIsLoadingRequest(true);
+
+          // call get search user Alpha
+          compareService.getUserInactiveCmsSearchUserAlpha(adminAlpha.access_token, usernameInactiveSearch).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getUserInactiveCmsSearchUserAlpha', JSON.stringify(data));
+          }).catch((err) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getUserInactiveCmsSearchUserAlpha', JSON.stringify(data));
+          })
+
+          compareService.getUserInactiveCmsSearchUserBeta(adminBeta.access_token, usernameInactiveSearch).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getUserInactiveCmsSearchUserBeta', JSON.stringify(data));
+          }).catch((err) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getUserInactiveCmsSearchUserBeta', JSON.stringify(data));
+          })
+          break;
+        case 21:
+          setIsLoadingRequest(true);
+
+          // call get search user Alpha
+          compareService.getRefundsCmsAlpha(adminAlpha.access_token, refundCmsSearch.refundId, refundCmsSearch.userId).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getRefundsCmsAlpha', JSON.stringify(data));
+          }).catch((err) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getRefundsCmsAlpha', JSON.stringify(data));
+          })
+
+          compareService.getRefundsCmsBeta(adminBeta.access_token, refundCmsSearch.refundId, refundCmsSearch.userId).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getRefundsCmsBeta', JSON.stringify(data));
+          }).catch((err) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getRefundsCmsBeta', JSON.stringify(data));
+          })
+          break;
+        case 22:
+          setIsLoadingRequest(true);
+
+          // call get search user Alpha
+          compareService.getInvitationsCmsAlpha(adminAlpha.access_token, invitationCmsSearch.invitationId, invitationCmsSearch.userId).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getInvitationsCmsAlpha', JSON.stringify(data));
+          }).catch((err) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getInvitationsCmsAlpha', JSON.stringify(data));
+          })
+
+          compareService.getInvitationsCmsBeta(adminBeta.access_token, invitationCmsSearch.invitationId, invitationCmsSearch.userId).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getInvitationsCmsBeta', JSON.stringify(data));
+          }).catch((err) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getInvitationsCmsBeta', JSON.stringify(data));
+          })
+          break;
+        case 23:
+          setIsLoadingRequest(true);
+
+          // call get search user Alpha
+          compareService.getDevicesCmsAlpha(adminAlpha.access_token, deviceCmsSearch.deviceId, deviceCmsSearch.userId).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getDevicesCmsAlpha', JSON.stringify(data));
+          }).catch((err) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getDevicesCmsAlpha', JSON.stringify(data));
+          })
+
+          compareService.getInvitationsCmsBeta(adminBeta.access_token, deviceCmsSearch.deviceId, deviceCmsSearch.userId).then((res) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: res.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getInvitationsCmsBeta', JSON.stringify(data));
+          }).catch((err) => {
+            const timeTaken = (new Date()) - start;
+            const data = {
+              response: err.response.data,
+              timeTaken: timeTaken,
+            };
+            localStorage.setItem('getInvitationsCmsBeta', JSON.stringify(data));
           })
           break;
         default:
@@ -3804,6 +3978,229 @@ function App() {
 
             {/* ====================== ====================== END OF API DEL ======================  ====================== */}
 
+
+            {/* ====================== ====================== API get search user cms ======================  ====================== */}
+
+            <hr id='wrapper_get_23' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /v2/inactive_users/user_name?limit=10 &#160;
+              <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#searchInactiveUsersCmsModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="searchInactiveUsersCmsModal" tabIndex="-1" aria-labelledby="searchInactiveUsersCmsModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="searchInactiveUsersCmsModalLabel">GET /v2/inactive_users/user_name?limit=10</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                      <form>
+                        <div className="row align-items-center">
+                          <span>
+                            <label htmlFor="" className="col-form-label">username or userId&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='username' onChange={(e) => handlePutChangeValue1(e, 16)} defaultValue={usernameSearch ? usernameSearch : null} />
+                          </span>
+                        </div>
+                      </form>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 20)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({getUserInactiveCmsSearchUserBeta ? getUserInactiveCmsSearchUserBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(getUserInactiveCmsSearchUserBeta ? getUserInactiveCmsSearchUserBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:({getUserInactiveCmsSearchUserAlpha ? getUserInactiveCmsSearchUserAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(getUserInactiveCmsSearchUserAlpha ? getUserInactiveCmsSearchUserAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={getUserInactiveCmsSearchUserBeta ? getUserInactiveCmsSearchUserBeta.response : null} newData={getUserInactiveCmsSearchUserAlpha ? getUserInactiveCmsSearchUserAlpha.response : null} />
+
+            {/* ====================== ====================== API get search user cms ======================  ====================== */}
+
+            <hr id='wrapper_get_24' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /v2/refunds?_=refundId&limit=10&state=&userId=userId &#160;
+              <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#searchRefundCmsModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="searchRefundCmsModal" tabIndex="-1" aria-labelledby="searchRefundCmsModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="searchRefundCmsModalLabel">GET /v2/refunds?_=refundId&limit=10&state=&userId=userId</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                      <form>
+                        <div className="row align-items-center">
+                          <span>
+                            <label htmlFor="" className="col-form-label">userId&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userId' onChange={(e) => handlePutChangeValue1(e, 17)} defaultValue={refundCmsSearch ? refundCmsSearch.userId : null} />
+                          </span>
+                        </div>
+
+                        <div className="row align-items-center">
+                          <span>
+                            <label htmlFor="" className="col-form-label">refundId&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='refundId' onChange={(e) => handlePutChangeValue1(e, 17)} defaultValue={refundCmsSearch ? refundCmsSearch.refundId : null} />
+                          </span>
+                        </div>
+                      </form>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 21)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({getRefundsCmsBeta ? getRefundsCmsBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(getRefundsCmsBeta ? getRefundsCmsBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:({getRefundsCmsAlpha ? getRefundsCmsAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(getRefundsCmsAlpha ? getRefundsCmsAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={getRefundsCmsBeta ? getRefundsCmsBeta.response : null} newData={getRefundsCmsAlpha ? getRefundsCmsAlpha.response : null} />
+
+            {/* ====================== ====================== API get search user cms ======================  ====================== */}
+
+            <hr id='wrapper_get_25' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /v2/users/userId/invitations?_=invitationId&limit=10 &#160;
+              <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#searchInviteCmsModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="searchInviteCmsModal" tabIndex="-1" aria-labelledby="searchInviteCmsModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="searchInviteCmsModalLabel">GET /v2/users/userId/invitations?_=invitationId&limit=10</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                      <form>
+                        <div className="row align-items-center">
+                          <span>
+                            <label htmlFor="" className="col-form-label">userId&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userId' onChange={(e) => handlePutChangeValue1(e, 18)} defaultValue={invitationCmsSearch ? invitationCmsSearch.userId : null} />
+                          </span>
+                        </div>
+
+                        <div className="row align-items-center">
+                          <span>
+                            <label htmlFor="" className="col-form-label">invitationId&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='invitationId' onChange={(e) => handlePutChangeValue1(e, 18)} defaultValue={invitationCmsSearch ? invitationCmsSearch.refundId : null} />
+                          </span>
+                        </div>
+                      </form>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 22)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({getInvitationsCmsBeta ? getInvitationsCmsBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(getInvitationsCmsBeta ? getInvitationsCmsBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:({getInvitationsCmsAlpha ? getInvitationsCmsAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(getInvitationsCmsAlpha ? getInvitationsCmsAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={getInvitationsCmsBeta ? getInvitationsCmsBeta.response : null} newData={getInvitationsCmsAlpha ? getInvitationsCmsAlpha.response : null} />
+
+            {/* ====================== ====================== API get search user cms ======================  ====================== */}
+
+            <hr id='wrapper_get_26' />
+
+            <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
+              {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /v2/users/userId/devices?_=deviceId &#160;
+              <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#searchDeviceCmsModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
+
+              <div className="modal fade" id="searchDeviceCmsModal" tabIndex="-1" aria-labelledby="searchDeviceCmsModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="searchDeviceCmsModalLabel">GET /v2/users/userId/devices?_=deviceId</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                      <form>
+                        <div className="row align-items-center">
+                          <span>
+                            <label htmlFor="" className="col-form-label">userId&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userId' onChange={(e) => handlePutChangeValue1(e, 19)} defaultValue={refundCmsSearch ? refundCmsSearch.userId : null} />
+                          </span>
+                        </div>
+
+                        <div className="row align-items-center">
+                          <span>
+                            <label htmlFor="" className="col-form-label">deviceId&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='deviceId' onChange={(e) => handlePutChangeValue1(e, 19)} defaultValue={refundCmsSearch ? refundCmsSearch.refundId : null} />
+                          </span>
+                        </div>
+                      </form>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e) => handClickRequest(e, 23)}>Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="origin-data pt-3">
+              <div className="old-data">
+                <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({getDevicesCmsBeta ? getDevicesCmsBeta.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingBeta ? (JSON.stringify(getDevicesCmsBeta ? getDevicesCmsBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+              <div className="new-data">
+                <p className="title">- Alpha data:({getDevicesCmsAlpha ? getDevicesCmsAlpha.timeTaken : 'NaN'} ms)</p>
+                <pre>{!isLoadingAlpha ? (JSON.stringify(getDevicesCmsAlpha ? getDevicesCmsAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span className='ps-2'>Calling API</span></>)}</pre>
+              </div>
+            </div>
+
+            <p className="title">- The merged different:</p>
+            <JsonCompare oldData={getDevicesCmsBeta ? getDevicesCmsBeta.response : null} newData={getDevicesCmsAlpha ? getDevicesCmsAlpha.response : null} />
+
+            {/* ================================================================================================================================== */}
           </div>
 
           <div className='col-2 d-none d-lg-block'>
@@ -3812,7 +4209,7 @@ function App() {
                 <button type="button" className="btn text-danger" onClick={clickView} style={{ fontSize: '.74rem' }} data-bs-toggle="tooltip" title="Up">API</button>
                 <div style={{ height: "535px", overflowY: "scroll" }}>
                   <a href={`#wrapper_get_1`}><button type="button" className="btn btn-md " style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeAlpha ? userMeAlpha : null, userMeBeta ? userMeBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}</span></button></a>
-                  <a href={`#wrapper_get_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeMetaAlpha ? userMeMetaAlpha : null , userMeMetaBeta ? userMeMetaAlpha : null)) ? "black" : "red" }}>  v2/users/{"{me}"}/meta </span> </button></a>
+                  <a href={`#wrapper_get_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeMetaAlpha ? userMeMetaAlpha : null, userMeMetaBeta ? userMeMetaAlpha : null)) ? "black" : "red" }}>  v2/users/{"{me}"}/meta </span> </button></a>
                   <a href={`#wrapper_get_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeCohortAlpha ? userMeCohortAlpha : null, userMeCohortBeta ? userMeCohortBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/cohort </span> </button></a>
                   <a href={`#wrapper_get_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeSubscriptionAlpha ? userMeSubscriptionAlpha : null, userMeSubscriptionBeta ? userMeSubscriptionBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/subscription </span> </button></a>
                   <a href={`#wrapper_get_5`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeCertificationsAlpha ? userMeCertificationsAlpha : null, userMeCertificationsBeta ? userMeCertificationsBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/certifications </span> </button></a>
@@ -3827,7 +4224,6 @@ function App() {
                   <a href={`#wrapper_get_15`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeDailyFreeAlpha ? userMeDailyFreeAlpha : null, userMeDailyFreeBeta ? userMeDailyFreeBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/daily/recent </span> </button></a>
                   <a href={`#wrapper_get_16`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeRecentsAlpha ? userMeRecentsAlpha : null, userMeRecentsBeta ? userMeRecentsBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/recents </span> </button></a>
                   <a href={`#wrapper_get_17`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeChargesAlpha ? userMeChargesAlpha : null, userMeChargesBeta ? userMeChargesBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/charges </span> </button></a>
-                  <a href={`#wrapper_get_18`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(getUserCmsSearchAlpha ? getUserCmsSearchAlpha : null, getUserCmsSearchBeta ? getUserCmsSearchBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/username?limit=10 </span> </button></a>
 
                   <a href={`#wrapper_get_19`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeInvitationsAlpha ? userMeInvitationsAlpha : null, userMeInvitationsBeta ? userMeInvitationsBeta : null)) ? "black" : "red" }}> /users/{"{me}"}/invitations </span> </button></a>
                   <a href={`#wrapper_get_20`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeV1Alpha ? userMeV1Alpha : null, userMeV1Beta ? userMeV1Beta : null)) ? "black" : "red" }}> /users/{"{me}"} </span> </button></a>
@@ -3838,8 +4234,6 @@ function App() {
 
                   <a href={`#wrapper_put_1`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeAlpha ? putUserMeAlpha : null, putUserMeBeta ? putUserMeBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"} </span></button></a>
                   <a href={`#wrapper_put_5`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putVerificationsAlpha ? putVerificationsAlpha : null, putVerificationsBeta ? putVerificationsBeta : null)) ? "black" : "red" }}> v2/verifications</span> </button></a>
-                  <a href={`#wrapper_put_6`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(postUserCmsUnregisterAlpha ? postUserCmsUnregisterAlpha : null, postUserCmsUnregisterBeta ? postUserCmsUnregisterBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/unregister {"(cms)"}</span> </button></a>
-                  <a href={`#wrapper_put_7`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(postUserCmsReregisterAlpha ? postUserCmsReregisterAlpha : null, postUserCmsReregisterBeta ? postUserCmsReregisterBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/reregister {"(cms)"}</span> </button></a>
                   <a href={`#wrapper_put_8`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(postUserChangeEmailAlpha ? postUserChangeEmailAlpha : null, postUserChangeEmailBeta ? postUserChangeEmailBeta : null)) ? "black" : "red" }}> /v2/users/me/email</span> </button></a>
                   <a href={`#wrapper_put_9`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMePasswordV2Alpha ? putUserMePasswordV2Alpha : null, putUserMePasswordV2Beta ? putUserMePasswordV2Beta : null)) ? "black" : "red" }}> /v2/users/me/password</span> </button></a>
                   <a href={`#wrapper_put_10`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserResetPasswordAlpha ? putUserResetPasswordAlpha : null, putUserResetPasswordBeta ? putUserResetPasswordBeta : null)) ? "black" : "red" }}> /v2/users/password/reset</span> </button></a>
@@ -3864,6 +4258,17 @@ function App() {
                   <a href={`#wrapper_del_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-danger'>DEL &#160; </span> <span style={{ color: (isEqual(delUserByeAlpha ? delUserByeAlpha : null, delUserByeBeta ? delUserByeBeta : null)) ? "black" : "red" }}> v2/users/bye </span></button></a>
                   <a href={`#wrapper_del_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-danger'>DEL &#160; </span> <span style={{ color: (isEqual(delUserDevicesAllAlpha ? delUserDevicesAllAlpha : null, delUserDevicesAllBeta ? delUserDevicesAllBeta : null)) ? "black" : "red" }}> users/{"{me}"}/devices/all </span></button></a>
                   <a href={`#wrapper_del_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-danger'>DEL &#160; </span> <span style={{ color: (isEqual(delUserDevicesByIdAlpha ? delUserDevicesByIdAlpha : null, delUserDevicesByIdBeta ? delUserDevicesByIdBeta : null)) ? "black" : "red" }}> users/{"{me}"}/devices/deviceId </span></button></a>
+
+                  {/* =============== cms ================== */}
+                  <hr></hr>
+
+                  <a href={`#wrapper_get_18`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(getUserCmsSearchAlpha ? getUserCmsSearchAlpha : null, getUserCmsSearchBeta ? getUserCmsSearchBeta : null)) ? "black" : "red" }}> (cms) v2/users/user_name&limit=10 </span> </button></a>
+                  <a href={`#wrapper_get_23`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(getUserInactiveCmsSearchUserAlpha ? getUserInactiveCmsSearchUserAlpha : null, getUserInactiveCmsSearchUserBeta ? getUserInactiveCmsSearchUserBeta : null)) ? "black" : "red" }}> (cms) /v2/inactive_users/user_name&limit=10 </span> </button></a>
+                  <a href={`#wrapper_get_24`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(getRefundsCmsAlpha ? getRefundsCmsAlpha : null, getRefundsCmsBeta ? getRefundsCmsBeta : null)) ? "black" : "red" }}> (cms) /v2/refunds?_=refundId&limit=10&state=&userId=userId </span> </button></a>
+                  <a href={`#wrapper_get_25`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(getInvitationsCmsAlpha ? getInvitationsCmsAlpha : null, getInvitationsCmsBeta ? getInvitationsCmsBeta : null)) ? "black" : "red" }}> (cms) /v2/users/userId/invitations?_=invitationId&limit=10 </span> </button></a>
+                  <a href={`#wrapper_get_26`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(getDevicesCmsAlpha ? getDevicesCmsAlpha : null, getDevicesCmsBeta ? getDevicesCmsBeta : null)) ? "black" : "red" }}> (cms) /v2/users/userId/devices?_=deviceId </span> </button></a>
+                  <a href={`#wrapper_put_6`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(postUserCmsUnregisterAlpha ? postUserCmsUnregisterAlpha : null, postUserCmsUnregisterBeta ? postUserCmsUnregisterBeta : null)) ? "black" : "red" }}>{"(cms)"} v2/users/{"{me}"}/unregister </span> </button></a>
+                  <a href={`#wrapper_put_7`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(postUserCmsReregisterAlpha ? postUserCmsReregisterAlpha : null, postUserCmsReregisterBeta ? postUserCmsReregisterBeta : null)) ? "black" : "red" }}>{"(cms)"} v2/users/{"{me}"}/reregister </span> </button></a>
 
                 </div>
               </div>
