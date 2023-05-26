@@ -131,6 +131,7 @@ function App() {
 
       // call get users/me/meta alpha
       compareService.getUserMeMetaAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+        const timeTaken = (new Date()) - start;
         const data = {
           response: res.data,
           timeTaken: timeTaken,
