@@ -146,20 +146,20 @@ function App() {
       })
 
       // call get users/me alpha
-      compareService.getUserMeBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
+      compareService.getUserMeAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
         const timeTaken = (new Date()) - start;
         const data = {
           response: res.data,
           timeTaken: timeTaken,
         };
-        localStorage.setItem('userMeBeta', JSON.stringify(data));
+        localStorage.setItem('userMeAlpha', JSON.stringify(data));
       }).catch((err) => {
         const timeTaken = (new Date()) - start;
         const data = {
           response: err.response.data,
           timeTaken: timeTaken,
         };
-        localStorage.setItem('userMeBeta', JSON.stringify(data));
+        localStorage.setItem('userMeAlpha', JSON.stringify(data));
       })
 
       // call get users/me/meta alpha
