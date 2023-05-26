@@ -146,20 +146,20 @@ function App() {
       })
 
       // call get users/me alpha
-      compareService.getUserMeAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, locale).then((res) => {
+      compareService.getUserMeBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, locale).then((res) => {
         const timeTaken = (new Date()) - start;
         const data = {
           response: res.data,
           timeTaken: timeTaken,
         };
-        localStorage.setItem('userMeAlpha', JSON.stringify(data));
+        localStorage.setItem('userMeBeta', JSON.stringify(data));
       }).catch((err) => {
         const timeTaken = (new Date()) - start;
         const data = {
           response: err.response.data,
           timeTaken: timeTaken,
         };
-        localStorage.setItem('userMeAlpha', JSON.stringify(data));
+        localStorage.setItem('userMeBeta', JSON.stringify(data));
       })
 
       // call get users/me/meta alpha
@@ -4209,7 +4209,7 @@ function App() {
                 <button type="button" className="btn text-danger" onClick={clickView} style={{ fontSize: '.74rem' }} data-bs-toggle="tooltip" title="Up">API</button>
                 <div style={{ height: "535px", overflowY: "scroll" }}>
                   <a href={`#wrapper_get_1`}><button type="button" className="btn btn-md " style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeAlpha ? userMeAlpha : null, userMeBeta ? userMeBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}</span></button></a>
-                  <a href={`#wrapper_get_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeMetaAlpha ? userMeMetaAlpha : null, userMeMetaBeta ? userMeMetaAlpha : null)) ? "black" : "red" }}>  v2/users/{"{me}"}/meta </span> </button></a>
+                  <a href={`#wrapper_get_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeMetaAlpha ? userMeMetaAlpha : null, userMeMetaBeta ? userMeMetaBeta : null)) ? "black" : "red" }}>  v2/users/{"{me}"}/meta </span> </button></a>
                   <a href={`#wrapper_get_3`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeCohortAlpha ? userMeCohortAlpha : null, userMeCohortBeta ? userMeCohortBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/cohort </span> </button></a>
                   <a href={`#wrapper_get_4`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeSubscriptionAlpha ? userMeSubscriptionAlpha : null, userMeSubscriptionBeta ? userMeSubscriptionBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/subscription </span> </button></a>
                   <a href={`#wrapper_get_5`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-success'>GET</span> <span style={{ color: (isEqual(userMeCertificationsAlpha ? userMeCertificationsAlpha : null, userMeCertificationsBeta ? userMeCertificationsBeta : null)) ? "black" : "red" }}> v2/users/{"{me}"}/certifications </span> </button></a>
