@@ -2223,7 +2223,7 @@ function App() {
                 <>
                   <div className='ms-4 mt-5 text-center' style={{ fontSize: 13 }}>
                     <span className="title">- Alpha:</span> {userAlpha.response.data && !userAlpha.response.error ? userAlpha.response.data.user.username : (<>not found</>)} - {userAlpha.response.data && !userAlpha.response.error ? userAlpha.response.data.user.userId : (<>not found</>)}
-                    <br /> <span className="title">- Beta :</span> {userBeta.response.data && !userBeta.response.error ? userBeta.response.data.user.username : (<>not found</>)} - {userBeta.response.data && !userBeta.response.error ? userBeta.response.data.user.userId : <>not found</>}
+                    <br /> <span className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} :</span> {userBeta.response.data && !userBeta.response.error ? userBeta.response.data.user.username : (<>not found</>)} - {userBeta.response.data && !userBeta.response.error ? userBeta.response.data.user.userId : <>not found</>}
                     <br />
                     <button
                       className="btn btn-primary btn-block mb-4 mt-3"
