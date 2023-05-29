@@ -1828,6 +1828,7 @@ function App() {
               timeTaken: timeTaken,
             };
             localStorage.setItem('getUserInactiveCmsSearchUserAlpha', JSON.stringify(data));
+            setIsLoadingRequest(false);
           }).catch((err) => {
             const timeTaken = (new Date()) - start;
             const data = {
@@ -1835,6 +1836,7 @@ function App() {
               timeTaken: timeTaken,
             };
             localStorage.setItem('getUserInactiveCmsSearchUserAlpha', JSON.stringify(data));
+            setIsLoadingRequest(false);
           })
 
           compareService.getUserInactiveCmsSearchUserBeta(adminBeta.access_token, usernameInactiveSearch).then((res) => {
@@ -1864,6 +1866,7 @@ function App() {
               timeTaken: timeTaken,
             };
             localStorage.setItem('getRefundsCmsAlpha', JSON.stringify(data));
+            setIsLoadingRequest(false);
           }).catch((err) => {
             const timeTaken = (new Date()) - start;
             const data = {
@@ -1871,6 +1874,7 @@ function App() {
               timeTaken: timeTaken,
             };
             localStorage.setItem('getRefundsCmsAlpha', JSON.stringify(data));
+            setIsLoadingRequest(false);
           })
 
           compareService.getRefundsCmsBeta(adminBeta.access_token, refundCmsSearch.refundId, refundCmsSearch.userId).then((res) => {
@@ -1900,6 +1904,7 @@ function App() {
               timeTaken: timeTaken,
             };
             localStorage.setItem('getInvitationsCmsAlpha', JSON.stringify(data));
+            setIsLoadingRequest(false);
           }).catch((err) => {
             const timeTaken = (new Date()) - start;
             const data = {
@@ -1907,6 +1912,7 @@ function App() {
               timeTaken: timeTaken,
             };
             localStorage.setItem('getInvitationsCmsAlpha', JSON.stringify(data));
+            setIsLoadingRequest(false);
           })
 
           compareService.getInvitationsCmsBeta(adminBeta.access_token, invitationCmsSearch.invitationId, invitationCmsSearch.userId).then((res) => {
@@ -1936,6 +1942,7 @@ function App() {
               timeTaken: timeTaken,
             };
             localStorage.setItem('getDevicesCmsAlpha', JSON.stringify(data));
+            setIsLoadingRequest(false);
           }).catch((err) => {
             const timeTaken = (new Date()) - start;
             const data = {
@@ -1943,6 +1950,7 @@ function App() {
               timeTaken: timeTaken,
             };
             localStorage.setItem('getDevicesCmsAlpha', JSON.stringify(data));
+            setIsLoadingRequest(false);
           })
 
           compareService.getInvitationsCmsBeta(adminBeta.access_token, deviceCmsSearch.deviceId, deviceCmsSearch.userId).then((res) => {
@@ -4019,12 +4027,12 @@ function App() {
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({getUserInactiveCmsSearchUserBeta ? getUserInactiveCmsSearchUserBeta.timeTaken : 'NaN'} ms)</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(getUserInactiveCmsSearchUserBeta ? getUserInactiveCmsSearchUserBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(getUserInactiveCmsSearchUserBeta ? getUserInactiveCmsSearchUserBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
                 <p className="title">- Alpha data:({getUserInactiveCmsSearchUserAlpha ? getUserInactiveCmsSearchUserAlpha.timeTaken : 'NaN'} ms)</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(getUserInactiveCmsSearchUserAlpha ? getUserInactiveCmsSearchUserAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(getUserInactiveCmsSearchUserAlpha ? getUserInactiveCmsSearchUserAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
@@ -4076,12 +4084,12 @@ function App() {
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({getRefundsCmsBeta ? getRefundsCmsBeta.timeTaken : 'NaN'} ms)</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(getRefundsCmsBeta ? getRefundsCmsBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(getRefundsCmsBeta ? getRefundsCmsBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
                 <p className="title">- Alpha data:({getRefundsCmsAlpha ? getRefundsCmsAlpha.timeTaken : 'NaN'} ms)</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(getRefundsCmsAlpha ? getRefundsCmsAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(getRefundsCmsAlpha ? getRefundsCmsAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
@@ -4133,12 +4141,12 @@ function App() {
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({getInvitationsCmsBeta ? getInvitationsCmsBeta.timeTaken : 'NaN'} ms)</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(getInvitationsCmsBeta ? getInvitationsCmsBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(getInvitationsCmsBeta ? getInvitationsCmsBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
                 <p className="title">- Alpha data:({getInvitationsCmsAlpha ? getInvitationsCmsAlpha.timeTaken : 'NaN'} ms)</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(getInvitationsCmsAlpha ? getInvitationsCmsAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(getInvitationsCmsAlpha ? getInvitationsCmsAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
@@ -4190,12 +4198,12 @@ function App() {
             <div className="origin-data pt-3">
               <div className="old-data">
                 <p className="title">- {env.charAt(0).toUpperCase() + env.slice(1)} data ({getDevicesCmsBeta ? getDevicesCmsBeta.timeTaken : 'NaN'} ms)</p>
-                <pre>{!isLoadingBeta ? (JSON.stringify(getDevicesCmsBeta ? getDevicesCmsBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(getDevicesCmsBeta ? getDevicesCmsBeta.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
               <div className="new-data">
                 <p className="title">- Alpha data:({getDevicesCmsAlpha ? getDevicesCmsAlpha.timeTaken : 'NaN'} ms)</p>
-                <pre>{!isLoadingAlpha ? (JSON.stringify(getDevicesCmsAlpha ? getDevicesCmsAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <pre>{!isLoadingRequest ? (JSON.stringify(getDevicesCmsAlpha ? getDevicesCmsAlpha.response : null, null, 2)) : (<><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   <span className='ps-2'>Calling API</span></>)}</pre>
               </div>
             </div>
