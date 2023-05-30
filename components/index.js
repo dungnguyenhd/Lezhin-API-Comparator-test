@@ -2002,6 +2002,7 @@ function App() {
               timeTaken: timeTaken,
             };
             localStorage.setItem('postVerificationSendEmailBeta', JSON.stringify(data));
+            setIsLoadingRequest(false);
           }).catch((err) => {
             const timeTaken = (new Date()) - start;
             const data = {
@@ -2009,6 +2010,7 @@ function App() {
               timeTaken: timeTaken,
             };
             localStorage.setItem('postVerificationSendEmailBeta', JSON.stringify(data));
+            setIsLoadingRequest(false);
           });
 
           break;
@@ -2040,6 +2042,7 @@ function App() {
               timeTaken: timeTaken,
             };
             localStorage.setItem('putVerificationsBeta', JSON.stringify(data));
+            setIsLoadingRequest(false);
           }).catch((err) => {
             const timeTaken = (new Date()) - start;
             const data = {
@@ -2047,6 +2050,7 @@ function App() {
               timeTaken: timeTaken,
             };
             localStorage.setItem('putVerificationsBeta', JSON.stringify(data));
+            setIsLoadingRequest(false);
           });
 
           break;
@@ -2078,6 +2082,7 @@ function App() {
               timeTaken: timeTaken,
             };
             localStorage.setItem('postUserSignupBeta', JSON.stringify(data));
+            setIsLoadingRequest(false);
           }).catch((err) => {
             const timeTaken = (new Date()) - start;
             const data = {
@@ -2085,6 +2090,7 @@ function App() {
               timeTaken: timeTaken,
             };
             localStorage.setItem('postUserSignupBeta', JSON.stringify(data));
+            setIsLoadingRequest(false);
           });
 
           break;
@@ -2116,6 +2122,7 @@ function App() {
               timeTaken: timeTaken,
             };
             localStorage.setItem('postUserSendResetPasswordBeta', JSON.stringify(data));
+            setIsLoadingRequest(false);
           }).catch((err) => {
             const timeTaken = (new Date()) - start;
             const data = {
@@ -2123,6 +2130,7 @@ function App() {
               timeTaken: timeTaken,
             };
             localStorage.setItem('postUserSendResetPasswordBeta', JSON.stringify(data));
+            setIsLoadingRequest(false);
           });
 
           break;
@@ -2154,6 +2162,7 @@ function App() {
               timeTaken: timeTaken,
             };
             localStorage.setItem('putUserResetPasswordBeta', JSON.stringify(data));
+            setIsLoadingRequest(false);
           }).catch((err) => {
             const timeTaken = (new Date()) - start;
             const data = {
@@ -2161,8 +2170,8 @@ function App() {
               timeTaken: timeTaken,
             };
             localStorage.setItem('putUserResetPasswordBeta', JSON.stringify(data));
+            setIsLoadingRequest(false);
           });
-
           break;
         default:
           break;
