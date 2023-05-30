@@ -1859,7 +1859,7 @@ function App() {
           setIsLoadingRequest(true);
 
           // call get search user Alpha
-          compareService.getRefundsCmsAlpha(adminAlpha.access_token, refundCmsSearch.refundId, refundCmsSearch.userId).then((res) => {
+          compareService.getRefundsCmsAlpha(adminAlpha.access_token, refundCmsSearch.userId).then((res) => {
             const timeTaken = (new Date()) - start;
             const data = {
               response: res.data,
@@ -1877,7 +1877,7 @@ function App() {
             setIsLoadingRequest(false);
           })
 
-          compareService.getRefundsCmsBeta(adminBeta.access_token, refundCmsSearch.refundId, refundCmsSearch.userId).then((res) => {
+          compareService.getRefundsCmsBeta(adminBeta.access_token, refundCmsSearch.userId).then((res) => {
             const timeTaken = (new Date()) - start;
             const data = {
               response: res.data,
@@ -1897,7 +1897,7 @@ function App() {
           setIsLoadingRequest(true);
 
           // call get search user Alpha
-          compareService.getInvitationsCmsAlpha(adminAlpha.access_token, invitationCmsSearch.invitationId, invitationCmsSearch.userId).then((res) => {
+          compareService.getInvitationsCmsAlpha(adminAlpha.access_token, invitationCmsSearch.userId).then((res) => {
             const timeTaken = (new Date()) - start;
             const data = {
               response: res.data,
@@ -1915,7 +1915,7 @@ function App() {
             setIsLoadingRequest(false);
           })
 
-          compareService.getInvitationsCmsBeta(adminBeta.access_token, invitationCmsSearch.invitationId, invitationCmsSearch.userId).then((res) => {
+          compareService.getInvitationsCmsBeta(adminBeta.access_token, invitationCmsSearch.userId).then((res) => {
             const timeTaken = (new Date()) - start;
             const data = {
               response: res.data,
@@ -1935,7 +1935,7 @@ function App() {
           setIsLoadingRequest(true);
 
           // call get search user Alpha
-          compareService.getDevicesCmsAlpha(adminAlpha.access_token, deviceCmsSearch.deviceId, deviceCmsSearch.userId).then((res) => {
+          compareService.getDevicesCmsAlpha(adminAlpha.access_token, deviceCmsSearch.userId).then((res) => {
             const timeTaken = (new Date()) - start;
             const data = {
               response: res.data,
@@ -1953,7 +1953,7 @@ function App() {
             setIsLoadingRequest(false);
           })
 
-          compareService.getInvitationsCmsBeta(adminBeta.access_token, deviceCmsSearch.deviceId, deviceCmsSearch.userId).then((res) => {
+          compareService.getInvitationsCmsBeta(adminBeta.access_token, deviceCmsSearch.userId).then((res) => {
             const timeTaken = (new Date()) - start;
             const data = {
               response: res.data,
@@ -4064,13 +4064,6 @@ function App() {
                             <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userId' onChange={(e) => handlePutChangeValue1(e, 17)} defaultValue={refundCmsSearch ? refundCmsSearch.userId : null} />
                           </span>
                         </div>
-
-                        <div className="row align-items-center">
-                          <span>
-                            <label htmlFor="" className="col-form-label">refundId&#160;</label>
-                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='refundId' onChange={(e) => handlePutChangeValue1(e, 17)} defaultValue={refundCmsSearch ? refundCmsSearch.refundId : null} />
-                          </span>
-                        </div>
                       </form>
                     </div>
                     <div className="modal-footer">
@@ -4160,14 +4153,14 @@ function App() {
             <hr id='wrapper_get_26' />
 
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
-              {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /v2/users/userId/devices?_=deviceId &#160;
+              {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /v2/users/userId/devices?_= &#160;
               <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#searchDeviceCmsModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
 
               <div className="modal fade" id="searchDeviceCmsModal" tabIndex="-1" aria-labelledby="searchDeviceCmsModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                   <div className="modal-content">
                     <div className="modal-header">
-                      <h5 className="modal-title" id="searchDeviceCmsModalLabel">GET /v2/users/userId/devices?_=deviceId</h5>
+                      <h5 className="modal-title" id="searchDeviceCmsModalLabel">GET /v2/users/userId/devices?_=</h5>
                       <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
@@ -4176,13 +4169,6 @@ function App() {
                           <span>
                             <label htmlFor="" className="col-form-label">userId&#160;</label>
                             <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userId' onChange={(e) => handlePutChangeValue1(e, 19)} defaultValue={refundCmsSearch ? refundCmsSearch.userId : null} />
-                          </span>
-                        </div>
-
-                        <div className="row align-items-center">
-                          <span>
-                            <label htmlFor="" className="col-form-label">deviceId&#160;</label>
-                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='deviceId' onChange={(e) => handlePutChangeValue1(e, 19)} defaultValue={refundCmsSearch ? refundCmsSearch.refundId : null} />
                           </span>
                         </div>
                       </form>

@@ -5,7 +5,7 @@ let API_BASE_URL_BETA = process.env.REACT_APP_BETA_DOMAIN;
 const API_CMS_URL_ALPHA = process.env.REACT_APP_ALPHA_CMS_DOMAIN;
 const API_CMS_URL_BETA = process.env.REACT_APP_BETA_CMS_DOMAIN;
 let token = process.env.REACT_APP_BETA_TOKEN;
-
+const time = new Date();
 class compareService {
 
   switchEnvironment(e) {
@@ -911,56 +911,56 @@ class compareService {
 
   // ====== ======= ====== Get Search User By Name or Id ====== ======= ======
 
-  getRefundsCmsAlpha(access_token, refundId, userId) {
+  getRefundsCmsAlpha(access_token, userId) {
     const headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${access_token}`,
     };
-    return axios.get(API_CMS_URL_ALPHA + `/v2/refunds?_=${refundId}&limit=10&state=&userId=${userId}`, { headers })
+    return axios.get(API_CMS_URL_ALPHA + `/v2/refunds?_=${time}&limit=50&state=&userId=${userId}`, { headers })
   }
 
-  getRefundsCmsBeta(access_token, refundId, userId) {
+  getRefundsCmsBeta(access_token, userId) {
     const headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${access_token}`,
     };
-    return axios.get(API_CMS_URL_BETA + `/v2/refunds?_=${refundId}&limit=10&state=&userId=${userId}`, { headers })
+    return axios.get(API_CMS_URL_BETA + `/v2/refunds?_=${time}&limit=50&state=&userId=${userId}`, { headers })
   }
 
   // ====== ======= ====== Get Search User By Name or Id ====== ======= ======
 
-  getInvitationsCmsAlpha(access_token, invitationId, userId) {
+  getInvitationsCmsAlpha(access_token, userId) {
     const headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${access_token}`,
     };
-    return axios.get(API_CMS_URL_ALPHA + `/v2/users/${userId}/invitations?_=${invitationId}&limit=10`, { headers })
+    return axios.get(API_CMS_URL_ALPHA + `/v2/users/${userId}/invitations?_=${time}&limit=20`, { headers })
   }
 
-  getInvitationsCmsBeta(access_token, invitationId, userId) {
+  getInvitationsCmsBeta(access_token, userId) {
     const headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${access_token}`,
     };
-    return axios.get(API_CMS_URL_BETA + `/v2/users/${userId}/invitations?_=${invitationId}&limit=10`, { headers })
+    return axios.get(API_CMS_URL_BETA + `/v2/users/${userId}/invitations?_=${time}&limit=20`, { headers })
   }
 
     // ====== ======= ====== Get Search User By Name or Id ====== ======= ======
 
-    getDevicesCmsAlpha(access_token, deviceId, userId) {
+    getDevicesCmsAlpha(access_token, userId) {
       const headers = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${access_token}`,
       };
-      return axios.get(API_CMS_URL_ALPHA + `/v2/users/${userId}/devices?_=${deviceId}`, { headers })
+      return axios.get(API_CMS_URL_ALPHA + `/v2/users/${userId}/devices?_=${time}`, { headers })
     }
 
-    getDevicesCmsBeta(access_token, deviceId, userId) {
+    getDevicesCmsBeta(access_token, userId) {
       const headers = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${access_token}`,
       };
-      return axios.get(API_CMS_URL_BETA + `/v2/users/${userId}/devices?_=${deviceId}`, { headers })
+      return axios.get(API_CMS_URL_BETA + `/v2/users/${userId}/devices?_=${time}`, { headers })
     }
 
   // ===============================================================
