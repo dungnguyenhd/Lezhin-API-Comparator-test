@@ -4046,14 +4046,14 @@ function App() {
             <hr id='wrapper_get_24' />
 
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
-              {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /v2/refunds?_=refundId&limit=10&state=&userId=userId &#160;
+              {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /v2/refunds?_=&limit=10&state=&userId=userId &#160;
               <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#searchRefundCmsModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
 
               <div className="modal fade" id="searchRefundCmsModal" tabIndex="-1" aria-labelledby="searchRefundCmsModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                   <div className="modal-content">
                     <div className="modal-header">
-                      <h5 className="modal-title" id="searchRefundCmsModalLabel">GET /v2/refunds?_=refundId&limit=10&state=&userId=userId</h5>
+                      <h5 className="modal-title" id="searchRefundCmsModalLabel">GET /v2/refunds?_=&limit=10&state=&userId=userId</h5>
                       <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
@@ -4096,14 +4096,14 @@ function App() {
             <hr id='wrapper_get_25' />
 
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
-              {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /v2/users/userId/invitations?_=invitationId&limit=10 &#160;
+              {'>'} <span className='text-success'> &#160;<strong>GET</strong></span> /v2/users/userId/invitations?_=&limit=10 &#160;
               <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#searchInviteCmsModal" data-bs-whatever="@mdo"><i className="fa fa-user-edit" style={{ fontSize: ".8rem" }}></i></button>
 
               <div className="modal fade" id="searchInviteCmsModal" tabIndex="-1" aria-labelledby="searchInviteCmsModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                   <div className="modal-content">
                     <div className="modal-header">
-                      <h5 className="modal-title" id="searchInviteCmsModalLabel">GET /v2/users/userId/invitations?_=invitationId&limit=10</h5>
+                      <h5 className="modal-title" id="searchInviteCmsModalLabel">GET /v2/users/userId/invitations?_=&limit=10</h5>
                       <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
@@ -4112,13 +4112,6 @@ function App() {
                           <span>
                             <label htmlFor="" className="col-form-label">userId&#160;</label>
                             <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userId' onChange={(e) => handlePutChangeValue1(e, 18)} defaultValue={invitationCmsSearch ? invitationCmsSearch.userId : null} />
-                          </span>
-                        </div>
-
-                        <div className="row align-items-center">
-                          <span>
-                            <label htmlFor="" className="col-form-label">invitationId&#160;</label>
-                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='invitationId' onChange={(e) => handlePutChangeValue1(e, 18)} defaultValue={invitationCmsSearch ? invitationCmsSearch.refundId : null} />
                           </span>
                         </div>
                       </form>
