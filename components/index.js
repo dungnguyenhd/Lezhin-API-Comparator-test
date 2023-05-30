@@ -24,11 +24,11 @@ function App() {
   const [putUserUsername, setPutUserUsername] = useState({ username: null, password: 'lezhin123!' });
   const [putUserSocial, setPutUserSocial] = useState({ accessToken: null });
   const [putUnregister, setPutUnregister] = useState(null);
-  const [usernameSearch, setUsernameSearch] = useState(null);
-  const [usernameInactiveSearch, setUsernameInactiveSearch] = useState(null);
-  const [refundCmsSearch, setRefundCmsSearch] = useState({ userId: null, refundId: null });
-  const [invitationCmsSearch, setInvitationCmsSearch] = useState({ userId: null, invitationId: null });
-  const [deviceCmsSearch, setDeviceCmsSearch] = useState({ userId: null, deviceId: null });
+  const [usernameSearch, setUsernameSearch] = useState({ userIdAlpha: null, userIdBeta: null });
+  const [usernameInactiveSearch, setUsernameInactiveSearch] = useState({ userIdAlpha: null, userIdBeta: null });
+  const [refundCmsSearch, setRefundCmsSearch] = useState({ userIdAlpha: null, userIdBeta: null });
+  const [invitationCmsSearch, setInvitationCmsSearch] = useState({ userIdAlpha: null, userIdBeta: null });
+  const [deviceCmsSearch, setDeviceCmsSearch] = useState({ userIdAlpha: null, userIdBeta: null });
   const [putVerificationsDataAlpha, setPutVerificationsDataAlpha] = useState({ email: verificationEmail, token: null });
   const [putVerificationsDataBeta, setPutVerificationsDataBeta] = useState({ email: verificationEmail, token: null });
   const [postSignupAlpha, setPostSignupApha] = useState({ agreements: { marketingEmail: false, collectingBirth: false }, birthDate: null, gender: null, account: { username: verificationEmail, password: null }, verificationToken: putVerificationsDataAlpha.token });
@@ -1115,13 +1115,17 @@ function App() {
       case 4:
         data = { ...putUserSocial };
         data[name] = value;
+        setPutUserSocial(data)
         break;
       case 5:
         data = { ...putUnregister };
         data[name] = value;
+        setPutUnregister(data);
         break;
       case 6:
-        setUsernameSearch(value);
+        data = { ...usernameSearch };
+        data[name] = value;
+        setUsernameSearch(data);
         break;
       case 7:
         localStorage.setItem('verificationEmail', value);
@@ -1171,7 +1175,9 @@ function App() {
         setPutUserResetPasswordData(data);
         break;
       case 16:
-        setUsernameInactiveSearch(value);
+        data = { ...usernameInactiveSearch };
+        data[name] = value;
+        setUsernameInactiveSearch(data);
         break;
       case 17:
         data = { ...refundCmsSearch };
@@ -1186,7 +1192,7 @@ function App() {
       case 19:
         data = { ...deviceCmsSearch };
         data[name] = value;
-        deviceCmsSearch(data);
+        setDeviceCmsSearch(data);
         break;
       default:
         break;
@@ -1434,7 +1440,7 @@ function App() {
 
           // call post v2/get/{me}/Search cms alpha
           setIsLoadingRequest(true);
-          compareService.getUserCmsSearchUserAlpha(adminAlpha.access_token, usernameSearch).then((res) => {
+          compareService.getUserCmsSearchUserAlpha(adminAlpha.access_token, usernameSearch.userIdAlpha).then((res) => {
             const timeTaken = (new Date()) - start;
             const data = {
               response: res.data,
@@ -1454,7 +1460,7 @@ function App() {
 
           // call post v2/get/{me}/Search cms Beta
 
-          compareService.getUserCmsSearchUserBeta(adminBeta.access_token, usernameSearch).then((res) => {
+          compareService.getUserCmsSearchUserBeta(adminBeta.access_token, usernameSearch.userIdBeta).then((res) => {
             const timeTaken = (new Date()) - start;
             const data = {
               response: res.data,
@@ -1821,14 +1827,13 @@ function App() {
           setIsLoadingRequest(true);
 
           // call get search user Alpha
-          compareService.getUserInactiveCmsSearchUserAlpha(adminAlpha.access_token, usernameInactiveSearch).then((res) => {
+          compareService.getUserInactiveCmsSearchUserAlpha(adminAlpha.access_token, usernameInactiveSearch.userIdAlpha).then((res) => {
             const timeTaken = (new Date()) - start;
             const data = {
               response: res.data,
               timeTaken: timeTaken,
             };
             localStorage.setItem('getUserInactiveCmsSearchUserAlpha', JSON.stringify(data));
-            setIsLoadingRequest(false);
           }).catch((err) => {
             const timeTaken = (new Date()) - start;
             const data = {
@@ -1839,13 +1844,14 @@ function App() {
             setIsLoadingRequest(false);
           })
 
-          compareService.getUserInactiveCmsSearchUserBeta(adminBeta.access_token, usernameInactiveSearch).then((res) => {
+          compareService.getUserInactiveCmsSearchUserBeta(adminBeta.access_token, usernameInactiveSearch.userIdBeta).then((res) => {
             const timeTaken = (new Date()) - start;
             const data = {
               response: res.data,
               timeTaken: timeTaken,
             };
             localStorage.setItem('getUserInactiveCmsSearchUserBeta', JSON.stringify(data));
+            setIsLoadingRequest(false);
           }).catch((err) => {
             const timeTaken = (new Date()) - start;
             const data = {
@@ -1859,7 +1865,7 @@ function App() {
           setIsLoadingRequest(true);
 
           // call get search user Alpha
-          compareService.getRefundsCmsAlpha(adminAlpha.access_token, refundCmsSearch.userId).then((res) => {
+          compareService.getRefundsCmsAlpha(adminAlpha.access_token, refundCmsSearch.userIdAlpha).then((res) => {
             const timeTaken = (new Date()) - start;
             const data = {
               response: res.data,
@@ -1877,7 +1883,7 @@ function App() {
             setIsLoadingRequest(false);
           })
 
-          compareService.getRefundsCmsBeta(adminBeta.access_token, refundCmsSearch.userId).then((res) => {
+          compareService.getRefundsCmsBeta(adminBeta.access_token, refundCmsSearch.userIdBeta).then((res) => {
             const timeTaken = (new Date()) - start;
             const data = {
               response: res.data,
@@ -1897,7 +1903,7 @@ function App() {
           setIsLoadingRequest(true);
 
           // call get search user Alpha
-          compareService.getInvitationsCmsAlpha(adminAlpha.access_token, invitationCmsSearch.userId).then((res) => {
+          compareService.getInvitationsCmsAlpha(adminAlpha.access_token, invitationCmsSearch.userIdAlpha).then((res) => {
             const timeTaken = (new Date()) - start;
             const data = {
               response: res.data,
@@ -1915,7 +1921,7 @@ function App() {
             setIsLoadingRequest(false);
           })
 
-          compareService.getInvitationsCmsBeta(adminBeta.access_token, invitationCmsSearch.userId).then((res) => {
+          compareService.getInvitationsCmsBeta(adminBeta.access_token, invitationCmsSearch.userIdBeta).then((res) => {
             const timeTaken = (new Date()) - start;
             const data = {
               response: res.data,
@@ -1935,7 +1941,7 @@ function App() {
           setIsLoadingRequest(true);
 
           // call get search user Alpha
-          compareService.getDevicesCmsAlpha(adminAlpha.access_token, deviceCmsSearch.userId).then((res) => {
+          compareService.getDevicesCmsAlpha(adminAlpha.access_token, deviceCmsSearch.userIdAlpha).then((res) => {
             const timeTaken = (new Date()) - start;
             const data = {
               response: res.data,
@@ -1953,7 +1959,7 @@ function App() {
             setIsLoadingRequest(false);
           })
 
-          compareService.getInvitationsCmsBeta(adminBeta.access_token, deviceCmsSearch.userId).then((res) => {
+          compareService.getInvitationsCmsBeta(adminBeta.access_token, deviceCmsSearch.userIdBeta).then((res) => {
             const timeTaken = (new Date()) - start;
             const data = {
               response: res.data,
@@ -3960,8 +3966,13 @@ function App() {
                       <form>
                         <div className="row align-items-center">
                           <span>
-                            <label htmlFor="" className="col-form-label">username or userId&#160;</label>
-                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='username' onChange={(e) => handlePutChangeValue1(e, 6)} defaultValue={usernameSearch ? usernameSearch : null} />
+                            <label htmlFor="" className="col-form-label">username or userId Alpha&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userIdAlpha' onChange={(e) => handlePutChangeValue1(e, 6)} defaultValue={usernameSearch ? usernameSearch.userIdAlpha : null} />
+                          </span>
+
+                          <span>
+                            <label htmlFor="" className="col-form-label">username or userId Beta&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userIdBeta' onChange={(e) => handlePutChangeValue1(e, 6)} defaultValue={usernameSearch ? usernameSearch.userIdBeta : null} />
                           </span>
                         </div>
                       </form>
@@ -4010,8 +4021,13 @@ function App() {
                       <form>
                         <div className="row align-items-center">
                           <span>
-                            <label htmlFor="" className="col-form-label">username or userId&#160;</label>
-                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='username' onChange={(e) => handlePutChangeValue1(e, 16)} defaultValue={usernameSearch ? usernameSearch : null} />
+                            <label htmlFor="" className="col-form-label">username or userId Alpha&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userIdAlpha' onChange={(e) => handlePutChangeValue1(e, 16)} defaultValue={usernameSearch ? usernameSearch.userIdAlpha : null} />
+                          </span>
+
+                          <span>
+                            <label htmlFor="" className="col-form-label">username or userId Beta&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userIdBeta' onChange={(e) => handlePutChangeValue1(e, 16)} defaultValue={usernameSearch ? usernameSearch.userIdBeta : null} />
                           </span>
                         </div>
                       </form>
@@ -4060,8 +4076,13 @@ function App() {
                       <form>
                         <div className="row align-items-center">
                           <span>
-                            <label htmlFor="" className="col-form-label">userId&#160;</label>
-                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userId' onChange={(e) => handlePutChangeValue1(e, 17)} defaultValue={refundCmsSearch ? refundCmsSearch.userId : null} />
+                            <label htmlFor="" className="col-form-label">userId Alpha&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userIdAlpha' onChange={(e) => handlePutChangeValue1(e, 17)} defaultValue={refundCmsSearch ? refundCmsSearch.userIdAlpha : null} />
+                          </span>
+
+                          <span>
+                            <label htmlFor="" className="col-form-label">userId Beta&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userIdBeta' onChange={(e) => handlePutChangeValue1(e, 17)} defaultValue={refundCmsSearch ? refundCmsSearch.userIdBeta : null} />
                           </span>
                         </div>
                       </form>
@@ -4110,8 +4131,13 @@ function App() {
                       <form>
                         <div className="row align-items-center">
                           <span>
-                            <label htmlFor="" className="col-form-label">userId&#160;</label>
-                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userId' onChange={(e) => handlePutChangeValue1(e, 18)} defaultValue={invitationCmsSearch ? invitationCmsSearch.userId : null} />
+                            <label htmlFor="" className="col-form-label">userId Alpha&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userIdAlpha' onChange={(e) => handlePutChangeValue1(e, 18)} defaultValue={invitationCmsSearch ? invitationCmsSearch.userIdAlpha : null} />
+                          </span>
+
+                          <span>
+                            <label htmlFor="" className="col-form-label">userId Beta&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userIdBeta' onChange={(e) => handlePutChangeValue1(e, 18)} defaultValue={invitationCmsSearch ? invitationCmsSearch.userIdBeta : null} />
                           </span>
                         </div>
                       </form>
@@ -4160,8 +4186,13 @@ function App() {
                       <form>
                         <div className="row align-items-center">
                           <span>
-                            <label htmlFor="" className="col-form-label">userId&#160;</label>
-                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userId' onChange={(e) => handlePutChangeValue1(e, 19)} defaultValue={refundCmsSearch ? refundCmsSearch.userId : null} />
+                            <label htmlFor="" className="col-form-label">userId Alpha&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userIdAlpha' onChange={(e) => handlePutChangeValue1(e, 19)} defaultValue={refundCmsSearch ? refundCmsSearch.userIdAlpha : null} />
+                          </span>
+
+                          <span>
+                            <label htmlFor="" className="col-form-label">userId Beta&#160;</label>
+                            <input className="" style={{ fontSize: ".8rem" }} aria-describedby="passwordHelpInline" name='userIdBeta' onChange={(e) => handlePutChangeValue1(e, 19)} defaultValue={refundCmsSearch ? refundCmsSearch.userIdBeta : null} />
                           </span>
                         </div>
                       </form>
