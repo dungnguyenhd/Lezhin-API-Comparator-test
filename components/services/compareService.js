@@ -672,39 +672,39 @@ class compareService {
 
   // ================== Login to CMS  ==================
 
-  // postLoginCmsAlpha() {
-  //   const qs = require('qs');
-  //   const headers = {
-  //     'authority': 'cms-dot-lezhincomix-alpha.appspot.com',
-  //     'Content-Type': 'application/x-www-form-urlencoded'
-  //   };
-  //   const data = {
-  //     'client_id': 'lezhincomics-backoffice-user',
-  //     'grant_type': 'password',
-  //     'response_type': 'token',
-  //     'username': 'tpvn.common',
-  //     'password': 'Lezhin1!@'
-  //   };
-  //   const postData = qs.stringify(data);
-  //   return axios.post(API_CMS_URL_ALPHA + '/_admin/tokens', postData, { headers });
-  // }
+  postLoginCmsAlpha() {
+    const qs = require('qs');
+    const headers = {
+      'authority': 'cms-dot-lezhincomix-alpha.appspot.com',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    };
+    const data = {
+      'client_id': 'lezhincomics-backoffice-user',
+      'grant_type': 'password',
+      'response_type': 'token',
+      'username': 'tpvn.common',
+      'password': 'Lezhin1!@'
+    };
+    const postData = qs.stringify(data);
+    return axios.post(API_CMS_URL_ALPHA + '/_admin/tokens', postData, { headers });
+  }
 
-  // postLoginCmsBeta() {
-  //   const qs = require('qs');
-  //   const headers = {
-  //     'authority': 'cms-dot-lezhincomix-beta.appspot.com',
-  //     'Content-Type': 'application/x-www-form-urlencoded'
-  //   };
-  //   const data = {
-  //     'client_id': 'lezhincomics-backoffice-user',
-  //     'grant_type': 'password',
-  //     'response_type': 'token',
-  //     'username': 'tpvn.common',
-  //     'password': 'Lezhin1!@'
-  //   };
-  //   const postData = qs.stringify(data);
-  //   return axios.post(API_CMS_URL_BETA + '/_admin/tokens', postData, { headers });
-  // }
+  postLoginCmsBeta() {
+    const qs = require('qs');
+    const headers = {
+      'authority': 'cms-dot-lezhincomix-beta.appspot.com',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    };
+    const data = {
+      'client_id': 'lezhincomics-backoffice-user',
+      'grant_type': 'password',
+      'response_type': 'token',
+      'username': 'tpvn.common',
+      'password': 'Lezhin1!@'
+    };
+    const postData = qs.stringify(data);
+    return axios.post(API_CMS_URL_BETA + '/_admin/tokens', postData, { headers });
+  }
 
   // ====== ======= ====== PUT unregister ====== ======= ======
 
