@@ -463,207 +463,207 @@ class compareService {
   // ====================================================== PUT =======================================================================================
   // ====================================================== PUT =======================================================================================
 
-  putUserMeAlpha(access_token, userId, putData, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.put(API_BASE_URL_ALPHA + `/v2/users/${userId}`, putData, { headers })
-  }
+  // putUserMeAlpha(access_token, userId, putData, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.put(API_BASE_URL_ALPHA + `/v2/users/${userId}`, putData, { headers })
+  // }
 
-  putUserMeBeta(access_token, userId, putData, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.put(API_BASE_URL_BETA + `/v2/users/${userId}`, putData, { headers })
-  }
+  // putUserMeBeta(access_token, userId, putData, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.put(API_BASE_URL_BETA + `/v2/users/${userId}`, putData, { headers })
+  // }
 
-  // ================== put user Me Password ==================
+  // // ================== put user Me Password ==================
 
-  putUserMePasswordAlpha(access_token, userId, putData, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.put(API_BASE_URL_ALPHA + `/users/${userId}/password`, putData, { headers })
-  }
+  // putUserMePasswordAlpha(access_token, userId, putData, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.put(API_BASE_URL_ALPHA + `/users/${userId}/password`, putData, { headers })
+  // }
 
-  putUserMePasswordBeta(access_token, userId, putData, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.put(API_BASE_URL_BETA + `/users/${userId}/password`, putData, { headers })
-  }
+  // putUserMePasswordBeta(access_token, userId, putData, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.put(API_BASE_URL_BETA + `/users/${userId}/password`, putData, { headers })
+  // }
 
-  // ================== put user Me Password V2==================
+  // // ================== put user Me Password V2==================
 
-  putUserMePasswordV2Alpha(access_token, userId, putData, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.put(API_BASE_URL_ALPHA + `/users/${userId}/password`, putData, { headers })
-  }
+  // putUserMePasswordV2Alpha(access_token, userId, putData, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.put(API_BASE_URL_ALPHA + `/users/${userId}/password`, putData, { headers })
+  // }
 
-  putUserMePasswordV2Beta(access_token, userId, putData, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.put(API_BASE_URL_BETA + `/users/${userId}/password`, putData, { headers })
-  }
+  // putUserMePasswordV2Beta(access_token, userId, putData, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.put(API_BASE_URL_BETA + `/users/${userId}/password`, putData, { headers })
+  // }
 
-  // ================== put user Me Username ==================
+  // // ================== put user Me Username ==================
 
-  putUserMeUsernameAlpha(access_token, userId, putData, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.put(API_BASE_URL_ALPHA + `/users/${userId}/username`, putData, { headers })
-  }
+  // putUserMeUsernameAlpha(access_token, userId, putData, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.put(API_BASE_URL_ALPHA + `/users/${userId}/username`, putData, { headers })
+  // }
 
-  putUserMeUsernameBeta(access_token, userId, putData, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.put(API_BASE_URL_BETA + `/users/${userId}/username`, putData, { headers })
-  }
+  // putUserMeUsernameBeta(access_token, userId, putData, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.put(API_BASE_URL_BETA + `/users/${userId}/username`, putData, { headers })
+  // }
 
-  // ================== put user Me Connect Social ==================
+  // // ================== put user Me Connect Social ==================
 
-  putUserMeSocialAlpha(access_token, userId, putData, socialType, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.put(API_BASE_URL_ALPHA + `/users/${userId}/connect/${socialType}`, putData, { headers })
-  }
+  // putUserMeSocialAlpha(access_token, userId, putData, socialType, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.put(API_BASE_URL_ALPHA + `/users/${userId}/connect/${socialType}`, putData, { headers })
+  // }
 
-  putUserMeSocialBeta(access_token, userId, putData, socialType, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.put(API_BASE_URL_BETA + `/users/${userId}/connect/${socialType}`, putData, { headers })
-  }
+  // putUserMeSocialBeta(access_token, userId, putData, socialType, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.put(API_BASE_URL_BETA + `/users/${userId}/connect/${socialType}`, putData, { headers })
+  // }
 
-  // ====================================================== POST =======================================================================================
-  // ====================================================== POST =======================================================================================
+  // // ====================================================== POST =======================================================================================
+  // // ====================================================== POST =======================================================================================
 
-  // ================== post user Me Connect Social ==================
+  // // ================== post user Me Connect Social ==================
 
-  putUserMeUnregisterAlpha(access_token, userId, putData, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.post(API_BASE_URL_ALPHA + `/v2/users/${userId}/unregister`, putData, { headers })
-  }
+  // putUserMeUnregisterAlpha(access_token, userId, putData, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.post(API_BASE_URL_ALPHA + `/v2/users/${userId}/unregister`, putData, { headers })
+  // }
 
-  putUserMeUnregisterBeta(access_token, userId, putData, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.post(API_BASE_URL_BETA + `/v2/users/${userId}/unregister`, putData, { headers })
-  }
+  // putUserMeUnregisterBeta(access_token, userId, putData, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.post(API_BASE_URL_BETA + `/v2/users/${userId}/unregister`, putData, { headers })
+  // }
 
   // ====================================================== DEL =======================================================================================
   // ====================================================== DEL =======================================================================================
 
   // ================== del user Me Connect Social ==================
 
-  delUserMeSocialAlpha(access_token, userId, putData, socialType, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.delete(API_BASE_URL_ALPHA + `/v2/users/${userId}/connections/${socialType}`, putData, { headers })
-  }
+  // delUserMeSocialAlpha(access_token, userId, putData, socialType, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.delete(API_BASE_URL_ALPHA + `/v2/users/${userId}/connections/${socialType}`, putData, { headers })
+  // }
 
-  delUserMeSocialBeta(access_token, userId, putData, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.delete(API_BASE_URL_BETA + `/v2/users/${userId}/connections/${socialType}`, putData, { headers })
-  }
+  // delUserMeSocialBeta(access_token, userId, putData, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.delete(API_BASE_URL_BETA + `/v2/users/${userId}/connections/${socialType}`, putData, { headers })
+  // }
 
-  // ================== del user logout Social ==================
+  // // ================== del user logout Social ==================
 
-  delUserByeAlpha(access_token) {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.delete(API_BASE_URL_ALPHA + `/v2/users/bye`, { headers })
-  }
+  // delUserByeAlpha(access_token) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.delete(API_BASE_URL_ALPHA + `/v2/users/bye`, { headers })
+  // }
 
-  delUserByeBeta(access_token) {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.delete(API_BASE_URL_BETA + `/v2/users/bye`, { headers })
-  }
+  // delUserByeBeta(access_token) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.delete(API_BASE_URL_BETA + `/v2/users/bye`, { headers })
+  // }
 
-  // ================== del user Me devices all Social ==================
+  // // ================== del user Me devices all Social ==================
 
-  delUserDevicesAllAlpha(access_token, userId, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.delete(API_BASE_URL_ALPHA + `/users/${userId}/devices/all`, { headers })
-  }
+  // delUserDevicesAllAlpha(access_token, userId, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.delete(API_BASE_URL_ALPHA + `/users/${userId}/devices/all`, { headers })
+  // }
 
-  delUserDevicesAllBeta(access_token, userId, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.delete(API_BASE_URL_BETA + `/users/${userId}/devices/all`, { headers })
-  }
+  // delUserDevicesAllBeta(access_token, userId, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.delete(API_BASE_URL_BETA + `/users/${userId}/devices/all`, { headers })
+  // }
 
-  // ================== del user Me device by id Social ==================
+  // // ================== del user Me device by id Social ==================
 
-  delUserDevicesByIdAlpha(access_token, userId, deviceCode, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.delete(API_BASE_URL_ALPHA + `/users/${userId}/devices/${deviceCode}`, { headers })
-  }
+  // delUserDevicesByIdAlpha(access_token, userId, deviceCode, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.delete(API_BASE_URL_ALPHA + `/users/${userId}/devices/${deviceCode}`, { headers })
+  // }
 
-  delUserDevicesByIdBeta(access_token, userId, deviceCode, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.delete(API_BASE_URL_BETA + `/users/${userId}/devices/${deviceCode}`, { headers })
-  }
+  // delUserDevicesByIdBeta(access_token, userId, deviceCode, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.delete(API_BASE_URL_BETA + `/users/${userId}/devices/${deviceCode}`, { headers })
+  // }
 
 
   // ====================================================== CMS API =======================================================================================
@@ -672,77 +672,77 @@ class compareService {
 
   // ================== Login to CMS  ==================
 
-  postLoginCmsAlpha() {
-    const qs = require('qs');
-    const headers = {
-      'authority': 'cms-dot-lezhincomix-alpha.appspot.com',
-      'Content-Type': 'application/x-www-form-urlencoded'
-    };
-    const data = {
-      'client_id': 'lezhincomics-backoffice-user',
-      'grant_type': 'password',
-      'response_type': 'token',
-      'username': 'tpvn.common',
-      'password': 'Lezhin1!@'
-    };
-    const postData = qs.stringify(data);
-    return axios.post(API_CMS_URL_ALPHA + '/_admin/tokens', postData, { headers });
-  }
+  // postLoginCmsAlpha() {
+  //   const qs = require('qs');
+  //   const headers = {
+  //     'authority': 'cms-dot-lezhincomix-alpha.appspot.com',
+  //     'Content-Type': 'application/x-www-form-urlencoded'
+  //   };
+  //   const data = {
+  //     'client_id': 'lezhincomics-backoffice-user',
+  //     'grant_type': 'password',
+  //     'response_type': 'token',
+  //     'username': 'tpvn.common',
+  //     'password': 'Lezhin1!@'
+  //   };
+  //   const postData = qs.stringify(data);
+  //   return axios.post(API_CMS_URL_ALPHA + '/_admin/tokens', postData, { headers });
+  // }
 
-  postLoginCmsBeta() {
-    const qs = require('qs');
-    const headers = {
-      'authority': 'cms-dot-lezhincomix-beta.appspot.com',
-      'Content-Type': 'application/x-www-form-urlencoded'
-    };
-    const data = {
-      'client_id': 'lezhincomics-backoffice-user',
-      'grant_type': 'password',
-      'response_type': 'token',
-      'username': 'tpvn.common',
-      'password': 'Lezhin1!@'
-    };
-    const postData = qs.stringify(data);
-    return axios.post(API_CMS_URL_BETA + '/_admin/tokens', postData, { headers });
-  }
+  // postLoginCmsBeta() {
+  //   const qs = require('qs');
+  //   const headers = {
+  //     'authority': 'cms-dot-lezhincomix-beta.appspot.com',
+  //     'Content-Type': 'application/x-www-form-urlencoded'
+  //   };
+  //   const data = {
+  //     'client_id': 'lezhincomics-backoffice-user',
+  //     'grant_type': 'password',
+  //     'response_type': 'token',
+  //     'username': 'tpvn.common',
+  //     'password': 'Lezhin1!@'
+  //   };
+  //   const postData = qs.stringify(data);
+  //   return axios.post(API_CMS_URL_BETA + '/_admin/tokens', postData, { headers });
+  // }
 
   // ====== ======= ====== PUT unregister ====== ======= ======
 
-  postUserCmsUnregisterAlpha(access_token, userId, postData, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.put(API_CMS_URL_ALPHA + `/v2/users/${userId}/unregister`, postData, { headers })
-  }
+  // postUserCmsUnregisterAlpha(access_token, userId, postData, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.put(API_CMS_URL_ALPHA + `/v2/users/${userId}/unregister`, postData, { headers })
+  // }
 
-  postUserCmsUnregisterBeta(access_token, userId, postData, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.put(API_CMS_URL_BETA + `/v2/users/${userId}/unregister`, postData, { headers })
-  }
+  // postUserCmsUnregisterBeta(access_token, userId, postData, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.put(API_CMS_URL_BETA + `/v2/users/${userId}/unregister`, postData, { headers })
+  // }
 
   // ====== ======= ====== PUT Reregister ====== ======= ======
 
-  postUserCmsReregisterAlpha(access_token, userId, postData) {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.put(API_CMS_URL_ALPHA + `/v2/users/${userId}/reregister`, postData, { headers })
-  }
+  // postUserCmsReregisterAlpha(access_token, userId, postData) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.put(API_CMS_URL_ALPHA + `/v2/users/${userId}/reregister`, postData, { headers })
+  // }
 
-  postUserCmsReregisterBeta(access_token, userId, postData) {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.put(API_CMS_URL_BETA + `/v2/users/${userId}/reregister`, postData, { headers })
-  }
+  // postUserCmsReregisterBeta(access_token, userId, postData) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.put(API_CMS_URL_BETA + `/v2/users/${userId}/reregister`, postData, { headers })
+  // }
 
   // ====== ======= ====== Get Search User By Name or Id ====== ======= ======
 
@@ -764,57 +764,57 @@ class compareService {
 
   // ====== ======= ====== Post send email verifications ====== ======= ======
 
-  postVerificationSendEmailAlpha(email) {
-    const data = { email: email };
-    const headers = {
-      'Content-Type': 'application/json',
-    };
-    return axios.post(API_BASE_URL_ALPHA + `/v2/verifications/send-mail`, data, { headers })
-  }
+  // postVerificationSendEmailAlpha(email) {
+  //   const data = { email: email };
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //   };
+  //   return axios.post(API_BASE_URL_ALPHA + `/v2/verifications/send-mail`, data, { headers })
+  // }
 
-  postVerificationSendEmailBeta(email) {
-    const data = { email: email };
-    const headers = {
-      'Content-Type': 'application/json',
-    };
-    return axios.post(API_BASE_URL_BETA + `/v2/verifications/send-mail`, data, { headers })
-  }
+  // postVerificationSendEmailBeta(email) {
+  //   const data = { email: email };
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //   };
+  //   return axios.post(API_BASE_URL_BETA + `/v2/verifications/send-mail`, data, { headers })
+  // }
 
   // ====== ======= ====== Put verifications ====== ======= ======
 
-  putVerificationsAlpha(putVerificationsData) {
-    const headers = {
-      'Content-Type': 'application/json',
-    };
-    return axios.put(API_BASE_URL_ALPHA + `/v2/verifications`, putVerificationsData, { headers })
-  }
+  // putVerificationsAlpha(putVerificationsData) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //   };
+  //   return axios.put(API_BASE_URL_ALPHA + `/v2/verifications`, putVerificationsData, { headers })
+  // }
 
-  putVerificationsBeta(putVerificationsData) {
-    const headers = {
-      'Content-Type': 'application/json',
-    };
-    return axios.put(API_BASE_URL_BETA + `/v2/verifications`, putVerificationsData, { headers })
-  }
+  // putVerificationsBeta(putVerificationsData) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //   };
+  //   return axios.put(API_BASE_URL_BETA + `/v2/verifications`, putVerificationsData, { headers })
+  // }
 
   // ====== ======= ====== Put change email v2 ====== ======= ======
 
-  postUserChangeEmailAlpha(access_token, userId, postUserChangeEmail, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.put(API_BASE_URL_ALPHA + `/v2/users/${userId}/email`, postUserChangeEmail, { headers })
-  }
+  // postUserChangeEmailAlpha(access_token, userId, postUserChangeEmail, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.put(API_BASE_URL_ALPHA + `/v2/users/${userId}/email`, postUserChangeEmail, { headers })
+  // }
 
-  postUserChangeEmailBeta(access_token, userId, postUserChangeEmail, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-      Authorization: `Bearer ${access_token}`,
-    };
-    return axios.put(API_BASE_URL_BETA + `/v2/users/${userId}/email`, postUserChangeEmail, { headers })
-  }
+  // postUserChangeEmailBeta(access_token, userId, postUserChangeEmail, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //     Authorization: `Bearer ${access_token}`,
+  //   };
+  //   return axios.put(API_BASE_URL_BETA + `/v2/users/${userId}/email`, postUserChangeEmail, { headers })
+  // }
 
   // ====== ======= ====== Post user signup ====== ======= ======
 
@@ -857,39 +857,39 @@ class compareService {
 
   // ====== ======= ====== Post send reset password ====== ======= ======
 
-  postUserSendResetPasswordAlpha(username, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-    };
-    return axios.post(API_BASE_URL_ALPHA + `/v2/users/${username}/password/reset`, { headers })
-  }
+  // postUserSendResetPasswordAlpha(username, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //   };
+  //   return axios.post(API_BASE_URL_ALPHA + `/v2/users/${username}/password/reset`, { headers })
+  // }
 
-  postUserSendResetPasswordBeta(username, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-    };
-    return axios.post(API_BASE_URL_BETA + `/v2/users/${username}/password/reset`, { headers })
-  }
+  // postUserSendResetPasswordBeta(username, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //   };
+  //   return axios.post(API_BASE_URL_BETA + `/v2/users/${username}/password/reset`, { headers })
+  // }
 
   // ====== ======= ====== Put reset password ====== ======= ======
 
-  putUserResetPasswordAlpha(putUserResetPasswordData, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-    };
-    return axios.put(API_BASE_URL_ALPHA + `/v2/users/password/reset`, putUserResetPasswordData, { headers })
-  }
+  // putUserResetPasswordAlpha(putUserResetPasswordData, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //   };
+  //   return axios.put(API_BASE_URL_ALPHA + `/v2/users/password/reset`, putUserResetPasswordData, { headers })
+  // }
 
-  putUserResetPasswordBeta(putUserResetPasswordData, locale) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-lz-locale': locale,
-    };
-    return axios.put(API_BASE_URL_BETA + `/v2/users/password/reset`, putUserResetPasswordData, { headers })
-  }
+  // putUserResetPasswordBeta(putUserResetPasswordData, locale) {
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'x-lz-locale': locale,
+  //   };
+  //   return axios.put(API_BASE_URL_BETA + `/v2/users/password/reset`, putUserResetPasswordData, { headers })
+  // }
 
   // ====== ======= ====== Get Search User By Name or Id ====== ======= ======
 

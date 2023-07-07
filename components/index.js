@@ -508,45 +508,45 @@ function App() {
 
       // call put users/{me}/connect/{socialType} alpha
 
-      compareService.putUserMeSocialAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, putUserSocial, socialTypePut, locale).then((res) => {
-        const timeTaken = (new Date()) - start;
-        const data = {
-          response: res.data,
-          timeTaken: timeTaken,
-        };
-        localStorage.setItem('putUserMeSocialAlpha', JSON.stringify(data));
-      }).catch((err) => {
-        const timeTaken = (new Date()) - start;
-        const data = {
-          response: err.response.data,
-          timeTaken: timeTaken,
-        };
-        localStorage.setItem('putUserMeSocialAlpha', JSON.stringify(data));
-      })
+      // compareService.putUserMeSocialAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, putUserSocial, socialTypePut, locale).then((res) => {
+      //   const timeTaken = (new Date()) - start;
+      //   const data = {
+      //     response: res.data,
+      //     timeTaken: timeTaken,
+      //   };
+      //   localStorage.setItem('putUserMeSocialAlpha', JSON.stringify(data));
+      // }).catch((err) => {
+      //   const timeTaken = (new Date()) - start;
+      //   const data = {
+      //     response: err.response.data,
+      //     timeTaken: timeTaken,
+      //   };
+      //   localStorage.setItem('putUserMeSocialAlpha', JSON.stringify(data));
+      // })
 
-      // call put users/{me} alpha
+      // // call put users/{me} alpha
 
-      compareService.putUserMeAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, putUserMe, locale).then((res) => {
-        const timeTaken = (new Date()) - start;
-        const data = {
-          response: res.data,
-          timeTaken: timeTaken,
-        };
-        localStorage.setItem('putUserMeAlpha', JSON.stringify(data));
-        setIsLoadingAlpha(false);
-        setIsLoading(false);
-        setIsLoadingBeta(false);
-      }).catch((err) => {
-        const timeTaken = (new Date()) - start;
-        const data = {
-          response: err.response.data,
-          timeTaken: timeTaken,
-        };
-        setIsLoadingAlpha(false);
-        setIsLoading(false);
-        setIsLoadingBeta(false);
-        localStorage.setItem('putUserMeAlpha', JSON.stringify(data));
-      })
+      // compareService.putUserMeAlpha(userAlpha.response.data.access_token, userAlpha.response.data.user.userId, putUserMe, locale).then((res) => {
+      //   const timeTaken = (new Date()) - start;
+      //   const data = {
+      //     response: res.data,
+      //     timeTaken: timeTaken,
+      //   };
+      //   localStorage.setItem('putUserMeAlpha', JSON.stringify(data));
+      //   setIsLoadingAlpha(false);
+      //   setIsLoading(false);
+      //   setIsLoadingBeta(false);
+      // }).catch((err) => {
+      //   const timeTaken = (new Date()) - start;
+      //   const data = {
+      //     response: err.response.data,
+      //     timeTaken: timeTaken,
+      //   };
+      //   setIsLoadingAlpha(false);
+      //   setIsLoading(false);
+      //   setIsLoadingBeta(false);
+      //   localStorage.setItem('putUserMeAlpha', JSON.stringify(data));
+      // })
 
       // ============================== ============================== del API ============================== ==============================
       // ============================== ============================== del API ============================== ==============================
@@ -919,39 +919,39 @@ function App() {
       // ============================== ============================== put API ============================== ==============================
 
       // call put users/{me} Beta
-      compareService.putUserMeBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, putUserMe, locale).then((res) => {
-        const timeTaken = (new Date()) - start;
-        const data = {
-          response: res.data,
-          timeTaken: timeTaken,
-        };
-        localStorage.setItem('putUserMeBeta', JSON.stringify(data));
-      }).catch((err) => {
-        const timeTaken = (new Date()) - start;
-        const data = {
-          response: err.response.data,
-          timeTaken: timeTaken,
-        };
-        localStorage.setItem('putUserMeBeta', JSON.stringify(data));
-      })
+      // compareService.putUserMeBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, putUserMe, locale).then((res) => {
+      //   const timeTaken = (new Date()) - start;
+      //   const data = {
+      //     response: res.data,
+      //     timeTaken: timeTaken,
+      //   };
+      //   localStorage.setItem('putUserMeBeta', JSON.stringify(data));
+      // }).catch((err) => {
+      //   const timeTaken = (new Date()) - start;
+      //   const data = {
+      //     response: err.response.data,
+      //     timeTaken: timeTaken,
+      //   };
+      //   localStorage.setItem('putUserMeBeta', JSON.stringify(data));
+      // })
 
       // call put users/{me}/connection/{social-type} Beta
 
-      compareService.putUserMeSocialBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, putUserSocial, socialTypePut, locale).then((res) => {
-        const timeTaken = (new Date()) - start;
-        const data = {
-          response: res.data,
-          timeTaken: timeTaken,
-        };
-        localStorage.setItem('putUserMeSocialBeta', JSON.stringify(data));
-      }).catch((err) => {
-        const timeTaken = (new Date()) - start;
-        const data = {
-          response: err.response.data,
-          timeTaken: timeTaken,
-        };
-        localStorage.setItem('putUserMeSocialBeta', JSON.stringify(data));
-      })
+      // compareService.putUserMeSocialBeta(userBeta.response.data.access_token, userBeta.response.data.user.userId, putUserSocial, socialTypePut, locale).then((res) => {
+      //   const timeTaken = (new Date()) - start;
+      //   const data = {
+      //     response: res.data,
+      //     timeTaken: timeTaken,
+      //   };
+      //   localStorage.setItem('putUserMeSocialBeta', JSON.stringify(data));
+      // }).catch((err) => {
+      //   const timeTaken = (new Date()) - start;
+      //   const data = {
+      //     response: err.response.data,
+      //     timeTaken: timeTaken,
+      //   };
+      //   localStorage.setItem('putUserMeSocialBeta', JSON.stringify(data));
+      // })
 
       // ============================== ============================== del API ============================== ==============================
       // ============================== ============================== del API ============================== ==============================
