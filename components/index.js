@@ -256,6 +256,9 @@ function App() {
           timeTaken: timeTaken,
         };
         localStorage.setItem('userIdentityAlpha', JSON.stringify(data));
+        setIsLoadingAlpha(false);
+        setIsLoading(false);
+        setIsLoadingBeta(false);
       }).catch((err) => {
         const timeTaken = (new Date()) - start;
         const data = {
@@ -263,6 +266,9 @@ function App() {
           timeTaken: timeTaken,
         };
         localStorage.setItem('userIdentityAlpha', JSON.stringify(data));
+        setIsLoadingAlpha(false);
+        setIsLoading(false);
+        setIsLoadingBeta(false);
       })
 
       // call get v2/users/{{me}/connections/Social alpha
