@@ -764,37 +764,37 @@ class compareService {
 
   // ====== ======= ====== Post send email verifications ====== ======= ======
 
-  // postVerificationSendEmailAlpha(email) {
-  //   const data = { email: email };
-  //   const headers = {
-  //     'Content-Type': 'application/json',
-  //   };
-  //   return axios.post(API_BASE_URL_ALPHA + `/v2/verifications/send-mail`, data, { headers })
-  // }
+  postVerificationSendEmailAlpha(email) {
+    const data = { email: email };
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    return axios.post(API_BASE_URL_ALPHA + `/v2/verifications/send-mail`, data, { headers })
+  }
 
-  // postVerificationSendEmailBeta(email) {
-  //   const data = { email: email };
-  //   const headers = {
-  //     'Content-Type': 'application/json',
-  //   };
-  //   return axios.post(API_BASE_URL_BETA + `/v2/verifications/send-mail`, data, { headers })
-  // }
+  postVerificationSendEmailBeta(email) {
+    const data = { email: email };
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    return axios.post(API_BASE_URL_BETA + `/v2/verifications/send-mail`, data, { headers })
+  }
 
   // ====== ======= ====== Put verifications ====== ======= ======
 
-  // putVerificationsAlpha(putVerificationsData) {
-  //   const headers = {
-  //     'Content-Type': 'application/json',
-  //   };
-  //   return axios.put(API_BASE_URL_ALPHA + `/v2/verifications`, putVerificationsData, { headers })
-  // }
+  putVerificationsAlpha(putVerificationsData) {
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    return axios.put(API_BASE_URL_ALPHA + `/v2/verifications`, putVerificationsData, { headers })
+  }
 
-  // putVerificationsBeta(putVerificationsData) {
-  //   const headers = {
-  //     'Content-Type': 'application/json',
-  //   };
-  //   return axios.put(API_BASE_URL_BETA + `/v2/verifications`, putVerificationsData, { headers })
-  // }
+  putVerificationsBeta(putVerificationsData) {
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    return axios.put(API_BASE_URL_BETA + `/v2/verifications`, putVerificationsData, { headers })
+  }
 
   // ====== ======= ====== Put change email v2 ====== ======= ======
 

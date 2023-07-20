@@ -3246,7 +3246,7 @@ function App() {
             {/* ====================== ====================== API post user me signin ======================  ====================== */}
 
             {/* API post user signin */}
-            {/* <hr id='wrapper_post_1' />
+            <hr id='wrapper_post_1' />
 
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}> {'>'} <span className='text-warning'> &#160;<strong>POST</strong></span> users/signin </div>
 
@@ -3264,7 +3264,7 @@ function App() {
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={userBeta ? userBeta.response : null} newData={userAlpha ? userAlpha.response : null} /> */}
+            <JsonCompare oldData={userBeta ? userBeta.response : null} newData={userAlpha ? userAlpha.response : null} />
 
             {/* ====================== ====================== API post user me unregister ======================  ====================== */}
 {/* 
@@ -3339,7 +3339,7 @@ function App() {
 
             {/* ====================== ====================== API post send verification email ======================  ====================== */}
 
-            {/* <hr id='wrapper_post_5' />
+            <hr id='wrapper_post_5' />
 
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
               {'>'} <span className='text-warning'> &#160;<strong>POST</strong></span> v2/verifications/send-mail &#160;
@@ -3387,11 +3387,11 @@ function App() {
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={postVerificationSendEmailBeta ? postVerificationSendEmailBeta.response : null} newData={postVerificationSendEmailAlpha ? postVerificationSendEmailAlpha.response : null} /> */}
+            <JsonCompare oldData={postVerificationSendEmailBeta ? postVerificationSendEmailBeta.response : null} newData={postVerificationSendEmailAlpha ? postVerificationSendEmailAlpha.response : null} />
 
             {/* ====================== ====================== API put verifications ======================  ====================== */}
 
-            {/* <hr id='wrapper_put_5' />
+            <hr id='wrapper_put_5' />
 
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
               {'>'} <span className='text-primary'> &#160;<strong>PUT</strong></span> v2/verifications &#160;
@@ -3444,10 +3444,10 @@ function App() {
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={putVerificationsBeta ? putVerificationsBeta.response : null} newData={putVerificationsAlpha ? putVerificationsAlpha.response : null} /> */}
+            <JsonCompare oldData={putVerificationsBeta ? putVerificationsBeta.response : null} newData={putVerificationsAlpha ? putVerificationsAlpha.response : null} />
 
             {/* ====================================== API post sign up ====================================== */}
-            {/* <hr id='wrapper_post_6' />
+            <hr id='wrapper_post_6' />
 
             <div className='p-2 highlight' style={{ border: '1px solid lightgrey', borderRadius: 5 }}>
               {'>'} <span className='text-warning'> &#160;<strong>POST</strong></span> /users/signup &#160;
@@ -3542,7 +3542,7 @@ function App() {
             </div>
 
             <p className="title">- The merged different:</p>
-            <JsonCompare oldData={postUserSignupBeta ? postUserSignupBeta.response : null} newData={postUserSignupAlpha ? postUserSignupAlpha.response : null} /> */}
+            <JsonCompare oldData={postUserSignupBeta ? postUserSignupBeta.response : null} newData={postUserSignupAlpha ? postUserSignupAlpha.response : null} />
 
 
             {/* ====================== ====================== API post send verification email ======================  ====================== */}
@@ -4260,9 +4260,9 @@ function App() {
 
                   {/* ==================================================================================== PUT ====================================================================================*/}
 
-                  {/* <a href={`#wrapper_put_1`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeAlpha ? putUserMeAlpha.response : null, putUserMeBeta ? putUserMeBeta.response : null)) ? "black" : "red" }}> v2/users/{"{me}"} </span></button></a>
+                  {/* <a href={`#wrapper_put_1`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMeAlpha ? putUserMeAlpha.response : null, putUserMeBeta ? putUserMeBeta.response : null)) ? "black" : "red" }}> v2/users/{"{me}"} </span></button></a> */}
                   <a href={`#wrapper_put_5`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putVerificationsAlpha ? putVerificationsAlpha.response : null, putVerificationsBeta ? putVerificationsBeta.response : null)) ? "black" : "red" }}> v2/verifications</span> </button></a>
-                  <a href={`#wrapper_put_8`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(postUserChangeEmailAlpha ? postUserChangeEmailAlpha.response : null, postUserChangeEmailBeta ? postUserChangeEmailBeta.response : null)) ? "black" : "red" }}> /v2/users/me/email</span> </button></a>
+                  {/* <a href={`#wrapper_put_8`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(postUserChangeEmailAlpha ? postUserChangeEmailAlpha.response : null, postUserChangeEmailBeta ? postUserChangeEmailBeta.response : null)) ? "black" : "red" }}> /v2/users/me/email</span> </button></a>
                   <a href={`#wrapper_put_9`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserMePasswordV2Alpha ? putUserMePasswordV2Alpha.response : null, putUserMePasswordV2Beta ? putUserMePasswordV2Beta.response : null)) ? "black" : "red" }}> /v2/users/me/password</span> </button></a>
                   <a href={`#wrapper_put_10`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-primary'>PUT&#160;</span> <span style={{ color: (isEqual(putUserResetPasswordAlpha ? putUserResetPasswordAlpha.response : null, putUserResetPasswordBeta ? putUserResetPasswordBeta.response : null)) ? "black" : "red" }}> /v2/users/password/reset</span> </button></a>
 
@@ -4272,12 +4272,12 @@ function App() {
 
                   {/* ==================================================================================== POST ====================================================================================*/}
 
-                  {/* <a href={`#wrapper_post_1`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(userAlpha ? userAlpha.response : null, userBeta ? userBeta.response : null)) ? "black" : "red" }}> /users/signin</span> </button></a>
+                  <a href={`#wrapper_post_1`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(userAlpha ? userAlpha.response : null, userBeta ? userBeta.response : null)) ? "black" : "red" }}> /users/signin</span> </button></a>
                   <a href={`#wrapper_post_6`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postUserSignupAlpha ? postUserSignupAlpha.response : null, postUserSignupBeta ? postUserSignupBeta.response : null)) ? "black" : "red" }}> /users/signup</span> </button></a>
 
-                  <a href={`#wrapper_post_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(putUserMeUnregisterAlpha ? putUserMeUnregisterAlpha.response : null, putUserMeUnregisterBeta ? putUserMeUnregisterBeta.response : null)) ? "black" : "red" }}> v2/users/{"{me}"}/unregister</span> </button></a>
+                  {/* <a href={`#wrapper_post_2`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(putUserMeUnregisterAlpha ? putUserMeUnregisterAlpha.response : null, putUserMeUnregisterBeta ? putUserMeUnregisterBeta.response : null)) ? "black" : "red" }}> v2/users/{"{me}"}/unregister</span> </button></a> */}
                   <a href={`#wrapper_post_5`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postVerificationSendEmailAlpha ? postVerificationSendEmailAlpha.response : null, postVerificationSendEmailBeta ? postVerificationSendEmailBeta.response : null)) ? "black" : "red" }}> v2/verifications/send-email</span> </button></a>
-                  <a href={`#wrapper_post_7`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postUserSendChangeEmailAlpha ? postUserSendChangeEmailAlpha.response : null, postUserSendChangeEmailBeta ? postUserSendChangeEmailBeta.response : null)) ? "black" : "red" }}> /v2/verifications/me/send-change-mail</span> </button></a>
+                  {/* <a href={`#wrapper_post_7`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postUserSendChangeEmailAlpha ? postUserSendChangeEmailAlpha.response : null, postUserSendChangeEmailBeta ? postUserSendChangeEmailBeta.response : null)) ? "black" : "red" }}> /v2/verifications/me/send-change-mail</span> </button></a>
                   <a href={`#wrapper_post_8`}><button type="button" className="btn btn-md" style={{ fontSize: '.74rem', width: 240, textAlign: 'left' }} data-bs-toggle="tooltip" title="Popular"><span className='text-warning'>POST</span> <span style={{ color: (isEqual(postUserSendResetPasswordAlpha ? postUserSendResetPasswordAlpha.response : null, postUserSendResetPasswordBeta ? postUserSendResetPasswordBeta.response : null)) ? "black" : "red" }}> /v2/users/me/password/reset</span> </button></a> */}
 
                   {/* ==================================================================================== DEL ====================================================================================*/}
